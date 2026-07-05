@@ -496,23 +496,33 @@ section.block .lead {
 }
 
 .toho-badge {
-  display: inline-block;
-  background: #fff;
-  color: #c0392b;
-  border: 2px solid #c0392b;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid #cccccc;
   border-radius: 6px;
-  padding: 8px 14px;
-  font-size: 0.78rem;
+  padding: 8px 12px;
+  font-size: 0.75rem;
   font-weight: 700;
-  text-align: center;
   line-height: 1.4;
   text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+  transition: border-color 0.2s;
 }
 
 .toho-badge:hover {
+  border-color: #c0392b;
+}
+
+.toho-badge .toho-mark {
+  flex-shrink: 0;
   background: #c0392b;
   color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 6px;
+  border-radius: 3px;
 }
 
 .last-updated {
