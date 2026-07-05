@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ | Do Luck 道楽</title>
+<meta name="description" content="Do Luck 道楽へのお問い合わせフォーム。ご予約やご質問はこちらから、またはお電話015-572-4949まで。">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">Do Luck 道楽<small>CAFE &amp; GUESTHOUSE</small></a>
+    <button class="nav-toggle" aria-label="メニュー">&#9776;</button>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="cafe.html">喫茶</a></li>
+        <li><a href="lodge.html">旅宿</a></li>
+        <li><a href="access.html">アクセス</a></li>
+        <li><a href="contact.html" class="active">お問い合わせ</a></li>
+        <li><a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">ブログ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="page-header">
+  <div class="container">
+    <h1>お問い合わせ</h1>
+    <p>ご予約・ご質問はこちらのフォーム、またはお電話にて</p>
+  </div>
+</div>
+
+<section class="block container">
+  <div class="two-col">
+    <div>
+      <form name="contact" method="POST" action="/thanks.html" data-netlify="true" data-netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="form-name" value="contact">
+        <p class="hidden-field">
+          <label>この項目は入力しないでください<input name="bot-field"></label>
+        </p>
+
+        <label for="name">お名前<span class="required">必須</span></label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">メールアドレス<span class="required">必須</span></label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="subject">お問い合わせ種別</label>
+        <select id="subject" name="subject">
+          <option value="旅宿の予約について">旅宿の予約について</option>
+          <option value="喫茶について">喫茶について</option>
+          <option value="その他">その他</option>
+        </select>
+
+        <label for="message">お問い合わせ内容<span class="required">必須</span></label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit" class="btn btn-primary">送信する</button>
+      </form>
+    </div>
+
+    <div>
+      <div class="note-box">
+        <strong>お急ぎの場合はお電話ください</strong><br>
+        TEL: <a href="tel:0155724949">015-572-4949</a><br>
+        喫茶営業時間 10:00〜18:00（火曜定休）
+      </div>
+      <table class="detail-table">
+        <tr><th>住所</th><td>〒083-0034<br>北海道中川郡池田町利別本町2-6</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div>
+      <strong>Do Luck 道楽</strong><br>
+      〒083-0034 北海道中川郡池田町利別本町2-6<br>
+      TEL: <a href="tel:0155724949">015-572-4949</a>
+    </div>
+    <div>
+      <a href="cafe.html">喫茶</a><br>
+      <a href="lodge.html">旅宿</a><br>
+      <a href="access.html">アクセス</a><br>
+      <a href="contact.html">お問い合わせ</a><br>
+      <a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">ブログ</a>
+    </div>
+    <div class="copyright">&copy; 2008– Do Luck 道楽</div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
