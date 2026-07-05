@@ -1,0 +1,544 @@
+[index.html](https://github.com/user-attachments/files/29675460/index.html)
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="北海道・十勝 池田町の喫茶と旅人宿 Do Luck 道楽。薪ストーブの喫茶と、旅人同士の語らいを大切にする小さな宿です。">
+<title>Do Luck 道楽 | 北海道・池田町の喫茶と旅宿</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF8F2;
+    --paper-deep: #F1EDE3;
+    --ink: #2C2A25;
+    --muted: #7C776B;
+    --green: #46604A;
+    --sky-top: #D8E4EA;
+    --sky-low: #F3EFE2;
+    --radius: 24px;
+    --nav-h: 52px;
+    --serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.9;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: rgba(250, 248, 242, 0.82);
+    backdrop-filter: saturate(160%) blur(18px);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+    border-bottom: 1px solid rgba(44,42,37,0.08);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-inner {
+    width: min(1024px, 92%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.14em;
+  }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links a { color: rgba(44,42,37,0.75); transition: color .25s ease; letter-spacing: 0.05em; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-toggle {
+    display: none;
+    background: none; border: none;
+    font-size: 20px; cursor: pointer; color: var(--ink);
+  }
+  @media (max-width: 760px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: var(--nav-h); left: 0; right: 0;
+      background: rgba(250,248,242,0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      flex-direction: column; gap: 0;
+      padding: 10px 6%;
+      border-bottom: 1px solid rgba(44,42,37,0.08);
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 13px 0; border-bottom: 1px solid rgba(44,42,37,0.05); }
+    .nav-links li:last-child { border-bottom: none; }
+    .nav-toggle { display: block; }
+  }
+
+  /* ---------- Shared ---------- */
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.28em;
+    margin-bottom: 20px;
+  }
+  .headline {
+    font-family: var(--serif);
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+  }
+  .subhead {
+    font-size: clamp(15px, 1.8vw, 17px);
+    color: var(--muted);
+    margin-top: 26px;
+    line-height: 2.2;
+  }
+  .link-quiet {
+    display: inline-block;
+    margin-top: 38px;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    border-bottom: 1px solid rgba(70,96,74,0.4);
+    padding-bottom: 4px;
+    transition: border-color .3s ease;
+  }
+  .link-quiet:hover { border-color: var(--green); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 1.1s cubic-bezier(.16,.6,.2,1), transform 1.1s cubic-bezier(.16,.6,.2,1);
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Hero: 空と、一本の道 ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    padding-top: calc(var(--nav-h) + 10vh);
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--sky-top) 0%, #E8EDE6 46%, var(--sky-low) 62%);
+  }
+  .hero-copy { position: relative; z-index: 2; padding: 0 6%; }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(72px, 15vw, 150px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+  }
+  .hero .tagline {
+    font-family: var(--serif);
+    font-size: clamp(16px, 2.4vw, 21px);
+    letter-spacing: 0.2em;
+    color: rgba(44,42,37,0.75);
+    margin-top: 22px;
+  }
+  .hero-horizon {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 46vh;
+    min-height: 300px;
+    z-index: 1;
+    display: block;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(44,42,37,0.55);
+  }
+
+  /* ---------- Statement ---------- */
+  .statement {
+    padding: 150px 6%;
+    text-align: center;
+    background: var(--paper);
+  }
+  .statement .headline { line-height: 2; }
+  .statement p.body {
+    margin: 40px auto 0;
+    max-width: 560px;
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 2.4;
+  }
+
+  /* ---------- 喫茶 ---------- */
+  .cafe {
+    background: linear-gradient(to bottom, var(--paper-deep), #EDE6D8);
+    text-align: center;
+    padding: 150px 6%;
+  }
+  .cafe .inner { max-width: 680px; margin: 0 auto; }
+  .cafe .detail {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .detail-item .label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.22em;
+  }
+  .detail-item .value {
+    font-family: var(--serif);
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- 旅宿 ---------- */
+  .lodge {
+    background: var(--paper);
+    text-align: center;
+    padding: 150px 6%;
+  }
+  .lodge .inner { max-width: 680px; margin: 0 auto; }
+  .price {
+    margin-top: 46px;
+    font-family: var(--serif);
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .price small {
+    font-size: 0.36em;
+    font-weight: 500;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .lodge .note {
+    margin-top: 12px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  /* ---------- 案内タイル ---------- */
+  .tiles { background: var(--paper-deep); padding: 130px 6%; }
+  .tiles-grid {
+    max-width: 980px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 700px) { .tiles-grid { grid-template-columns: 1fr; } }
+  .tile {
+    background: var(--paper);
+    border: 1px solid rgba(44,42,37,0.06);
+    border-radius: var(--radius);
+    padding: 48px 42px;
+    text-align: left;
+    transition: transform .4s cubic-bezier(.16,.6,.2,1), box-shadow .4s cubic-bezier(.16,.6,.2,1);
+  }
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(44,42,37,0.10);
+  }
+  .tile h3 {
+    font-family: var(--serif);
+    font-size: 23px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+  .tile p {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 2.1;
+  }
+  .tile .link-quiet { margin-top: 26px; font-size: 14px; }
+
+  /* ---------- Contact ---------- */
+  .contact-band {
+    background: linear-gradient(to bottom, var(--paper-deep), var(--paper));
+    text-align: center;
+    padding: 150px 6% 130px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 44px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 15px 34px;
+    border-radius: 100px;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-primary { background: var(--green); color: var(--paper); }
+  .btn-ghost { background: transparent; color: var(--green); border: 1px solid rgba(70,96,74,0.5); }
+  .contact-band address {
+    font-style: normal;
+    margin-top: 44px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    line-height: 2.2;
+  }
+
+  /* ---------- 右下の看板犬（元サイトから引き継ぎ）---------- */
+  .corner-dogs {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    z-index: 90;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  .corner-dogs img {
+    display: block;
+    width: 76px;
+    height: auto;
+    background: #fff;
+    padding: 4px 4px 12px;
+    border: 1px solid rgba(44,42,37,0.1);
+    box-shadow: 0 8px 20px rgba(44,42,37,0.18);
+    transition: transform .3s cubic-bezier(.16,.6,.2,1);
+  }
+  .corner-dogs img:first-child { transform: rotate(-4deg); }
+  .corner-dogs img:last-child  { transform: rotate(3deg); }
+  .corner-dogs:hover img:first-child { transform: rotate(-4deg) translateY(-4px); }
+  .corner-dogs:hover img:last-child  { transform: rotate(3deg) translateY(-4px); }
+  @media (max-width: 600px) {
+    .corner-dogs img { width: 58px; }
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--paper-deep);
+    border-top: 1px solid rgba(44,42,37,0.08);
+    padding: 30px 6% 46px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; }
+  .footer-links a:hover { text-decoration: underline; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-right: 170px;
+  }
+  @media (max-width: 600px) {
+    .footer-bottom { padding-right: 130px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">道楽</a>
+    <button class="nav-toggle" aria-label="メニューを開閉" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">ホーム</a></li>
+      <li><a href="/cafe">喫茶</a></li>
+      <li><a href="/lodge">旅宿</a></li>
+      <li><a href="/access">アクセス</a></li>
+      <li><a href="/migration">移住計画</a></li>
+      <li><a href="/contact">お問い合わせ</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/">ブログ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow reveal">喫茶と旅人宿</p>
+    <h1 class="reveal">道楽</h1>
+    <p class="tagline reveal">都会の時間を、ここに置いていく。</p>
+  </div>
+
+  <!-- 十勝の地平線と、一本の道 -->
+  <svg class="hero-horizon" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0,180 C240,150 420,175 720,165 C1020,155 1240,175 1440,160 L1440,460 L0,460 Z" fill="#B9C7A8"/>
+    <path d="M0,235 C300,215 560,240 860,228 C1120,218 1300,235 1440,225 L1440,460 L0,460 Z" fill="#9DB08B"/>
+    <path d="M0,300 C260,285 620,305 940,295 C1180,288 1340,300 1440,294 L1440,460 L0,460 Z" fill="#7E9770"/>
+    <path d="M0,370 L1440,360 L1440,460 L0,460 Z" fill="#6F8A62"/>
+    <path d="M718,168 L722,168 L810,460 L630,460 Z" fill="#EDE6D2"/>
+    <path d="M719.4,180 L720.6,180 L724,460 L716,460 Z" fill="#C8BFA6" opacity="0.7"/>
+    <g fill="#4C6148">
+      <ellipse cx="905" cy="212" rx="7" ry="26"/>
+      <rect x="903.6" y="230" width="2.8" height="14"/>
+      <ellipse cx="948" cy="220" rx="6" ry="22"/>
+      <rect x="946.8" y="236" width="2.4" height="12"/>
+      <ellipse cx="530" cy="218" rx="6.5" ry="24"/>
+      <rect x="528.7" y="235" width="2.6" height="13"/>
+    </g>
+  </svg>
+
+  <p class="hero-scroll">SCROLL</p>
+</header>
+
+<section class="statement">
+  <p class="eyebrow reveal">喫茶と旅人宿</p>
+  <h2 class="headline reveal">十勝の空の下、<br>時間はゆっくり流れる。</h2>
+  <p class="body reveal">道（ロード）をたのしむ。道（趣味）をたのしむ。道（人生）をたのしむ。——「道楽」の名前に込められた、みっつの想い。北海道・池田町で、旅の途中のあなたを待っています。</p>
+</section>
+
+<section class="cafe">
+  <div class="inner">
+    <p class="eyebrow reveal">喫茶</p>
+    <h2 class="headline reveal">薪の火のそばで、<br>一杯のコーヒーを。</h2>
+    <p class="subhead reveal">西ドイツ weso 製の薪ストーブがあたたかい店内。オーナー手作りのベンチとテーブル、町民手作りのカップで、一杯のコーヒーを。</p>
+    <div class="detail reveal">
+      <div class="detail-item">
+        <p class="label">営業時間</p>
+        <p class="value">10:00 – 18:00</p>
+      </div>
+      <div class="detail-item">
+        <p class="label">定休日</p>
+        <p class="value">火曜日</p>
+      </div>
+    </div>
+    <a class="link-quiet reveal" href="/cafe">喫茶についてくわしく</a>
+  </div>
+</section>
+
+<section class="lodge">
+  <div class="inner">
+    <p class="eyebrow reveal">旅宿</p>
+    <h2 class="headline reveal">旅人が集まる、<br>語らいの夜。</h2>
+    <p class="subhead reveal">YH形式の男女別相部屋。旅人同士の語らいを大切にする、素朴であたたかい宿です。営業期間は4月1日から10月31日まで。</p>
+    <p class="price reveal">¥4,000<small>〜／素泊まり</small></p>
+    <p class="note reveal">とほネットワーク旅人宿の会 加盟宿</p>
+    <a class="link-quiet reveal" href="/lodge">旅宿についてくわしく</a>
+  </div>
+</section>
+
+<section class="tiles">
+  <div class="tiles-grid">
+    <a class="tile reveal" href="/access">
+      <h3>アクセス</h3>
+      <p>JR利別駅から徒歩5分。札幌・旭川方面、釧路方面からの車でのルートもご案内します。</p>
+      <span class="link-quiet">行き方を見る</span>
+    </a>
+    <a class="tile reveal" href="/migration">
+      <h3>移住計画</h3>
+      <p>大阪から北海道へ。オーナー一家が池田町にたどり着くまでの移住の物語。</p>
+      <span class="link-quiet">物語を読む</span>
+    </a>
+  </div>
+</section>
+
+<section class="contact-band">
+  <h2 class="headline reveal">道の途中で、<br>お会いしましょう。</h2>
+  <div class="cta-row reveal">
+    <a class="btn btn-primary" href="tel:0155724949">お電話はこちら 015-572-4949</a>
+    <a class="btn btn-ghost" href="/contact">お問い合わせ</a>
+  </div>
+  <address class="reveal">
+    Do Luck 道楽<br>
+    〒083-0034 北海道中川郡池田町利別本町2-6
+  </address>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <ul class="footer-links">
+      <li><a href="/cafe">喫茶</a></li>
+      <li><a href="/lodge">旅宿</a></li>
+      <li><a href="/access">アクセス</a></li>
+      <li><a href="/migration">移住計画</a></li>
+      <li><a href="/contact">お問い合わせ</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/">ブログ</a></li>
+    </ul>
+    <div class="footer-bottom">
+      <p>最終更新: 2026年7月　© 2008– Do Luck 道楽</p>
+      <a href="https://www.toho.net/meguri/1436.html">
+        <img src="https://wonderful-lebkuchen-362783.netlify.app/images/toho-badge.gif" alt="とほネットワーク旅人宿の会" width="88" height="31" style="display:block">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- 右下の看板犬：元サイトから引き継ぎ -->
+<a class="corner-dogs" href="https://doluck2007.hatenadiary.org/" title="看板犬・純の日常はブログで" aria-label="看板犬・純のブログへ">
+  <img src="https://wonderful-lebkuchen-362783.netlify.app/images/dog-jun.png" alt="看板犬">
+  <img src="https://wonderful-lebkuchen-362783.netlify.app/images/jun.avif" alt="看板犬 純"
+       onerror="this.style.display='none'">
+</a>
+
+<script>
+  function toggleMenu(btn) {
+    const links = document.getElementById('navLinks');
+    const open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+</script>
+
+</body>
+</html>
