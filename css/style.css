@@ -89,13 +89,19 @@ a {
   color: var(--brown-light);
 }
 
-/* Mascot button (dog Jun -> blog link) */
+/* Mascot button (dogs -> blog link) */
 .mascot-button {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  width: 64px;
-  height: 64px;
+  display: flex;
+  gap: 6px;
+  z-index: 90;
+}
+
+.mascot-button .dog-thumb {
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   background: var(--cream);
   border: 3px solid var(--brown-dark);
@@ -103,12 +109,11 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  z-index: 90;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
 }
 
-.mascot-button:hover {
+.mascot-button:hover .dog-thumb {
   transform: scale(1.08);
 }
 
@@ -120,11 +125,14 @@ a {
 }
 
 @media (max-width: 500px) {
+  .mascot-button .dog-thumb {
+    width: 46px;
+    height: 46px;
+  }
   .mascot-button {
-    width: 52px;
-    height: 52px;
     right: 10px;
     bottom: 10px;
+    gap: 4px;
   }
 }
 
