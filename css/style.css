@@ -89,14 +89,14 @@ a {
   color: var(--brown-light);
 }
 
-/* Mascot button (dog -> blog link) */
+/* Mascot button (2 dogs -> blog link) */
 .mascot-button {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 92px;
+  height: 58px;
+  border-radius: 30px;
   background: var(--cream);
   border: 3px solid var(--brown-dark);
   display: flex;
@@ -112,14 +112,14 @@ a {
 }
 
 .mascot-button svg {
-  width: 62%;
-  height: 62%;
+  width: 84%;
+  height: 84%;
 }
 
 @media (max-width: 500px) {
   .mascot-button {
-    width: 52px;
-    height: 52px;
+    width: 76px;
+    height: 48px;
     right: 10px;
     bottom: 10px;
   }
@@ -493,6 +493,33 @@ section.block .lead {
 .site-footer a {
   color: var(--cream);
   text-decoration: none;
+}
+
+.toho-badge {
+  display: inline-block;
+  background: #fff;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.toho-badge:hover {
+  background: #c0392b;
+  color: #fff;
+}
+
+.last-updated {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--brown-light);
+  margin-bottom: 4px;
 }
 
 .site-footer .copyright {
