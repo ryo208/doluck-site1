@@ -89,19 +89,20 @@ a {
   color: var(--brown-light);
 }
 
-/* Mascot button (2 dogs -> blog link) */
+/* Mascot button (dog Jun -> blog link) */
 .mascot-button {
   position: fixed;
   right: 16px;
   bottom: 16px;
-  width: 92px;
-  height: 58px;
-  border-radius: 30px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
   background: var(--cream);
   border: 3px solid var(--brown-dark);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   z-index: 90;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   transition: transform 0.2s;
@@ -111,15 +112,16 @@ a {
   transform: scale(1.08);
 }
 
-.mascot-button svg {
-  width: 84%;
-  height: 84%;
+.mascot-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 500px) {
   .mascot-button {
-    width: 76px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     right: 10px;
     bottom: 10px;
   }
@@ -496,32 +498,13 @@ section.block .lead {
 }
 
 .toho-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #ffffff;
-  color: #111111;
-  border: 1px solid #cccccc;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.4;
-  text-decoration: none;
-  transition: border-color 0.2s;
+  display: inline-block;
+  line-height: 0;
 }
 
-.toho-badge:hover {
-  border-color: #c0392b;
-}
-
-.toho-badge .toho-mark {
-  flex-shrink: 0;
-  background: #c0392b;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 4px 6px;
+.toho-badge img {
+  height: 40px;
+  width: auto;
   border-radius: 3px;
 }
 
