@@ -161,6 +161,35 @@ a {
   }
 }
 
+/* Hero motorcycle badge */
+.moto-badge {
+  position: absolute;
+  top: 24px;
+  left: 26px;
+  width: 110px;
+  transform: rotate(6deg);
+  transition: transform 0.2s;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.moto-badge img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.moto-badge:hover {
+  transform: rotate(6deg) scale(1.08);
+}
+
+@media (max-width: 760px) {
+  .moto-badge {
+    width: 78px;
+    top: 12px;
+    left: 14px;
+  }
+}
+
 .nav-toggle {
   display: none;
   background: none;
