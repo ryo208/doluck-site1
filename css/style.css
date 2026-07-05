@@ -64,6 +64,21 @@ a {
   letter-spacing: 0.05em;
   text-decoration: none;
   color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
 }
 
 .brand small {
@@ -72,6 +87,67 @@ a {
   font-weight: 400;
   letter-spacing: 0.2em;
   color: var(--brown-light);
+}
+
+/* Mascot button (dog -> blog link) */
+.mascot-button {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 3px solid var(--brown-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+.mascot-button:hover {
+  transform: scale(1.08);
+}
+
+.mascot-button svg {
+  width: 62%;
+  height: 62%;
+}
+
+@media (max-width: 500px) {
+  .mascot-button {
+    width: 52px;
+    height: 52px;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+/* Hero "open" sticker badge */
+.open-badge {
+  position: absolute;
+  top: 20px;
+  right: 26px;
+  width: 92px;
+  height: 92px;
+  transform: rotate(-8deg);
+  transition: transform 0.2s;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+.open-badge:hover {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+@media (max-width: 760px) {
+  .open-badge {
+    width: 66px;
+    height: 66px;
+    top: 12px;
+    right: 14px;
+  }
 }
 
 .nav-toggle {
