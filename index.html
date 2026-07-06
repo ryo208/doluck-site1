@@ -39,16 +39,6 @@
   .nav-inner { width: min(1024px, 92%); display: flex; align-items: center;
     justify-content: space-between; font-size: 13px; gap: 14px; }
   .nav-brand { font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: 0.14em; }
-  .nav-brand { display: inline-flex; align-items: center; gap: 9px; }
-  .brand-mark { width: 34px; height: 34px; display: block; flex: none;
-    animation: seasonIn .8s cubic-bezier(.2,.8,.3,1) both; }
-  @keyframes seasonIn { from { opacity: 0; transform: scale(.6) rotate(-10deg); }
-    to { opacity: 1; transform: none; } }
-  .brand-lockup { display: flex; flex-direction: column; line-height: 1.2; }
-  .brand-ja { font-family: var(--serif); font-weight: 700; font-size: 16px; letter-spacing: 0.34em; }
-  .brand-en { font-family: var(--sans); font-weight: 600; font-size: 7px;
-    letter-spacing: 0.3em; color: var(--muted); margin-top: 2px; white-space: nowrap; }
-  @media (prefers-reduced-motion: reduce) { .brand-mark { animation: none; } }
   .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a { color: rgba(44,42,37,0.75); transition: color .25s ease; letter-spacing: 0.05em; }
   .nav-links a:hover { color: var(--ink); }
@@ -213,7 +203,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html" aria-label="Do Luck 道楽"><svg class="brand-mark" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="bmClip"><circle cx="24" cy="24" r="22"/></clipPath></defs><circle cx="24" cy="24" r="22" fill="#D8E4EA"/><g class="bm-scene" clip-path="url(#bmClip)"></g><circle cx="24" cy="24" r="22" fill="none" stroke="rgba(44,42,37,0.4)" stroke-width="1.5"/></svg><span class="brand-lockup"><span class="brand-ja">道楽</span><span class="brand-en">DO LUCK · CAFE &amp; INN</span></span></a>
+    <a class="nav-brand" href="index.html">Do Luck 道楽</a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" data-i18n="nav.home">ホーム</a></li>
       <li><a href="cafe.html" data-i18n="nav.cafe">喫茶</a></li>
@@ -435,45 +425,6 @@
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }
-  // 左上ロゴ：十勝の四季で風景が変わるエンブレム
-  (() => {
-    const g = document.querySelector('.brand-mark .bm-scene');
-    if (!g) return;
-    const m = new Date().getMonth() + 1;
-    const season = (m >= 3 && m <= 5) ? 'spring' : (m >= 6 && m <= 8) ? 'summer' : (m >= 9 && m <= 11) ? 'autumn' : 'winter';
-    const scene = (sky, h1, h2, h3, road, extra) =>
-      '<rect width="48" height="48" fill="' + sky + '"/>' +
-      '<path d="M0,26 C8,24.5 16,25.5 24,25 C32,24.5 40,25.5 48,25 L48,48 L0,48 Z" fill="' + h1 + '"/>' +
-      '<path d="M0,31 C10,30 20,31.5 30,30.5 C38,30 44,31 48,30.5 L48,48 L0,48 Z" fill="' + h2 + '"/>' +
-      '<path d="M0,38 L48,37 L48,48 L0,48 Z" fill="' + h3 + '"/>' +
-      '<path d="M23.6,25.2 L24.4,25.2 L28.5,48 L19.5,48 Z" fill="' + road + '"/>' + extra;
-    const scenes = {
-      spring: scene('#DCE9EE', '#C6D4A8', '#ACBE8D', '#90A878', '#EDE6D2',
-        '<ellipse cx="10" cy="27.8" rx="1.5" ry="3.6" fill="#8CA876"/>' +
-        '<circle cx="8.5" cy="34" r="1.1" fill="#E3C34D"/><circle cx="13.5" cy="36" r="0.9" fill="#E2A9B8"/>' +
-        '<circle cx="35" cy="34.5" r="1" fill="#E2A9B8"/><circle cx="39.5" cy="32.6" r="0.9" fill="#E3C34D"/>' +
-        '<circle cx="33" cy="12" r="3" fill="#EFD98F" opacity="0.8"/>'),
-      summer: scene('#CFE3EA', '#9DB08B', '#7E9770', '#6F8A62', '#EDE6D2',
-        '<circle cx="33" cy="11.5" r="4" fill="#E0B145"/>' +
-        '<g stroke="#E0B145" stroke-width="1.3" stroke-linecap="round" fill="none">' +
-        '<path d="M33 4.2 V6.2"/><path d="M27.5 6 L28.9 7.4"/><path d="M38.5 6 L37.1 7.4"/>' +
-        '<path d="M25.5 11.5 H27.5"/><path d="M38.5 11.5 H40.5"/></g>' +
-        '<ellipse cx="10" cy="27.5" rx="1.6" ry="4" fill="#4C6148"/>' +
-        '<ellipse cx="38.5" cy="28.5" rx="1.3" ry="3.2" fill="#4C6148"/>'),
-      autumn: scene('#E6E2D4', '#DABC6E', '#C7A251', '#A98540', '#EFE8D6',
-        '<ellipse cx="10" cy="27.5" rx="1.8" ry="4" fill="#B65C3A"/>' +
-        '<ellipse cx="38.5" cy="28.5" rx="1.4" ry="3.2" fill="#C9803F"/>' +
-        '<g stroke="#B98E3E" stroke-width="0.9" stroke-linecap="round">' +
-        '<path d="M14 35 V32.5"/><path d="M17 36 V33.5"/><path d="M32 34.5 V32"/><path d="M35.5 35.5 V33"/></g>' +
-        '<circle cx="33" cy="12" r="3.2" fill="#E7CB8A" opacity="0.9"/>'),
-      winter: scene('#D9E2E9', '#F3F5F4', '#E7EDEF', '#DBE3E7', '#ECEAE0',
-        '<path d="M10 31 V25 M10 27 L7.8 24.8 M10 27 L12.2 24.8" stroke="#5B564B" stroke-width="1.1" stroke-linecap="round" fill="none"/>' +
-        '<g fill="#FFFFFF"><circle cx="12" cy="9" r="1"/><circle cx="20" cy="14" r="0.8"/>' +
-        '<circle cx="30" cy="8" r="0.9"/><circle cx="38" cy="15" r="0.8"/><circle cx="25" cy="19" r="0.7"/>' +
-        '<circle cx="7" cy="17" r="0.8"/><circle cx="42" cy="9" r="0.7"/></g>')
-    };
-    g.innerHTML = scenes[season];
-  })();
 </script>
 
 </body>
