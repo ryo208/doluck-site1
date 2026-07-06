@@ -99,16 +99,21 @@
 
   .corner-dogs { position: fixed; right: 14px; bottom: 14px; z-index: 90;
     display: flex; align-items: flex-end; gap: 6px; }
-  .corner-dogs img { display: block; width: 82px; height: auto;
-    background: #fff; padding: 4px 4px 12px;
+  .corner-dogs svg { display: block; width: 82px; height: auto;
+    background: #fff; padding: 4px;
     border: 1px solid rgba(44,42,37,0.1);
     box-shadow: 0 8px 20px rgba(44,42,37,0.18);
     transition: transform .3s cubic-bezier(.16,.6,.2,1); }
-  .corner-dogs img:first-child { transform: rotate(-4deg); }
-  .corner-dogs img:last-child { transform: rotate(3deg); }
-  .corner-dogs:hover img:first-child { transform: rotate(-4deg) translateY(-4px); }
-  .corner-dogs:hover img:last-child { transform: rotate(3deg) translateY(-4px); }
-  @media (max-width: 600px) { .corner-dogs img { width: 62px; } }
+  .corner-dogs svg:first-child { transform: rotate(-4deg); }
+  .corner-dogs svg:last-child { transform: rotate(3deg); }
+  .corner-dogs:hover svg:first-child { transform: rotate(-4deg) translateY(-4px); }
+  .corner-dogs:hover svg:last-child { transform: rotate(3deg) translateY(-4px); }
+  @media (max-width: 600px) { .corner-dogs svg { width: 62px; } }
+
+  .hero-horizon .tail { transform-box: fill-box; transform-origin: 50% 90%;
+    animation: wag 1.3s ease-in-out infinite alternate; }
+  @keyframes wag { from { transform: rotate(-7deg); } to { transform: rotate(9deg); } }
+  @media (prefers-reduced-motion: reduce) { .hero-horizon .tail { animation: none; } }
 
   footer { background: var(--paper-deep); border-top: 1px solid rgba(44,42,37,0.08);
     padding: 30px 6% 46px; font-size: 12px; color: var(--muted); }
@@ -202,6 +207,51 @@
       <ellipse cx="948" cy="220" rx="6" ry="22"/><rect x="946.8" y="236" width="2.4" height="12"/>
       <ellipse cx="530" cy="218" rx="6.5" ry="24"/><rect x="528.7" y="235" width="2.6" height="13"/>
     </g>
+    <!-- 道を散歩するご夫婦と看板犬（ほたる・純） -->
+    <g aria-hidden="true" transform="translate(220.8, 103.6) scale(0.7)">
+      <ellipse cx="684" cy="434" rx="15" ry="3" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="720" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="756" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="790" cy="434" rx="12" ry="2.8" fill="#54704C" opacity="0.28"/>
+      <!-- ほたる（白いもふもふ・後ろ姿） -->
+      <g>
+        <path class="tail" d="M691,428 Q698,424 696,414 Q689,417 688,424 Z" fill="#F4F0E2"/>
+        <path d="M672,420 Q671,409 682,407 Q694,406 696,416 Q697,426 690,430 Q683,434 676,430 Q671,427 672,420 Z" fill="#FBF8EF"/>
+        <path d="M674,403 Q673,395 682,394 Q691,395 690,403 Q690,410 682,410 Q674,410 674,403 Z" fill="#FDFBF4"/>
+        <path d="M675,397 Q669,399 670,408 Q674,411 677,407 Q676,402 676,397 Z" fill="#C9C3B4"/>
+        <path d="M689,397 Q695,399 694,408 Q690,411 687,407 Q688,402 688,397 Z" fill="#C9C3B4"/>
+        <ellipse cx="682" cy="431" rx="8" ry="2.2" fill="#EDE7D6"/>
+      </g>
+      <!-- 奥さん -->
+      <g>
+        <rect x="715" y="414" width="3.4" height="17" rx="1.7" fill="#4A453C"/>
+        <rect x="722" y="414" width="3.4" height="17" rx="1.7" fill="#4A453C"/>
+        <path d="M711,377 Q713,370 720,370 Q727,370 729,377 L734,412 Q734,416 730,416 L710,416 Q706,416 706,412 Z" fill="#B08F72"/>
+        <path d="M710,381 Q704,390 706,399" stroke="#B08F72" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+        <circle cx="720" cy="361" r="8.4" fill="#CFC8B8"/>
+        <circle cx="720" cy="351.8" r="3.5" fill="#CFC8B8"/>
+      </g>
+      <!-- ご主人 -->
+      <g>
+        <rect x="750" y="411" width="3.6" height="20" rx="1.8" fill="#3E3A33"/>
+        <rect x="758" y="411" width="3.6" height="20" rx="1.8" fill="#3E3A33"/>
+        <path d="M746,379 Q746,372 753,371 L760,371 Q767,372 767,379 L768,408 Q768,412 764,412 L749,412 Q745,412 745,408 Z" fill="#46604A"/>
+        <path d="M767,381 Q773,390 772,400" stroke="#46604A" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+        <circle cx="756.5" cy="361" r="8.8" fill="#C4BCAC"/>
+        <path d="M747.7,359 Q748.2,351 756.5,351 Q764.8,351 765.3,359 Q761,356.6 756.5,356.6 Q752,356.6 747.7,359 Z" fill="#4E483E"/>
+      </g>
+      <!-- 純（黒い犬・後ろ姿） -->
+      <g>
+        <path class="tail" d="M792,427 Q798,423 796,414 Q791,417 790,423 Z" fill="#3A362F"/>
+        <path d="M781,418 Q781,409 790,408 Q799,408 800,417 Q800,426 794,429 Q787,432 782,427 Q780,423 781,418 Z" fill="#312E28"/>
+        <path d="M784,404 Q784,397 791,397 Q797,397 797,403 Q797,409 791,409 Q784,409 784,404 Z" fill="#353129"/>
+        <path d="M783,400 Q781,407 784,409 Q787,407 786,401 Z" fill="#211F1B"/>
+        <path d="M798,400 Q800,407 797,409 Q794,407 795,401 Z" fill="#211F1B"/>
+      </g>
+      <!-- リード -->
+      <path d="M706,399 Q696,403 685,404" stroke="#4E483E" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M772,401 Q782,400 790,402" stroke="#4E483E" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </g>
   </svg>
   <p class="hero-scroll">SCROLL</p>
 </header>
@@ -287,10 +337,38 @@
 
 <!-- 右下の看板犬：ほたると純 -->
 <a class="corner-dogs" href="https://doluck2007.hatenadiary.org/" data-i18n-title="dogs.title" title="看板犬・ほたると純（ブログへ）" aria-label="Hotaru & Jun">
-  <img src="https://static.wixstatic.com/media/823729_5b4ed34fbe1b4d13957c31f4c1e38d68~mv2.jpg" alt="ほたる"
-       onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://wonderful-lebkuchen-362783.netlify.app/images/dog-jun.png';}else{this.style.display='none';}">
-  <img src="https://static.wixstatic.com/media/823729_e782fe5bb0b0486a966f243a25af76fc~mv2.jpg" alt="純"
-       onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://wonderful-lebkuchen-362783.netlify.app/images/jun.avif';}else{this.style.display='none';}">
+  <svg viewBox="0 0 100 118" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ほたる">
+    <rect width="100" height="118" fill="#FFFFFF"/>
+    <path d="M30,96 Q28,72 50,70 Q72,72 70,96 Q70,102 62,102 L38,102 Q30,102 30,96 Z" fill="#F6F2E7"/>
+    <path d="M42,82 L42,100 Q42,102 44,102 L47,102 L47,82 Z" fill="#FDFBF5"/>
+    <path d="M53,82 L53,102 L56,102 Q58,102 58,100 L58,82 Z" fill="#FDFBF5"/>
+    <path d="M24,44 Q22,24 42,20 Q50,12 58,20 Q78,24 76,44 Q78,58 66,62 Q58,66 50,65 Q42,66 34,62 Q22,58 24,44 Z" fill="#FBF8F0"/>
+    <path d="M32,40 Q40,29 50,30 Q60,29 68,40 Q60,35 50,36 Q40,35 32,40 Z" fill="#E9E3D2"/>
+    <path d="M24,36 Q15,40 17,53 Q23,59 30,54 Q26,46 28,38 Z" fill="#BCB6A6"/>
+    <path d="M76,36 Q85,40 83,53 Q77,59 70,54 Q74,46 72,38 Z" fill="#BCB6A6"/>
+    <ellipse cx="50" cy="50" rx="5.5" ry="4" fill="#2C2A25"/>
+    <path d="M50,54 Q50,58 46,59 M50,54 Q50,58 54,59" stroke="#8B8574" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <path d="M46.5,59.5 Q50,66 53.5,59.5 Q52,62 50,62 Q48,62 46.5,59.5 Z" fill="#D89A8E"/>
+    <text x="50" y="114" text-anchor="middle" font-family="'Shippori Mincho',serif" font-size="11" fill="#7C776B" letter-spacing="2">ほたる</text>
+  </svg>
+  <svg viewBox="0 0 100 118" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="純">
+    <rect width="100" height="118" fill="#FFFFFF"/>
+    <path d="M32,98 Q30,74 50,72 Q70,74 68,98 Q68,103 61,103 L39,103 Q32,103 32,98 Z" fill="#33302A"/>
+    <path d="M44,77 Q50,73 56,77 Q56,91 50,95 Q44,91 44,77 Z" fill="#4A463E"/>
+    <rect x="41" y="84" width="5.5" height="19" rx="2.6" fill="#3B3831"/>
+    <rect x="53.5" y="84" width="5.5" height="19" rx="2.6" fill="#3B3831"/>
+    <path d="M28,42 Q28,22 50,22 Q72,22 72,42 Q72,58 50,58 Q28,58 28,42 Z" fill="#3A362F"/>
+    <path d="M28,32 Q18,36 20,52 Q26,58 32,52 Q28,44 30,34 Z" fill="#26231E"/>
+    <path d="M72,32 Q82,36 80,52 Q74,58 68,52 Q72,44 70,34 Z" fill="#26231E"/>
+    <circle cx="42" cy="40" r="2.6" fill="#F1EDE3"/>
+    <circle cx="58" cy="40" r="2.6" fill="#F1EDE3"/>
+    <circle cx="42.6" cy="40.6" r="1.3" fill="#1B1916"/>
+    <circle cx="58.6" cy="40.6" r="1.3" fill="#1B1916"/>
+    <ellipse cx="50" cy="50" rx="9" ry="6.5" fill="#4A463E"/>
+    <ellipse cx="50" cy="48" rx="4.4" ry="3.2" fill="#161411"/>
+    <path d="M50,51 Q50,54 47,55 M50,51 Q50,54 53,55" stroke="#161411" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    <text x="50" y="114" text-anchor="middle" font-family="'Shippori Mincho',serif" font-size="11" fill="#7C776B" letter-spacing="4">純</text>
+  </svg>
 </a>
 
 <script>
