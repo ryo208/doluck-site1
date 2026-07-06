@@ -39,21 +39,12 @@
   .nav-inner { width: min(1024px, 92%); display: flex; align-items: center;
     justify-content: space-between; font-size: 13px; gap: 14px; }
   .nav-brand { font-family: var(--serif); font-weight: 700; font-size: 15px; letter-spacing: 0.14em; }
-  .nav-brand { position: relative; display: inline-block; }
-  .nb-full { transition: opacity .3s ease; }
-  .nb-slam { position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-    opacity: 0; pointer-events: none; white-space: nowrap;
-    clip-path: inset(-25% 100% -25% 0); transition: opacity .2s ease; }
-  .nav-brand.slammed .nb-full { opacity: 0; }
-  .nav-brand.slammed .nb-slam { opacity: 1; animation: brandInk .7s cubic-bezier(.65,.05,.25,1) forwards; }
-  @keyframes brandInk {
-    0% { clip-path: inset(-25% 100% -25% 0); filter: blur(2.5px); }
-    60% { filter: blur(0.5px); }
-    100% { clip-path: inset(-25% -15% -25% 0); filter: blur(0); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .nav-brand.slammed .nb-slam { animation: none; clip-path: none; }
-  }
+  .nav-brand { display: inline-flex; align-items: center; gap: 8px; }
+  .brand-season { width: 20px; height: 20px; display: block; flex: none;
+    animation: seasonIn .7s cubic-bezier(.2,.8,.3,1) both; }
+  @keyframes seasonIn { from { opacity: 0; transform: scale(.5) rotate(-12deg); }
+    to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .brand-season { animation: none; } }
   .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a { color: rgba(44,42,37,0.75); transition: color .25s ease; letter-spacing: 0.05em; }
   .nav-links a:hover { color: var(--ink); }
@@ -218,7 +209,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html" aria-label="Do Luck 道楽"><span class="nb-full" aria-hidden="true">Do Luck 道楽</span><span class="nb-slam" aria-hidden="true">道楽</span></a>
+    <a class="nav-brand" href="index.html" aria-label="Do Luck 道楽"><svg class="brand-season" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"></svg><span>Do Luck 道楽</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html" data-i18n="nav.home">ホーム</a></li>
       <li><a href="cafe.html" data-i18n="nav.cafe">喫茶</a></li>
@@ -440,17 +431,37 @@
   } else {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }
-  // ヘッダー演出：スクロールで「道楽」が墨書きのように現れる
+  // 左上の季節アイコン（十勝の四季で自動的に変わる）
   (() => {
-    const brand = document.querySelector('.nav-brand');
-    if (!brand || !brand.querySelector('.nb-slam')) return;
-    let slammed = null;
-    const onScroll = () => {
-      const want = window.scrollY > 180;
-      if (want !== slammed) { slammed = want; brand.classList.toggle('slammed', want); }
+    const el = document.querySelector('.brand-season');
+    if (!el) return;
+    const m = new Date().getMonth() + 1;
+    const season = (m >= 3 && m <= 5) ? 'spring' : (m >= 6 && m <= 8) ? 'summer' : (m >= 9 && m <= 11) ? 'autumn' : 'winter';
+    const icons = {
+      spring: '<path d="M12 20.5 V11" stroke="#46604A" stroke-width="1.8" stroke-linecap="round" fill="none"/>' +
+        '<path d="M12 13.5 C11.5 9.5 8.5 7.5 5.5 7.5 C5.5 11 8 13.5 12 13.5 Z" fill="#7E9770"/>' +
+        '<path d="M12 11.5 C12.5 7 15.5 5 18.5 5 C18.5 8.5 16 11.5 12 11.5 Z" fill="#4C6148"/>' +
+        '<circle cx="6.2" cy="17.8" r="1.8" fill="#E3C34D"/>' +
+        '<circle cx="17.8" cy="18.6" r="1.4" fill="#E2A9B8"/>',
+      summer: '<circle cx="12" cy="9.5" r="3.6" fill="#E0B145"/>' +
+        '<g stroke="#E0B145" stroke-width="1.5" stroke-linecap="round" fill="none">' +
+        '<path d="M12 2.6 V4.5"/><path d="M5.4 4.6 L6.8 6"/><path d="M18.6 4.6 L17.2 6"/>' +
+        '<path d="M3 9.5 H4.9"/><path d="M19.1 9.5 H21"/></g>' +
+        '<path d="M1.5 20.8 Q6 17.6 12 18.3 Q18 19 22.5 17.1 L22.5 21.6 L1.5 21.6 Z" fill="#6F8A62"/>',
+      autumn: '<path d="M12 21 V7.5" stroke="#B98E3E" stroke-width="1.6" stroke-linecap="round" fill="none"/>' +
+        '<g fill="#C69A45">' +
+        '<ellipse cx="9.5" cy="8" rx="1.6" ry="3" transform="rotate(-32 9.5 8)"/>' +
+        '<ellipse cx="14.5" cy="8" rx="1.6" ry="3" transform="rotate(32 14.5 8)"/>' +
+        '<ellipse cx="9.1" cy="12.3" rx="1.6" ry="3" transform="rotate(-32 9.1 12.3)"/>' +
+        '<ellipse cx="14.9" cy="12.3" rx="1.6" ry="3" transform="rotate(32 14.9 12.3)"/>' +
+        '<ellipse cx="12" cy="4.6" rx="1.5" ry="2.6"/></g>',
+      winter: '<g stroke="#8AA6B8" stroke-width="1.4" stroke-linecap="round" fill="none">' +
+        '<path d="M12 3 V21"/><path d="M4.2 7.5 L19.8 16.5"/><path d="M19.8 7.5 L4.2 16.5"/>' +
+        '<path d="M12 3 L10.2 4.8 M12 3 L13.8 4.8 M12 21 L10.2 19.2 M12 21 L13.8 19.2"/>' +
+        '<path d="M4.2 7.5 L6.7 7.3 M4.2 7.5 L4.4 10 M19.8 16.5 L17.3 16.7 M19.8 16.5 L19.6 14"/>' +
+        '<path d="M19.8 7.5 L17.3 7.3 M19.8 7.5 L19.6 10 M4.2 16.5 L6.7 16.7 M4.2 16.5 L4.4 14"/></g>'
     };
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    el.innerHTML = icons[season];
   })();
 </script>
 
