@@ -3,11 +3,438 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Do Luck | Cafe & Guesthouse in Ikeda, Hokkaido</title>
 <meta name="description" content="A wood-stove cafe and travelers' guesthouse in Ikeda, Hokkaido.">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://ryo208.github.io/doluck-site1/en/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Do Luck 道楽">
+<meta property="og:title" content="Do Luck | Cafe & Guesthouse in Ikeda, Hokkaido">
+<meta property="og:description" content="A wood-stove cafe and travelers' guesthouse in Ikeda, Hokkaido.">
+<meta property="og:url" content="https://ryo208.github.io/doluck-site1/en/">
+<meta property="og:image" content="https://ryo208.github.io/doluck-site1/images/lodge-photo.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<title>Do Luck | Cafe & Guesthouse in Ikeda, Hokkaido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F8F5EE; --paper-deep: #EFEAE0; --ink: #26231D; --muted: #7A7466;
+    --green: #43614B; --green-deep: #2E4636; --gold: #A98A50; --gold-soft: #C9B287;
+    --night: #12160F; --night-2: #1A211A;
+    --radius: 22px; --nav-h: 64px;
+    --serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --ease: cubic-bezier(.16,.6,.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--paper);
+    -webkit-font-smoothing: antialiased; line-height: 1.9; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  /* ---- film grain ---- */
+  body::after { content: ''; position: fixed; inset: 0; z-index: 998; pointer-events: none;
+    opacity: 0.05; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* ---- opening ---- */
+  #loader { position: fixed; inset: 0; z-index: 1000; background: var(--paper);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 26px; transition: opacity 1s ease .2s, visibility 1s .2s; }
+  .loader-mark { font-family: var(--serif); font-weight: 700;
+    font-size: clamp(58px, 11vw, 112px); letter-spacing: 0.14em; color: var(--ink);
+    display: flex; padding-left: 0.14em; }
+  .loader-mark span { opacity: 0; transform: translateY(26px);
+    animation: lIn 1.1s var(--ease) forwards; }
+  .loader-mark span:nth-child(2) { animation-delay: .2s; }
+  .loader-rule { width: 1px; height: 54px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0; animation: lIn 1.1s var(--ease) .5s forwards; }
+  @keyframes lIn { to { opacity: 1; transform: none; } }
+  body.loaded #loader { opacity: 0; visibility: hidden; }
+
+  #progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 999;
+    background: linear-gradient(90deg, var(--gold), var(--green)); }
+
+  /* ---- nav ---- */
+  .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+    background: transparent; z-index: 100; transition: background .5s ease, box-shadow .5s ease,
+    border-color .5s ease, height .5s ease; border-bottom: 1px solid transparent;
+    display: flex; align-items: center; justify-content: center; }
+  .nav.scrolled { height: 56px; background: rgba(248,245,238,0.86);
+    backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px);
+    border-bottom: 1px solid rgba(38,35,29,0.08); }
+  .nav-inner { width: min(1120px, 92%); display: flex; align-items: center;
+    justify-content: space-between; font-size: 13px; gap: 14px; }
+  .nav-brand { font-family: var(--serif); font-weight: 700; font-size: 16px; letter-spacing: 0.16em; }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links a { position: relative; color: rgba(38,35,29,0.72); transition: color .25s ease;
+    letter-spacing: 0.06em; padding: 4px 0; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 1px; background: var(--gold); transition: right .35s var(--ease); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .lang-select { font-family: var(--sans); font-size: 12px; color: var(--ink);
+    background: transparent; border: 1px solid rgba(38,35,29,0.25); border-radius: 100px;
+    padding: 4px 10px; cursor: pointer; }
+  .nav-toggle { display: none; background: none; border: none; font-size: 20px;
+    cursor: pointer; color: var(--ink); }
+  @media (max-width: 860px) {
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(248,245,238,0.97);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      flex-direction: column; gap: 0; padding: 10px 6%;
+      border-bottom: 1px solid rgba(38,35,29,0.08); }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 13px 0; border-bottom: 1px solid rgba(38,35,29,0.05); }
+    .nav-links li:last-child { border-bottom: none; }
+    .nav-links a::after { display: none; }
+    .nav-toggle { display: block; }
+  }
+
+  /* ---- shared type ---- */
+  .eyebrow { font-size: 12px; font-weight: 600; color: var(--gold);
+    letter-spacing: 0.34em; margin-bottom: 22px; text-transform: uppercase; }
+  .headline { font-family: var(--serif); font-size: clamp(30px, 5vw, 54px);
+    font-weight: 600; letter-spacing: 0.05em; line-height: 1.8; }
+  .subhead { font-size: clamp(15px, 1.8vw, 17px); color: var(--muted);
+    margin-top: 26px; line-height: 2.3; }
+  .link-quiet { display: inline-block; margin-top: 40px; font-size: 15px;
+    letter-spacing: 0.12em; color: var(--green);
+    border-bottom: 1px solid rgba(67,97,75,0.4); padding-bottom: 5px;
+    transition: border-color .3s ease, letter-spacing .3s ease; }
+  .link-quiet:hover { border-color: var(--green); letter-spacing: 0.18em; }
+  .rule-v { display: block; width: 1px; height: 72px; margin: 48px auto 0;
+    background: linear-gradient(to bottom, var(--gold), transparent); }
+
+  .detail { margin-top: 44px; display: flex; gap: 56px; flex-wrap: wrap; }
+  .detail-item .label { font-size: 11px; color: var(--muted); letter-spacing: 0.26em; }
+  .detail-item .value { font-family: var(--serif); font-size: 22px; font-weight: 600;
+    margin-top: 6px; letter-spacing: 0.06em; }
+
+  .note { margin-top: 18px; font-size: 13px; letter-spacing: 0.08em; color: var(--muted); }
+  .cta-row { display: flex; gap: 16px; justify-content: center; margin-top: 46px; flex-wrap: wrap; }
+  .btn { position: relative; overflow: hidden; display: inline-block; padding: 16px 38px;
+    border-radius: 100px; font-size: 15px; letter-spacing: 0.08em;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .btn::after { content: ''; position: absolute; top: 0; bottom: 0; left: -80%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-18deg); transition: left .6s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(46,70,54,0.22); }
+  .btn:hover::after { left: 130%; }
+  .btn-primary { background: var(--green-deep); color: var(--paper); }
+  .btn-ghost { background: transparent; color: var(--green); border: 1px solid rgba(67,97,75,0.5); }
+
+  .reveal { opacity: 0; transform: translateY(34px); filter: blur(5px);
+    transition: opacity 1.2s var(--ease), transform 1.2s var(--ease), filter 1.2s var(--ease); }
+  .reveal.visible { opacity: 1; transform: none; filter: none; }
+  a:focus-visible, button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--green); outline-offset: 3px; }
+
+  /* ---- hero ---- */
+  .hero { position: relative; min-height: 100svh; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start; text-align: center;
+    padding-top: calc(var(--nav-h) + 9vh); overflow: hidden;
+    background:
+      radial-gradient(120% 60% at 50% 88%, rgba(233,220,183,0.55) 0%, rgba(233,220,183,0) 60%),
+      linear-gradient(to bottom, #C7D8E2 0%, #DCE3D8 44%, #EFE9D8 66%, #F3EFE2 100%); }
+  .hero-copy { position: relative; z-index: 2; padding: 0 6%; }
+  .hero-eyebrow { opacity: 0; animation: heroIn 1.4s var(--ease) 1s forwards; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(76px, 15vw, 158px);
+    font-weight: 700; letter-spacing: 0.1em; line-height: 1.1; padding-left: 0.1em; }
+  .hero h1 .ch { display: inline-block; opacity: 0; transform: translateY(46px); filter: blur(8px);
+    animation: chIn 1.5s var(--ease) forwards; }
+  .hero h1 .ch:nth-child(1) { animation-delay: 1.15s; }
+  .hero h1 .ch:nth-child(2) { animation-delay: 1.32s; }
+  .hero .tagline { font-family: var(--serif); font-size: clamp(16px, 2.4vw, 21px);
+    letter-spacing: 0.22em; color: rgba(38,35,29,0.75); margin-top: 24px;
+    opacity: 0; animation: heroIn 1.4s var(--ease) 1.75s forwards; }
+  .hero-est { margin-top: 30px; font-size: 11px; letter-spacing: 0.42em;
+    color: rgba(38,35,29,0.45);
+    opacity: 0; animation: heroIn 1.4s var(--ease) 2.05s forwards; }
+  @keyframes chIn { to { opacity: 1; transform: none; filter: none; } }
+  @keyframes heroIn { to { opacity: 1; } }
+
+  .hero-vertical { position: absolute; z-index: 2; right: 4.5%; top: 50%;
+    transform: translateY(-56%); writing-mode: vertical-rl; font-family: var(--serif);
+    font-size: 14px; letter-spacing: 0.42em; color: rgba(38,35,29,0.42); line-height: 2.4;
+    opacity: 0; animation: heroIn 1.6s var(--ease) 2.3s forwards; }
+  @media (max-width: 900px) { .hero-vertical { display: none; } }
+
+  .hero-sky { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .cloud { position: absolute; border-radius: 100px; filter: blur(26px);
+    background: rgba(255,255,255,0.75); }
+  .cloud.c1 { width: 380px; height: 66px; top: 16%; left: -12%;
+    animation: drift 90s linear infinite; }
+  .cloud.c2 { width: 260px; height: 48px; top: 30%; left: -20%; opacity: 0.7;
+    animation: drift 120s linear infinite 18s; }
+  @keyframes drift { to { transform: translateX(140vw); } }
+
+  .hero-scene { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    height: 46vh; min-height: 300px; will-change: transform; }
+  .hero-horizon { position: absolute; left: 0; right: 0; bottom: 0; width: 100%;
+    height: 100%; display: block; }
+  .hero-scroll { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+    z-index: 2; font-size: 10px; letter-spacing: 0.34em; color: rgba(38,35,29,0.55); }
+  .scroll-line { display: block; width: 1px; height: 44px; margin: 0 auto 10px;
+    background: linear-gradient(to bottom, rgba(38,35,29,0.55), transparent);
+    animation: dropLine 2.2s var(--ease) infinite; transform-origin: top; }
+  @keyframes dropLine { 0% { transform: scaleY(0); } 45% { transform: scaleY(1); }
+    100% { transform: scaleY(1); opacity: 0; } }
+
+  .hero-horizon .tail { transform-box: fill-box; transform-origin: 50% 90%;
+    animation: wag 1.3s ease-in-out infinite alternate; }
+  @keyframes wag { from { transform: rotate(-7deg); } to { transform: rotate(9deg); } }
+
+  /* ---- statement ---- */
+  .statement { padding: 170px 6% 150px; text-align: center; background: var(--paper); }
+  .statement .headline { line-height: 2; font-size: clamp(32px, 5.6vw, 60px); }
+  .statement p.body { margin: 44px auto 0; max-width: 580px; font-size: 16px;
+    color: var(--muted); line-height: 2.5; font-family: var(--serif); }
+
+  /* ---- stats ---- */
+  .stats { border-top: 1px solid rgba(38,35,29,0.08); border-bottom: 1px solid rgba(38,35,29,0.08);
+    background: var(--paper); padding: 76px 6%; }
+  .stats-grid { max-width: 1020px; margin: 0 auto; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 30px; text-align: center; }
+  .stat-num { font-family: var(--serif); font-weight: 600;
+    font-size: clamp(34px, 4.6vw, 54px); letter-spacing: 0.04em; line-height: 1.3; }
+  .stat-num small { font-size: 0.34em; color: var(--muted); letter-spacing: 0.1em; font-weight: 500; }
+  .stat-season { font-size: clamp(22px, 3vw, 34px); line-height: 1.6; padding-top: 0.35em; }
+  .stat-label { margin-top: 10px; font-size: 11px; letter-spacing: 0.3em; color: var(--gold);
+    font-weight: 600; text-transform: uppercase; }
+  @media (max-width: 700px) { .stats-grid { grid-template-columns: 1fr; gap: 44px; } }
+
+  /* ---- cafe ---- */
+  .cafe-band { background: linear-gradient(to bottom, var(--paper), #F0E9DA);
+    padding: 170px 6%; }
+  .cafe-band .split { max-width: 1020px; margin: 0 auto; display: grid;
+    grid-template-columns: 1.15fr 0.85fr; gap: 70px; align-items: center; text-align: left; }
+  @media (max-width: 860px) { .cafe-band .split { grid-template-columns: 1fr; gap: 50px;
+    text-align: center; } .cafe-band .detail { justify-content: center; } }
+  .coffee-svg { width: min(320px, 74%); margin: 0 auto; display: block; }
+  .steam { animation: steam 3.6s ease-in-out infinite; }
+  .steam.s2 { animation-delay: 1.2s; } .steam.s3 { animation-delay: 2.3s; }
+  @keyframes steam { 0% { opacity: 0; transform: translateY(7px); }
+    35% { opacity: 0.85; } 100% { opacity: 0; transform: translateY(-16px); } }
+
+  /* ---- lodge (night) ---- */
+  .lodge-band { position: relative; overflow: hidden; text-align: center; padding: 190px 6%;
+    background: radial-gradient(130% 90% at 50% 110%, #23301F 0%, var(--night-2) 45%, var(--night) 100%);
+    color: #EFEBDD; }
+  .lodge-band .eyebrow { color: var(--gold-soft); }
+  .lodge-band .headline { color: #F4F1E6; }
+  .lodge-band .subhead { color: rgba(239,235,221,0.66); }
+  .lodge-band .note { color: rgba(239,235,221,0.5); }
+  .lodge-band .link-quiet { color: var(--gold-soft); border-color: rgba(201,178,135,0.45); }
+  .lodge-band .link-quiet:hover { border-color: var(--gold-soft); }
+  .lodge-band .inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .price { margin-top: 44px; font-family: var(--serif);
+    font-size: clamp(38px, 5.8vw, 58px); font-weight: 600; letter-spacing: 0.04em;
+    color: var(--gold-soft); }
+  .price small { font-size: 0.36em; font-weight: 500; color: rgba(239,235,221,0.6);
+    letter-spacing: 0.1em; }
+  .stars { position: absolute; inset: 0 0 30% 0; z-index: 0; pointer-events: none; }
+  .stars i { position: absolute; background: #EFEBDD; border-radius: 50%; opacity: 0.12;
+    animation: twinkle ease-in-out infinite; }
+  @keyframes twinkle { 50% { opacity: 0.85; } }
+  .moon { position: absolute; top: 12%; right: 14%; width: 54px; height: 54px; z-index: 0;
+    border-radius: 50%; background: transparent;
+    box-shadow: 14px 6px 0 0 rgba(239,235,221,0.8); filter: blur(0.4px); opacity: 0.85; }
+
+  /* ---- journey ---- */
+  .journey { padding: 170px 6%; text-align: center; background: var(--paper); }
+  .journey .body { margin: 40px auto 0; max-width: 560px; font-size: 15.5px;
+    color: var(--muted); line-height: 2.4; }
+  .journey-svg { width: min(880px, 100%); margin: 40px auto 0; display: block; overflow: visible; }
+  .journey-svg text { font-family: var(--sans); font-size: 12px; letter-spacing: 0.3em;
+    fill: var(--muted); }
+  #roadPath { transition: stroke-dashoffset 3s var(--ease); }
+  .journey-pin { animation: pinPulse 2.6s ease-out infinite; transform-box: fill-box;
+    transform-origin: center; }
+  @keyframes pinPulse { 0% { transform: scale(0.6); opacity: 0.8; }
+    100% { transform: scale(2.6); opacity: 0; } }
+
+  /* ---- news ---- */
+  .news { padding: 64px 6%; background: var(--paper-deep);
+    border-bottom: 1px solid rgba(38,35,29,0.06); }
+  .news-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .news .eyebrow { margin-bottom: 14px; }
+  .news-list { list-style: none; text-align: left; display: inline-block; max-width: 100%; }
+  .news-list li { padding: 12px 0; border-bottom: 1px solid rgba(38,35,29,0.08);
+    font-size: 14.5px; display: flex; gap: 18px; align-items: baseline; }
+  .news-list li:last-child { border-bottom: none; }
+  .news-date { font-family: var(--serif); color: var(--gold); font-size: 13px;
+    letter-spacing: 0.08em; white-space: nowrap; }
+
+  /* ---- spots ---- */
+  .spots { padding: 170px 6%; text-align: center; background: var(--paper-deep); }
+  .spots .body { margin: 34px auto 0; max-width: 580px; font-size: 15.5px;
+    color: var(--muted); line-height: 2.4; font-family: var(--serif); }
+  .spots-grid { max-width: 1020px; margin: 64px auto 0; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 800px) { .spots-grid { grid-template-columns: 1fr; } }
+  .spot { background: var(--paper); border: 1px solid rgba(38,35,29,0.06);
+    border-radius: var(--radius); padding: 46px 34px;
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .spot:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(38,35,29,0.12); }
+  .spot svg { width: 58px; height: 58px; margin: 0 auto 20px; display: block; }
+  .spot h3 { font-family: var(--serif); font-size: 19px; font-weight: 600;
+    letter-spacing: 0.06em; line-height: 1.7; }
+  .spot-time { margin-top: 10px; color: var(--gold); font-size: 12px;
+    letter-spacing: 0.18em; font-weight: 600; }
+  .spot-p { margin-top: 14px; font-size: 14px; color: var(--muted); line-height: 2.1; }
+  .spot .link-quiet { margin-top: 24px; font-size: 13px; }
+  .spots > .note { margin-top: 40px; }
+
+  /* ---- voices ---- */
+  .voices { padding: 150px 6%; text-align: center; background: var(--paper); }
+  .voices .body { margin: 34px auto 0; max-width: 520px; font-size: 15.5px;
+    color: var(--muted); line-height: 2.4; }
+  .voices .btn { margin-top: 44px; }
+
+  /* ---- seasons ---- */
+  body.season-spring .hero { background:
+    radial-gradient(120% 60% at 50% 88%, rgba(233,225,190,0.5) 0%, rgba(233,225,190,0) 60%),
+    linear-gradient(to bottom, #C9DBE4 0%, #DDE6D4 44%, #EEEAD3 66%, #F3F0DF 100%); }
+  body.season-spring .hero-horizon > path:nth-of-type(1) { fill: #C5D2A2; }
+  body.season-spring .hero-horizon > path:nth-of-type(2) { fill: #AEC08D; }
+  body.season-spring .hero-horizon > path:nth-of-type(3) { fill: #93AB7C; }
+  body.season-spring .hero-horizon > path:nth-of-type(4) { fill: #83A06D; }
+  body.season-autumn .hero { background:
+    radial-gradient(120% 60% at 50% 88%, rgba(233,210,160,0.55) 0%, rgba(233,210,160,0) 60%),
+    linear-gradient(to bottom, #C7CFDA 0%, #E0DCC5 44%, #EFE3C4 66%, #F3ECD6 100%); }
+  body.season-autumn .hero-horizon > path:nth-of-type(1) { fill: #D9C795; }
+  body.season-autumn .hero-horizon > path:nth-of-type(2) { fill: #C9B173; }
+  body.season-autumn .hero-horizon > path:nth-of-type(3) { fill: #B0985C; }
+  body.season-autumn .hero-horizon > path:nth-of-type(4) { fill: #A0894E; }
+  body.season-winter .hero { background:
+    radial-gradient(120% 60% at 50% 88%, rgba(240,244,248,0.6) 0%, rgba(240,244,248,0) 60%),
+    linear-gradient(to bottom, #B7C7D4 0%, #D5DDE2 44%, #E9EBE8 66%, #F1F2EF 100%); }
+  body.season-winter .hero-horizon > path:nth-of-type(1) { fill: #EAEEEB; }
+  body.season-winter .hero-horizon > path:nth-of-type(2) { fill: #DEE4E0; }
+  body.season-winter .hero-horizon > path:nth-of-type(3) { fill: #CFD8D2; }
+  body.season-winter .hero-horizon > path:nth-of-type(4) { fill: #C2CDC5; }
+  body.season-winter .hero-horizon > path:nth-of-type(5) { fill: #F4F1E8; }
+  .snowflake { position: absolute; top: -12px; border-radius: 50%; background: #fff;
+    animation: snowfall linear infinite; }
+  @keyframes snowfall { to { transform: translateY(110vh); } }
+
+  /* ---- family ---- */
+  .family { padding: 170px 6%; text-align: center;
+    background: linear-gradient(to bottom, var(--paper), var(--paper-deep)); }
+  .family .body { margin: 30px auto 0; max-width: 560px; font-size: 15.5px;
+    color: var(--muted); line-height: 2.3; }
+  .family-grid { max-width: 1040px; margin: 64px auto 0; display: grid;
+    grid-template-columns: repeat(4, 1fr); gap: 40px 22px; }
+  @media (max-width: 900px) { .family-grid { grid-template-columns: repeat(2, 1fr); } }
+  .member .medal { width: min(160px, 100%); aspect-ratio: 1; margin: 0 auto;
+    border-radius: 50%; overflow: hidden; border: 1px solid rgba(169,138,80,0.45);
+    background: linear-gradient(to bottom, #D8E4EA 0%, #EDEBDD 62%, #B9C7A8 62%, #9DB08B 100%);
+    box-shadow: inset 0 0 0 5px var(--paper), inset 0 0 0 6px rgba(169,138,80,0.25);
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .member:hover .medal { transform: translateY(-6px);
+    box-shadow: inset 0 0 0 5px var(--paper), inset 0 0 0 6px rgba(169,138,80,0.25),
+      0 20px 40px rgba(38,35,29,0.14); }
+  .member .medal svg { width: 100%; height: 100%; display: block; }
+  .member h3 { font-family: var(--serif); font-weight: 600; font-size: 20px;
+    letter-spacing: 0.08em; margin-top: 22px; }
+  .member .role { margin-top: 8px; font-size: 12.5px; color: var(--muted);
+    letter-spacing: 0.05em; line-height: 1.9; }
+  .medal .tail2 { transform-box: fill-box; transform-origin: 20% 85%;
+    animation: wag 1.1s ease-in-out infinite alternate; }
+
+  /* ---- tiles ---- */
+  .tiles { background: var(--paper-deep); padding: 150px 6%; }
+  .tiles-grid { max-width: 1020px; margin: 0 auto; display: grid;
+    grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  @media (max-width: 700px) { .tiles-grid { grid-template-columns: 1fr; } }
+  .tile { position: relative; background: var(--paper); border: 1px solid rgba(38,35,29,0.06);
+    border-radius: var(--radius); padding: 52px 46px; text-align: left; overflow: hidden;
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .tile::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent 70%);
+    opacity: 0; transition: opacity .45s ease; }
+  .tile:hover { transform: translateY(-6px); box-shadow: 0 24px 50px rgba(38,35,29,0.12); }
+  .tile:hover::before { opacity: 1; }
+  .tile .idx { font-family: var(--serif); font-size: 13px; letter-spacing: 0.3em;
+    color: var(--gold); }
+  .tile h3 { font-family: var(--serif); font-size: 24px; font-weight: 600;
+    letter-spacing: 0.08em; margin-top: 14px; }
+  .tile p { font-size: 14.5px; color: var(--muted); margin-top: 14px; line-height: 2.1; }
+  .tile .link-quiet { margin-top: 28px; font-size: 14px; }
+
+  /* ---- contact ---- */
+  .contact-band { background: linear-gradient(to bottom, var(--paper-deep), var(--paper));
+    text-align: center; padding: 170px 6% 150px; }
+  .contact-band .headline { font-size: clamp(34px, 5.6vw, 60px); }
+  .contact-band address { font-style: normal; margin-top: 48px; font-size: 14px;
+    color: var(--muted); letter-spacing: 0.06em; line-height: 2.3; }
+
+  /* ---- footer ---- */
+  footer { position: relative; background: var(--night); color: rgba(239,235,221,0.62);
+    padding: 70px 6% 54px; font-size: 12.5px; overflow: hidden; }
+  .footer-inner { max-width: 1020px; margin: 0 auto; display: flex;
+    flex-direction: column; gap: 26px; }
+  .footer-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.16em;
+    color: #F4F1E6; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; }
+  .footer-links a { transition: color .25s ease; }
+  .footer-links a:hover { color: #F4F1E6; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(239,235,221,0.12);
+    padding-top: 26px; }
+  .footer-vertical { position: absolute; right: 4%; top: 64px; pointer-events: none;
+    writing-mode: vertical-rl; font-family: var(--serif); font-size: 12px;
+    letter-spacing: 0.4em; color: rgba(239,235,221,0.28); white-space: nowrap; }
+  @media (max-width: 900px) { .footer-vertical { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .hero h1 .ch, .hero .tagline, .hero-eyebrow, .hero-est, .hero-vertical,
+    .loader-mark span, .loader-rule { opacity: 1 !important; transform: none !important;
+      filter: none !important; }
+    .stars i { opacity: 0.5; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["CafeOrCoffeeShop", "LodgingBusiness"],
+  "name": "Do Luck 道楽",
+  "alternateName": ["道楽", "ドゥ・ラック"],
+  "description": "北海道・十勝 池田町の喫茶と旅人宿。薪ストーブの喫茶と、旅人同士の語らいを大切にする小さな宿。",
+  "url": "https://ryo208.github.io/doluck-site1/",
+  "image": "https://ryo208.github.io/doluck-site1/images/lodge-photo.jpg",
+  "telephone": "+81-15-572-4949",
+  "address": {
+    "@type": "PostalAddress",
+    "postalCode": "083-0034",
+    "addressRegion": "北海道",
+    "addressLocality": "中川郡池田町",
+    "streetAddress": "利別本町2-6",
+    "addressCountry": "JP"
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "10:00",
+    "closes": "18:00"
+  }],
+  "priceRange": "素泊まり ¥4,000〜",
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=%E5%8C%97%E6%B5%B7%E9%81%93%E4%B8%AD%E5%B7%9D%E9%83%A1%E6%B1%A0%E7%94%B0%E7%94%BA%E5%88%A9%E5%88%A5%E6%9C%AC%E7%94%BA2-6",
+  "sameAs": [
+    "https://doluck2007.hatenadiary.org/",
+    "https://www.toho.net/meguri/1436.html"
+  ]
+}
+</script>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
 <link rel="alternate" hreflang="ja" href="https://ryo208.github.io/doluck-site1/">
 <link rel="alternate" hreflang="en" href="https://ryo208.github.io/doluck-site1/en/">
 <link rel="alternate" hreflang="ko" href="https://ryo208.github.io/doluck-site1/ko/">
@@ -22,127 +449,598 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand">
-      <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Do Luck logo Hokkaido">
-        <rect x="2" y="2" width="96" height="96" rx="22" fill="#3e2b23"/>
-        <g transform="translate(10,11) scale(0.8)">
-          <path d="M35.6,0 L45.5,11.2 L48.9,17.4 L54,23 L63.4,30 L69.5,32.3 L74.1,32.9 L74.1,34.4 L75.6,36.3 L79.1,37.3 L83.5,36.7 L92,27.5 L92.5,29.2 L87.9,37.8 L87.6,40.8 L89,43.5 L92.3,45 L91.3,45.7 L91.9,44.9 L89.7,44.3 L91.2,49.3 L92.8,51.3 L92.2,51.7 L94.6,52 L97.2,49.3 L100,49.8 L96.6,51.1 L94.9,54.5 L93,53.9 L89,54.9 L88.3,56 L89.1,56.5 L86.1,58.6 L83.7,57.9 L83.8,57.2 L85.3,57.5 L85.3,56.8 L83.1,56.9 L81.9,58.7 L83.4,59.8 L77.6,59.6 L75.4,58.1 L73.8,58.1 L69.2,60.4 L63.8,65.5 L59.2,72.4 L58.6,79.5 L57.5,82.1 L52.6,77.9 L45.5,74.9 L39.7,70.1 L37.5,69.8 L35.3,67.7 L32.8,66.7 L31,66.3 L27.7,67.4 L23.3,70.4 L20.5,73.8 L19.3,73.2 L18.3,70.4 L15.6,67.6 L11.8,67.6 L9,71.3 L8.7,75 L13.5,78.3 L15.9,77.6 L19.7,82.1 L22.3,83.2 L23.5,85 L19.8,87.1 L16.9,85.6 L15.4,86.4 L15.9,85.3 L14.8,84.6 L13.5,86.7 L11.1,88.1 L10.6,91.4 L8.7,91.9 L7.7,93.8 L5.2,93.5 L3.6,89.4 L5.1,84.9 L5.9,84.6 L6,80.8 L4.1,77.9 L2.7,77.7 L1.8,76 L0.4,75.4 L0,73.2 L1.3,70.9 L1,66.8 L2.5,65.1 L4.5,65.1 L6.9,62.2 L8.7,63.3 L10.1,60.2 L12.4,58.3 L9.3,53.1 L9.9,50.4 L12.2,49.7 L16.9,53.4 L20.5,52.7 L20.7,53.8 L23.4,54.9 L27.1,51 L27.5,49 L26.3,46.3 L26.7,44.5 L25.8,41.6 L26.7,39.8 L30.5,37.4 L31.2,34.9 L31,28.5 L32.7,25.2 L33.5,20.9 L32.6,14.8 L29.8,6.6 L31.2,4 L30.9,2.2 L33.4,2.7 L35.6,0 Z" fill="#f6efe4"/>
-          <circle cx="65" cy="62" r="5.5" fill="#c1622f"/>
-        </g>
-      </svg>
-      <span class="brand-text">Do Luck 道楽<small>CAFE &amp; GUESTHOUSE</small></span>
-    </a>
-    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html" class="active">HOME</a></li>
-        <li><a href="cafe.html">Cafe</a></li>
-        <li><a href="lodge.html">Lodge</a></li>
-        <li><a href="access.html">Access</a></li>
-        <li><a href="migration.html">Our Story</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">Blog</a></li>
-        <li><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language">
-        <option value="../index.html">日本語</option>
-        <option value="../en/index.html" selected>English</option>
-        <option value="../ko/index.html">한국어</option>
-        <option value="../zh-hans/index.html">简体中文</option>
-        <option value="../zh-hant/index.html">繁體中文</option>
-        <option value="../es/index.html">Español</option>
-        <option value="../fr/index.html">Français</option>
-        <option value="../de/index.html">Deutsch</option>
-        <option value="../it/index.html">Italiano</option>
-        <option value="../ru/index.html">Русский</option>
-      </select></li>
-      </ul>
-    </nav>
+<div id="loader" aria-hidden="true">
+  <div class="loader-mark"><span>道</span><span>楽</span></div>
+  <span class="loader-rule"></span>
+</div>
+<div id="progress" aria-hidden="true"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Do Luck 道楽</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+      <li><a href="cafe.html" data-i18n="nav.cafe">Café</a></li>
+      <li><a href="lodge.html" data-i18n="nav.lodge">Guesthouse</a></li>
+      <li><a href="access.html" data-i18n="nav.access">Access</a></li>
+      <li><a href="migration.html" data-i18n="nav.migration">Our Story</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/" data-i18n="nav.blog">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <select class="lang-select" id="langSelect" aria-label="Language"><option value="ja">日本語</option><option value="en">English</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="ko">한국어</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="ru">Русский</option><option value="fr">Français</option><option value="es">Español</option></select>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+    </div>
   </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-sky" aria-hidden="true">
+    <span class="cloud c1"></span>
+    <span class="cloud c2"></span>
+  </div>
+  <p class="hero-vertical" aria-hidden="true">道をたのしむ。旅をたのしむ。人生をたのしむ。</p>
+  <div class="hero-copy" id="heroCopy">
+    <p class="eyebrow hero-eyebrow" data-i18n="sec.kissa_yado">Café & Travelers' Inn</p>
+    <h1 aria-label="道楽"><span class="ch">道</span><span class="ch">楽</span></h1>
+    <p class="tagline" data-i18n="hero.tagline">Leave the city's clock behind.</p>
+    <p class="hero-est">TOKACHI・IKEDA — SINCE 2008</p>
+  </div>
+  <div class="hero-scene" id="heroScene">
+  <svg class="hero-horizon" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0,180 C240,150 420,175 720,165 C1020,155 1240,175 1440,160 L1440,460 L0,460 Z" fill="#B9C7A8"/>
+    <path d="M0,235 C300,215 560,240 860,228 C1120,218 1300,235 1440,225 L1440,460 L0,460 Z" fill="#9DB08B"/>
+    <path d="M0,300 C260,285 620,305 940,295 C1180,288 1340,300 1440,294 L1440,460 L0,460 Z" fill="#7E9770"/>
+    <path d="M0,370 L1440,360 L1440,460 L0,460 Z" fill="#6F8A62"/>
+    <path d="M718,168 L722,168 L810,460 L630,460 Z" fill="#EDE6D2"/>
+    <path d="M719.4,180 L720.6,180 L724,460 L716,460 Z" fill="#C8BFA6" opacity="0.7"/>
+    <g fill="#4C6148">
+      <ellipse cx="905" cy="212" rx="7" ry="26"/><rect x="903.6" y="230" width="2.8" height="14"/>
+      <ellipse cx="948" cy="220" rx="6" ry="22"/><rect x="946.8" y="236" width="2.4" height="12"/>
+      <ellipse cx="530" cy="218" rx="6.5" ry="24"/><rect x="528.7" y="235" width="2.6" height="13"/>
+    </g>
+    <!-- 道を散歩するご夫婦と看板犬（ほたる・純） -->
+    <g aria-hidden="true" transform="translate(220.8, 103.6) scale(0.7)">
+      <ellipse cx="684" cy="434" rx="15" ry="3" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="720" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="756" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
+      <ellipse cx="790" cy="434" rx="12" ry="2.8" fill="#54704C" opacity="0.28"/>
+      <!-- ほたる（白いもふもふ・後ろ姿） -->
+      <g>
+        <path class="tail" d="M691,428 Q698,424 696,414 Q689,417 688,424 Z" fill="#F4F0E2"/>
+        <path d="M672,420 Q671,409 682,407 Q694,406 696,416 Q697,426 690,430 Q683,434 676,430 Q671,427 672,420 Z" fill="#FBF8EF"/>
+        <path d="M674,403 Q673,395 682,394 Q691,395 690,403 Q690,410 682,410 Q674,410 674,403 Z" fill="#FDFBF4"/>
+        <path d="M675,397 Q669,399 670,408 Q674,411 677,407 Q676,402 676,397 Z" fill="#C9C3B4"/>
+        <path d="M689,397 Q695,399 694,408 Q690,411 687,407 Q688,402 688,397 Z" fill="#C9C3B4"/>
+        <ellipse cx="682" cy="431" rx="8" ry="2.2" fill="#EDE7D6"/>
+      </g>
+      <!-- 奥さん（肩までの黒髪・ブルーのトップス） -->
+      <g>
+        <rect x="715" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
+        <rect x="722" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
+        <path d="M711,381 Q704,390 706,398" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
+        <path d="M730,381 Q734,388 733,394" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
+        <path d="M712,377 Q713,371 720,371 Q727,371 728,377 L730,401 Q730,405 726,405 L714,405 Q710,405 710,401 Z" fill="#66908C"/>
+        <circle cx="720" cy="361" r="8.2" fill="#3A342C"/>
+        <path d="M712,359 Q711,372 714,376 Q720,372 726,376 Q729,372 728,359 Z" fill="#3A342C"/>
+      </g>
+      <!-- ご主人（もじゃっとした髪・デニムベスト） -->
+      <g>
+        <rect x="752" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
+        <rect x="760" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
+        <path d="M766,381 Q772,390 771,399" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M749,381 Q744,389 746,396" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M746,378 Q746,372 753,371 L762,371 Q769,372 769,378 L770,403 Q770,407 766,407 L750,407 Q746,407 746,403 Z" fill="#7188A0"/>
+        <path d="M757.5,372 L757.5,406" stroke="#5F7690" stroke-width="1.2"/>
+        <circle cx="757.5" cy="360" r="8.8" fill="#332E27"/>
+        <path d="M749,358 Q747.5,370 752,373 Q757.5,369 763,373 Q767.5,370 766,358 Z" fill="#332E27"/>
+      </g>
+      <!-- 純（黒い犬・後ろ姿） -->
+      <g>
+        <path class="tail" d="M792,427 Q798,423 796,414 Q791,417 790,423 Z" fill="#3A362F"/>
+        <path d="M781,418 Q781,409 790,408 Q799,408 800,417 Q800,426 794,429 Q787,432 782,427 Q780,423 781,418 Z" fill="#312E28"/>
+        <path d="M784,404 Q784,397 791,397 Q797,397 797,403 Q797,409 791,409 Q784,409 784,404 Z" fill="#353129"/>
+        <path d="M783,400 Q781,407 784,409 Q787,407 786,401 Z" fill="#211F1B"/>
+        <path d="M798,400 Q800,407 797,409 Q794,407 795,401 Z" fill="#211F1B"/>
+      </g>
+      <!-- リード -->
+      <path d="M706,399 Q696,403 685,404" stroke="#4E483E" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.85"/>
+      <path d="M772,401 Q782,400 790,402" stroke="#4E483E" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </g>
+    <!-- 旅の相棒：道ばたの車とバイク -->
+    <g aria-hidden="true">
+      <g transform="translate(290, 364)">
+        <ellipse cx="60" cy="52" rx="62" ry="6" fill="#54704C" opacity="0.22"/>
+        <rect x="10" y="10" width="100" height="38" rx="9" fill="#E8E0CB"/>
+        <rect x="10" y="30" width="100" height="5" fill="#46604A" opacity="0.45"/>
+        <rect x="20" y="17" width="26" height="14" rx="3" fill="#8FA3AD"/>
+        <rect x="52" y="17" width="26" height="14" rx="3" fill="#8FA3AD"/>
+        <circle cx="34" cy="50" r="9" fill="#33302B"/><circle cx="34" cy="50" r="3.6" fill="#C9C3B4"/>
+        <circle cx="88" cy="50" r="9" fill="#33302B"/><circle cx="88" cy="50" r="3.6" fill="#C9C3B4"/>
+      </g>
+      <g transform="translate(1030, 380)">
+        <ellipse cx="38" cy="36" rx="42" ry="4.5" fill="#54704C" opacity="0.22"/>
+        <circle cx="16" cy="30" r="10" fill="none" stroke="#33302B" stroke-width="3.2"/>
+        <circle cx="60" cy="30" r="10" fill="none" stroke="#33302B" stroke-width="3.2"/>
+        <path d="M16,30 L32,14 L48,14 L60,30" fill="none" stroke="#3F3B33" stroke-width="3.2" stroke-linejoin="round"/>
+        <rect x="32" y="9" width="15" height="8" rx="3.5" fill="#46604A"/>
+        <path d="M32,14 L26,4 L22,5" fill="none" stroke="#3F3B33" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M48,14 L54,8" fill="none" stroke="#3F3B33" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
+  </div>
+  <p class="hero-scroll"><span class="scroll-line" aria-hidden="true"></span>SCROLL</p>
 </header>
 
-<section class="hero">
-  <a href="cafe.html" class="open-badge" aria-label="Cafe open">
-    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img">
-      <circle cx="50" cy="50" r="47" fill="#3e2b23" stroke="#f6efe4" stroke-width="3"/>
-      <circle cx="34" cy="60" r="10" fill="none" stroke="#f6efe4" stroke-width="3"/>
-      <circle cx="68" cy="60" r="10" fill="none" stroke="#f6efe4" stroke-width="3"/>
-      <path d="M34,60 L44,42 L58,42 L68,60 M44,42 L48,32 L58,32 M50,32 L44,24" stroke="#f6efe4" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-      <text x="50" y="86" text-anchor="middle" font-size="14" font-weight="700" fill="#f6efe4" font-family="sans-serif">OPEN</text>
+<section class="statement">
+  <p class="eyebrow reveal" data-i18n="sec.kissa_yado">Café & Travelers' Inn</p>
+  <h2 class="headline reveal" data-i18n="stmt.h">Under the wide Tokachi sky,<br>time flows slowly.</h2>
+  <span class="rule-v reveal" aria-hidden="true"></span>
+  <p class="body reveal" data-i18n="stmt.body">“Do Luck” (dōraku) means a heart that enjoys the road, enjoys its passions, and enjoys life.</p>
+</section>
+
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat reveal">
+      <p class="stat-num"><span data-count="2008">2008</span></p>
+      <p class="stat-label">Since</p>
+    </div>
+    <div class="stat reveal">
+      <p class="stat-num">¥<span data-count="4000" data-comma="1">4,000</span><small data-i18n="price.small">~ / room only</small></p>
+      <p class="stat-label" data-i18n="lodge.price.eyebrow">Rates</p>
+    </div>
+    <div class="stat reveal">
+      <p class="stat-num stat-season" data-i18n="val.season">April 1 – October 31</p>
+      <p class="stat-label" data-i18n="lbl.season">Season</p>
+    </div>
+  </div>
+</section>
+
+<section class="news">
+  <div class="news-inner">
+    <p class="eyebrow reveal" data-i18n="news.h">News</p>
+    <ul class="news-list reveal">
+      <li><span class="news-date">2026.07</span><span data-i18n="news.1">Our website has been fully renewed.</span></li>
+      <li><span class="news-date">2026.07</span><span data-i18n="news.2">The guesthouse is open through October 31 this season.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="cafe-band">
+  <div class="split">
+    <div class="split-copy">
+      <p class="eyebrow reveal" data-i18n="nav.cafe">Café</p>
+      <h2 class="headline reveal" data-i18n="idx.cafe.h">A cup of coffee<br>by the wood stove.</h2>
+      <p class="subhead reveal" data-i18n="idx.cafe.p">A West German weso wood stove keeps the room warm. Enjoy your coffee on benches and tables handmade by the owner, from cups made by the townspeople.</p>
+      <div class="detail reveal">
+        <div class="detail-item">
+          <p class="label" data-i18n="lbl.hours">Hours</p>
+          <p class="value">10:00 – 18:00</p>
+        </div>
+        <div class="detail-item">
+          <p class="label" data-i18n="lbl.closed">Closed on</p>
+          <p class="value" data-i18n="val.closed">Tuesdays</p>
+        </div>
+      </div>
+      <a class="link-quiet reveal" href="cafe.html" data-i18n="link.cafe.more">More about the café</a>
+    </div>
+    <div class="split-art reveal">
+      <svg class="coffee-svg" viewBox="0 0 240 240" aria-hidden="true">
+        <circle cx="120" cy="126" r="88" fill="none" stroke="rgba(169,138,80,0.35)" stroke-width="1"/>
+        <path class="steam s1" d="M102,102 Q96,86 104,74 Q112,64 106,50" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path class="steam s2" d="M121,104 Q115,88 123,76 Q131,66 125,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path class="steam s3" d="M140,102 Q134,86 142,74 Q150,64 144,50" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M76,122 L83,170 Q85,179 95,179 L145,179 Q155,179 157,170 L164,122 Z" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M164,130 Q188,131 184,150 Q181,164 159,161" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linecap="round"/>
+        <ellipse cx="120" cy="192" rx="62" ry="7" fill="none" stroke="rgba(38,35,29,0.4)" stroke-width="1.6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="lodge-band">
+  <div class="stars" aria-hidden="true"></div>
+  <span class="moon" aria-hidden="true"></span>
+  <div class="inner">
+    <p class="eyebrow reveal" data-i18n="nav.lodge">Guesthouse</p>
+    <h2 class="headline reveal" data-i18n="idx.lodge.h">Evenings of stories<br>with fellow travelers.</h2>
+    <p class="subhead reveal" data-i18n="idx.lodge.p">Hostel-style dormitories, separate for men and women. A simple, warm inn that treasures conversation among travelers. Open April 1 to October 31.</p>
+    <p class="price reveal">¥4,000<small data-i18n="price.small">~ / room only</small></p>
+    <p class="note reveal" data-i18n="note.toho">Member of the Toho Network of travelers' inns</p>
+    <a class="link-quiet reveal" href="lodge.html" data-i18n="link.lodge.more">More about the guesthouse</a>
+  </div>
+</section>
+
+<section class="journey">
+  <p class="eyebrow reveal" data-i18n="mig.eyebrow">Our journey</p>
+  <h2 class="headline reveal" data-i18n="mig.h">The road so far</h2>
+  <div class="reveal" id="journeyArt">
+    <svg class="journey-svg" viewBox="0 0 900 300" aria-hidden="true">
+      <path d="M60,248 C220,150 330,266 450,176 C570,86 660,238 838,84" fill="none" stroke="rgba(67,97,75,0.14)" stroke-width="11" stroke-linecap="round"/>
+      <path id="roadPath" d="M60,248 C220,150 330,266 450,176 C570,86 660,238 838,84" fill="none" stroke="var(--green)" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="60" cy="248" r="5" fill="var(--gold)"/>
+      <circle class="journey-pin" cx="838" cy="84" r="7" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
+      <circle cx="838" cy="84" r="5" fill="var(--gold)"/>
+      <text x="60" y="286" text-anchor="start">OSAKA</text>
+      <text x="838" y="56" text-anchor="end">TOKACHI・IKEDA</text>
     </svg>
-  </a>
-  <div class="container">
-    <h1>Do Luck 道楽</h1>
-    <p class="philosophy">Doraku (道楽) — a heart that enjoys the road, enjoys one's passions, enjoys life.</p>
-    <p>A wood-stove cafe and a guesthouse for travelers, in Ikeda, Hokkaido.</p>
-    <div class="btn-row">
-      <a href="tel:0155724949" class="btn btn-primary">Call 015-572-4949</a>
-      <a href="access.html" class="btn btn-secondary">View Access</a>
+  </div>
+  <p class="body reveal" data-i18n="tile.mig.p">From Osaka to Hokkaido — the story of how the owners' family found its way to Ikeda.</p>
+  <a class="link-quiet reveal" href="migration.html" data-i18n="tile.mig.link">Read the story</a>
+</section>
+
+<section class="family">
+  <p class="eyebrow reveal">Family</p>
+  <h2 class="headline reveal" data-i18n="fam.h">The Do Luck family</h2>
+  <p class="body reveal" data-i18n="fam.p">The Fukushimas, who came all the way from Osaka, and their two dogs will welcome you.</p>
+  <div class="family-grid">
+    <div class="member reveal">
+      <div class="medal">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <ellipse cx="62" cy="132" rx="20" ry="3.4" fill="#54704C" opacity="0.25"/>
+          <ellipse cx="100" cy="133" rx="22" ry="3.6" fill="#54704C" opacity="0.25"/>
+          <g>
+            <rect x="56" y="108" width="4.4" height="22" rx="2.2" fill="#33302B"/>
+            <rect x="64" y="108" width="4.4" height="22" rx="2.2" fill="#33302B"/>
+            <path d="M50,88 Q44,98 46,106" stroke="#C9A183" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+            <path d="M51,84 Q52,77 60,77 L64,77 Q72,77 73,84 L75,106 Q75,111 70,111 L54,111 Q49,111 49,106 Z" fill="#66908C"/>
+            <circle cx="62" cy="60" r="12.5" fill="#3A342C"/>
+            <rect x="49.5" y="60" width="25" height="10" rx="4" fill="#3A342C"/>
+            <circle cx="62" cy="65" r="9.5" fill="#C9A183"/>
+            <circle cx="58.5" cy="65" r="1.5" fill="#33302B"/>
+            <circle cx="65.5" cy="65" r="1.5" fill="#33302B"/>
+            <path d="M59,70 Q62,72.5 65,70" stroke="#33302B" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          </g>
+          <g>
+            <rect x="93" y="108" width="4.8" height="24" rx="2.4" fill="#41505E"/>
+            <rect x="102" y="108" width="4.8" height="24" rx="2.4" fill="#41505E"/>
+            <path d="M112,86 Q117,95 115,102" stroke="#C9A183" stroke-width="4.6" fill="none" stroke-linecap="round"/>
+            <path d="M88,82 Q88,75 96,74 L104,74 Q112,75 112,82 L113,107 Q113,112 108,112 L92,112 Q87,112 87,107 Z" fill="#7188A0"/>
+            <path d="M100,75 L100,111" stroke="#5F7690" stroke-width="1.4"/>
+            <circle cx="100" cy="56" r="13" fill="#332E27"/>
+            <circle cx="91" cy="52" r="6" fill="#332E27"/>
+            <circle cx="109" cy="52" r="6" fill="#332E27"/>
+            <circle cx="100" cy="47" r="7" fill="#332E27"/>
+            <circle cx="100" cy="62" r="10" fill="#C9A183"/>
+            <circle cx="96.5" cy="62" r="1.6" fill="#33302B"/>
+            <circle cx="103.5" cy="62" r="1.6" fill="#33302B"/>
+            <path d="M97,67 Q100,69.5 103,67" stroke="#33302B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          </g>
+          <path d="M75,98 Q81,104 87,99" stroke="#C9A183" stroke-width="4.2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 data-i18n="fam.couple.name">Mr. & Mrs. Fukushima</h3>
+      <p class="role" data-i18n="fam.couple.role">Owners, Osaka natives</p>
+    </div>
+    <div class="member reveal">
+      <div class="medal">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <ellipse cx="80" cy="134" rx="30" ry="4.5" fill="#54704C" opacity="0.25"/>
+          <path class="tail2" d="M108,112 Q122,106 118,90 Q106,96 104,108 Z" fill="#F4F0E2"/>
+          <ellipse cx="80" cy="112" rx="27" ry="21" fill="#FBF8EF"/>
+          <circle cx="61" cy="126" r="5" fill="#EDE7D6"/>
+          <circle cx="74" cy="130" r="5" fill="#EDE7D6"/>
+          <circle cx="88" cy="130" r="5" fill="#EDE7D6"/>
+          <circle cx="100" cy="126" r="5" fill="#EDE7D6"/>
+          <circle cx="80" cy="74" r="21" fill="#FDFBF4"/>
+          <circle cx="63" cy="62" r="8" fill="#FDFBF4"/>
+          <circle cx="80" cy="56" r="9" fill="#FDFBF4"/>
+          <circle cx="97" cy="62" r="8" fill="#FDFBF4"/>
+          <path d="M60,64 Q52,68 54,80 Q60,84 64,78 Q62,70 62,64 Z" fill="#C9C3B4"/>
+          <path d="M100,64 Q108,68 106,80 Q100,84 96,78 Q98,70 98,64 Z" fill="#C9C3B4"/>
+          <circle cx="73" cy="74" r="2.2" fill="#33302B"/>
+          <circle cx="87" cy="74" r="2.2" fill="#33302B"/>
+          <path d="M80,80 L78,82.5 L82,82.5 Z" fill="#33302B"/>
+          <path d="M77,85 Q80,87 83,85" stroke="#33302B" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 data-i18n="fam.hotaru.name">Hotaru</h3>
+      <p class="role" data-i18n="fam.hotaru.role">Resident dog — the white fluffball</p>
+    </div>
+    <div class="member reveal">
+      <div class="medal">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <ellipse cx="80" cy="134" rx="28" ry="4.5" fill="#54704C" opacity="0.25"/>
+          <path class="tail2" d="M106,112 Q120,104 116,88 Q104,94 102,106 Z" fill="#211F1B"/>
+          <ellipse cx="80" cy="112" rx="25" ry="20" fill="#312E28"/>
+          <path d="M64,60 L56,42 Q66,42 70,52 Z" fill="#211F1B"/>
+          <path d="M96,60 L104,42 Q94,42 90,52 Z" fill="#211F1B"/>
+          <circle cx="80" cy="74" r="20" fill="#3B372F"/>
+          <circle cx="73" cy="72" r="2.4" fill="#C9B287"/>
+          <circle cx="87" cy="72" r="2.4" fill="#C9B287"/>
+          <ellipse cx="80" cy="82" rx="7" ry="5.5" fill="#211F1B"/>
+          <path d="M80,79 L78,81.5 L82,81.5 Z" fill="#C9B287" opacity="0.7"/>
+          <rect x="67" y="93" width="26" height="6" rx="3" fill="#A98A50"/>
+          <circle cx="80" cy="101" r="2.5" fill="#C9B287"/>
+        </svg>
+      </div>
+      <h3 data-i18n="fam.jun.name">Jun</h3>
+      <p class="role" data-i18n="fam.jun.role">Resident dog — sleek and black</p>
+    </div>
+    <div class="member reveal">
+      <div class="medal">
+        <svg viewBox="0 0 160 160" aria-hidden="true">
+          <ellipse cx="62" cy="104" rx="46" ry="5" fill="#54704C" opacity="0.22"/>
+          <g>
+            <rect x="22" y="60" width="80" height="32" rx="8" fill="#E8E0CB"/>
+            <rect x="22" y="77" width="80" height="4.5" fill="#46604A" opacity="0.45"/>
+            <rect x="30" y="66" width="20" height="12" rx="3" fill="#8FA3AD"/>
+            <rect x="56" y="66" width="20" height="12" rx="3" fill="#8FA3AD"/>
+            <circle cx="42" cy="94" r="8" fill="#33302B"/><circle cx="42" cy="94" r="3.2" fill="#C9C3B4"/>
+            <circle cx="84" cy="94" r="8" fill="#33302B"/><circle cx="84" cy="94" r="3.2" fill="#C9C3B4"/>
+          </g>
+          <ellipse cx="112" cy="130" rx="34" ry="4.5" fill="#54704C" opacity="0.25"/>
+          <g>
+            <circle cx="94" cy="122" r="9.5" fill="none" stroke="#33302B" stroke-width="3"/>
+            <circle cx="132" cy="122" r="9.5" fill="none" stroke="#33302B" stroke-width="3"/>
+            <path d="M94,122 L108,106 L122,106 L132,122" fill="none" stroke="#3F3B33" stroke-width="3" stroke-linejoin="round"/>
+            <rect x="107" y="101" width="14" height="8" rx="3.5" fill="#46604A"/>
+            <path d="M108,106 L102,96 L98,97" fill="none" stroke="#3F3B33" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M122,106 L128,100" fill="none" stroke="#3F3B33" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <h3 data-i18n="fam.ride.name">The bike & the car</h3>
+      <p class="role" data-i18n="fam.ride.role">Travel companions — the beloved bike lives inside the café</p>
     </div>
   </div>
 </section>
 
-<div class="info-strip">
-  <div class="container">
-    <span><strong>Cafe Hours</strong> 10:00–18:00 (Closed Tuesdays)</span>
-    <span><strong>Lodge Season</strong> Apr 1 – Oct 31</span>
-    <span><strong>Address</strong> 083-0034 Toshibetsu-honmachi 2-6, Ikeda, Hokkaido</span>
+<section class="spots">
+  <p class="eyebrow reveal">Around Tokachi</p>
+  <h2 class="headline reveal" data-i18n="spots.h">Around Do Luck</h2>
+  <p class="body reveal" data-i18n="spots.p">The sights are well worth a visit — but the real feast here is Tokachi's nature and unhurried conversation. Let the pace of the city slowly come undone.</p>
+  <div class="spots-grid">
+    <div class="spot reveal">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M22,16 L42,16 Q41,26 32,28 Q23,26 22,16 Z" fill="#A98A50" opacity="0.3"/>
+        <path d="M20,10 L44,10 Q44,28 32,30 Q20,28 20,10 Z" fill="none" stroke="#A98A50" stroke-width="2.2" stroke-linejoin="round"/>
+        <path d="M32,30 L32,50" stroke="#A98A50" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M22,52 Q32,49 42,52" fill="none" stroke="#A98A50" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+      <h3 data-i18n="spot1.name">Ikeda Wine Castle</h3>
+      <p class="spot-time" data-i18n="spot1.time">about 10 min by car</p>
+      <p class="spot-p" data-i18n="spot1.p">The symbol of Ikeda, the town of wine — with tastings and a restaurant.</p>
+      <a class="link-quiet" href="https://ikeda-wj.org/" target="_blank" rel="noopener" data-i18n="link.official">Official site</a>
+    </div>
+    <div class="spot reveal">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="#A98A50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22,24 Q26,16 36,16 Q50,16 50,30 Q50,38 46,42 L46,50 M38,50 L38,44 Q32,46 28,44 L28,50 M20,50 L20,42"/>
+          <path d="M22,24 Q12,24 12,32 Q12,42 16,46"/>
+          <path d="M16,34 Q20,38 26,36"/>
+        </g>
+        <circle cx="38" cy="26" r="1.8" fill="#A98A50"/>
+      </svg>
+      <h3 data-i18n="spot2.name">Naumann Elephant Museum (Chūrui)</h3>
+      <p class="spot-time" data-i18n="spot2.time">about 1 hour by car</p>
+      <p class="spot-p" data-i18n="spot2.p">A museum on the very site where Naumann's elephant fossils were unearthed.</p>
+      <a class="link-quiet" href="https://www.town.makubetsu.lg.jp/kyouiku/rekishibunka/naumanzo/1427.html" target="_blank" rel="noopener" data-i18n="link.official">Official site</a>
+    </div>
+    <div class="spot reveal">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="#A98A50" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32,6 Q41,16 41,30 L41,42 L23,42 L23,30 Q23,16 32,6 Z"/>
+          <circle cx="32" cy="26" r="4.5"/>
+          <path d="M23,34 L14,46 L23,44"/>
+          <path d="M41,34 L50,46 L41,44"/>
+          <path d="M28,48 Q32,58 36,48"/>
+        </g>
+      </svg>
+      <h3 data-i18n="spot3.name">Hokkaido Spaceport (Taiki)</h3>
+      <p class="spot-time" data-i18n="spot3.time">about 80 min by car</p>
+      <p class="spot-p" data-i18n="spot3.p">A gateway to space where private rockets lift off. Stay with us for launch viewing — or as your base for work.</p>
+      <a class="link-quiet" href="https://hokkaidospaceport.com/" target="_blank" rel="noopener" data-i18n="link.launch">Launch info & official site</a>
+    </div>
   </div>
-</div>
+  <p class="note reveal" data-i18n="spots.note">Times are rough estimates by car — all three make great motorcycle rides, too.</p>
+</section>
 
-<section class="block container">
-  <h2>Two Sides of Do Luck</h2>
-  <p class="lead">A wood-stove cafe and a shared-room guesthouse where travelers meet — both born from the owner's wish to “enjoy the road.”</p>
-  <div class="card-grid">
-    <div class="card">
-      <h3>Cafe</h3>
-      <p>A warm room with a West German wood stove. Enjoy coffee in handmade cups made by local townspeople.</p>
-      <a href="cafe.html" class="card-link">See Cafe →</a>
-    </div>
-    <div class="card">
-      <h3>Lodge</h3>
-      <p>A youth-hostel-style shared room, separated by gender. A simple, warm place that values conversation between travelers. From 4,000 yen.</p>
-      <a href="lodge.html" class="card-link">See Lodge →</a>
-    </div>
-    <div class="card">
-      <h3>Access</h3>
-      <p>5 minutes on foot from JR Toshibetsu Station. Directions by car from Sapporo/Asahikawa and Kushiro are also available.</p>
-      <a href="access.html" class="card-link">See Access →</a>
-    </div>
-    <div class="card">
-      <h3>Our Story</h3>
-      <p>From Osaka to Hokkaido — the story of how the owner's family arrived in Ikeda.</p>
-      <a href="migration.html" class="card-link">Read Our Story →</a>
-    </div>
+<section class="voices">
+  <p class="eyebrow reveal">Guest Book</p>
+  <h2 class="headline reveal" data-i18n="voices.h">Travelers' voices</h2>
+  <p class="body reveal" data-i18n="voices.p">We'd love to hear the memories of your night here — we'll share travelers' voices on this page.</p>
+  <a class="btn btn-ghost reveal" href="contact.html" data-i18n="nav.contact">Contact</a>
+</section>
+
+<section class="tiles">
+  <div class="tiles-grid">
+    <a class="tile reveal" href="access.html">
+      <p class="idx">01</p>
+      <h3 data-i18n="nav.access">Access</h3>
+      <p data-i18n="tile.access.p">5 min on foot from JR Toshibetsu Station, 15 min from Ikeda Station (Nemuro Line). Driving routes inside.</p>
+      <span class="link-quiet" data-i18n="tile.access.link">See directions</span>
+    </a>
+    <a class="tile reveal" href="https://doluck2007.hatenadiary.org/">
+      <p class="idx">02</p>
+      <h3 data-i18n="nav.blog">Blog</h3>
+      <p data-i18n="mig.note">Daily life is chronicled on our blog (in Japanese)</p>
+      <span class="link-quiet" data-i18n="link.blog">Read the blog</span>
+    </a>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container">
-    <div>
-      <strong>Do Luck 道楽</strong><br>
-      〒083-0034 Toshibetsu-honmachi 2-6, Ikeda, Nakagawa-gun, Hokkaido, Japan<br>
-      TEL: <a href="tel:0155724949">+81-15-572-4949</a>
+<section class="contact-band">
+  <h2 class="headline reveal" data-i18n="cta.h">See you<br>along the road.</h2>
+  <div class="cta-row reveal">
+    <a class="btn btn-primary" href="tel:+81155724949" data-i18n="btn.call">Call us +81 15-572-4949</a>
+    <a class="btn btn-ghost" href="contact.html" data-i18n="nav.contact">Contact</a>
+  </div>
+  <address class="reveal" data-i18n="addr.full">Do Luck<br>2-6 Toshibetsu-honmachi, Ikeda, Nakagawa-gun, Hokkaido 083-0034, Japan</address>
+</section>
+
+<footer>
+  <p class="footer-vertical" aria-hidden="true">十勝・池田町</p>
+  <div class="footer-inner">
+    <p class="footer-brand">Do Luck 道楽</p>
+    <ul class="footer-links">
+      <li><a href="cafe.html" data-i18n="nav.cafe">Café</a></li>
+      <li><a href="lodge.html" data-i18n="nav.lodge">Guesthouse</a></li>
+      <li><a href="access.html" data-i18n="nav.access">Access</a></li>
+      <li><a href="migration.html" data-i18n="nav.migration">Our Story</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/" data-i18n="nav.blog">Blog</a></li>
+    </ul>
+    <div class="footer-bottom">
+      <p>© 2008– Do Luck 道楽</p>
+      <a href="https://www.toho.net/meguri/1436.html">
+        <img src="../images/toho-badge.gif" alt="とほネットワーク旅人宿の会" width="132" height="47" style="display:block">
+      </a>
     </div>
-    <div>
-      <a href="cafe.html">Cafe</a><br>
-      <a href="lodge.html">Lodge</a><br>
-      <a href="access.html">Access</a><br>
-      <a href="migration.html">Our Story</a><br>
-      <a href="contact.html">Contact</a><br>
-      <a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">Blog</a>
-    </div>
-    <div>
-      <a href="https://www.toho.net/meguri/1436.html" target="_blank" rel="noopener" class="toho-badge"><img src="../images/toho-badge.gif" alt="Toho Network Travelers' Inn Association"></a>
-    </div>
-    <div class="copyright"><span class="last-updated">Last updated: July 2026</span>&copy; 2008– Do Luck 道楽</div>
   </div>
 </footer>
 
-<a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener" class="mascot-button" aria-label="Our dogs / blog">
-  <span class="dog-thumb"><img src="../images/dog-jun.png" alt="dog"></span>
-  <span class="dog-thumb"><img src="../images/jun.avif" alt="dog Jun"></span>
-</a>
-<script src="../js/main.js"></script>
+<script>
+  function toggleMenu(btn) {
+    const links = document.getElementById('navLinks');
+    const open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+
+    const LANG_DIRS = {"ja":"","en":"en","zh-CN":"zh-hans","zh-TW":"zh-hant","ko":"ko","de":"de","it":"it","ru":"ru","fr":"fr","es":"es"};
+  (function () {
+    var sel = document.getElementById('langSelect');
+    sel.value = 'en';
+    sel.addEventListener('change', function (e) {
+      var d = LANG_DIRS[e.target.value];
+      if (d === undefined) return;
+      location.href = (d === '' ? '../' : '../' + d + '/') + 'index.html';
+    });
+  })();
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+</script>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* opening curtain — once per session */
+  var body = document.body;
+  var seen = false;
+  try { seen = sessionStorage.getItem('doluck-intro') === '1'; } catch (e) {}
+  if (seen || reduced) {
+    body.classList.add('loaded');
+  } else {
+    setTimeout(function () {
+      body.classList.add('loaded');
+      try { sessionStorage.setItem('doluck-intro', '1'); } catch (e) {}
+    }, 1500);
+  }
+
+  /* nav state, progress bar, hero parallax */
+  var nav = document.querySelector('.nav');
+  var progress = document.getElementById('progress');
+  var heroScene = document.getElementById('heroScene');
+  var heroCopy = document.getElementById('heroCopy');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY || 0;
+      nav.classList.toggle('scrolled', y > 40);
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+      if (!reduced && y < window.innerHeight * 1.2) {
+        heroScene.style.transform = 'translateY(' + (y * 0.16) + 'px)';
+        heroCopy.style.transform = 'translateY(' + (y * 0.3) + 'px)';
+        heroCopy.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.7));
+      }
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* seasonal hero: spring 3-5 / summer 6-8 (default) / autumn 9-11 / winter 12-2 */
+  var mo = new Date().getMonth() + 1;
+  var season = (mo === 12 || mo <= 2) ? 'winter' : (mo <= 5) ? 'spring' : (mo <= 8) ? 'summer' : 'autumn';
+  body.classList.add('season-' + season);
+  if (season === 'winter' && !reduced) {
+    var sky = document.querySelector('.hero-sky');
+    if (sky) {
+      for (var w = 0; w < 34; w++) {
+        var f = document.createElement('i');
+        f.className = 'snowflake';
+        var fs = (Math.random() * 3 + 2).toFixed(1);
+        f.style.width = fs + 'px';
+        f.style.height = fs + 'px';
+        f.style.left = (Math.random() * 100) + '%';
+        f.style.opacity = (0.35 + Math.random() * 0.5).toFixed(2);
+        f.style.animationDuration = (7 + Math.random() * 9).toFixed(1) + 's';
+        f.style.animationDelay = (-Math.random() * 16).toFixed(1) + 's';
+        sky.appendChild(f);
+      }
+    }
+  }
+
+  /* night stars */
+  var starBox = document.querySelector('.stars');
+  if (starBox) {
+    for (var i = 0; i < 26; i++) {
+      var s = document.createElement('i');
+      var sz = (Math.random() * 1.7 + 0.9).toFixed(1);
+      s.style.left = (Math.random() * 100) + '%';
+      s.style.top = (Math.random() * 68) + '%';
+      s.style.width = sz + 'px';
+      s.style.height = sz + 'px';
+      s.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+      s.style.animationDuration = (2.6 + Math.random() * 3).toFixed(2) + 's';
+      starBox.appendChild(s);
+    }
+  }
+
+  /* count-up numbers */
+  function animateCount(el) {
+    var target = parseInt(el.getAttribute('data-count'), 10);
+    var comma = el.getAttribute('data-comma') === '1';
+    var t0 = null, dur = 1600;
+    function fmt(n) { return comma ? n.toLocaleString('en-US') : String(n); }
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* journey road draw */
+  var road = document.getElementById('roadPath');
+  if (road) {
+    var len = road.getTotalLength();
+    road.style.strokeDasharray = len;
+    road.style.strokeDashoffset = reduced ? 0 : len;
+  }
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    var fxIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.target.hasAttribute('data-count')) animateCount(e.target);
+        if (e.target.id === 'journeyArt' && road) road.style.strokeDashoffset = 0;
+        fxIO.unobserve(e.target);
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { fxIO.observe(el); });
+    var ja = document.getElementById('journeyArt');
+    if (ja) fxIO.observe(ja);
+  }
+})();
+</script>
+
 </body>
 </html>

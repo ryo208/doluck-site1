@@ -3,11 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unsere Geschichte | Do Luck</title>
 <meta name="description" content="Von Osaka nach Ikeda, Hokkaido — die Geschichte der Besitzerfamilie von Do Luck.">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://ryo208.github.io/doluck-site1/de/migration.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Do Luck 道楽">
+<meta property="og:title" content="Unsere Geschichte | Do Luck">
+<meta property="og:description" content="Von Osaka nach Ikeda, Hokkaido — die Geschichte der Besitzerfamilie von Do Luck.">
+<meta property="og:url" content="https://ryo208.github.io/doluck-site1/de/migration.html">
+<meta property="og:image" content="https://ryo208.github.io/doluck-site1/images/lodge-photo.jpg">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<title>Unsere Geschichte | Do Luck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F8F5EE; --paper-deep: #EFEAE0; --ink: #26231D; --muted: #7A7466;
+    --green: #43614B; --green-deep: #2E4636; --gold: #A98A50; --gold-soft: #C9B287;
+    --night: #12160F; --night-2: #1A211A;
+    --radius: 22px; --nav-h: 64px;
+    --serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --ease: cubic-bezier(.16,.6,.2,1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--ink); background: var(--paper);
+    -webkit-font-smoothing: antialiased; line-height: 1.9; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--gold-soft); color: var(--ink); }
+
+  body::after { content: ''; position: fixed; inset: 0; z-index: 998; pointer-events: none;
+    opacity: 0.05; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  #progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 999;
+    background: linear-gradient(90deg, var(--gold), var(--green)); }
+
+  .nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+    background: transparent; z-index: 100; transition: background .5s ease, box-shadow .5s ease,
+    border-color .5s ease, height .5s ease; border-bottom: 1px solid transparent;
+    display: flex; align-items: center; justify-content: center; }
+  .nav.scrolled { height: 56px; background: rgba(248,245,238,0.86);
+    backdrop-filter: saturate(160%) blur(18px); -webkit-backdrop-filter: saturate(160%) blur(18px);
+    border-bottom: 1px solid rgba(38,35,29,0.08); }
+  .nav-inner { width: min(1120px, 92%); display: flex; align-items: center;
+    justify-content: space-between; font-size: 13px; gap: 14px; }
+  .nav-brand { font-family: var(--serif); font-weight: 700; font-size: 16px; letter-spacing: 0.16em; }
+  .nav-links { display: flex; gap: 26px; list-style: none; }
+  .nav-links a { position: relative; color: rgba(38,35,29,0.72); transition: color .25s ease;
+    letter-spacing: 0.06em; padding: 4px 0; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0;
+    height: 1px; background: var(--gold); transition: right .35s var(--ease); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { right: 0; }
+  .nav-links a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .lang-select { font-family: var(--sans); font-size: 12px; color: var(--ink);
+    background: transparent; border: 1px solid rgba(38,35,29,0.25); border-radius: 100px;
+    padding: 4px 10px; cursor: pointer; }
+  .nav-toggle { display: none; background: none; border: none; font-size: 20px;
+    cursor: pointer; color: var(--ink); }
+  @media (max-width: 860px) {
+    .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0;
+      background: rgba(248,245,238,0.97);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      flex-direction: column; gap: 0; padding: 10px 6%;
+      border-bottom: 1px solid rgba(38,35,29,0.08); }
+    .nav-links.open { display: flex; }
+    .nav-links li { padding: 13px 0; border-bottom: 1px solid rgba(38,35,29,0.05); }
+    .nav-links li:last-child { border-bottom: none; }
+    .nav-links a::after { display: none; }
+    .nav-toggle { display: block; }
+  }
+
+  .eyebrow { font-size: 12px; font-weight: 600; color: var(--gold);
+    letter-spacing: 0.34em; margin-bottom: 22px; text-transform: uppercase; }
+  .headline { font-family: var(--serif); font-size: clamp(28px, 4.6vw, 48px);
+    font-weight: 600; letter-spacing: 0.05em; line-height: 1.8; }
+  .subhead { font-size: clamp(15px, 1.8vw, 17px); color: var(--muted);
+    margin-top: 26px; line-height: 2.3; }
+  .link-quiet { display: inline-block; margin-top: 40px; font-size: 15px;
+    letter-spacing: 0.12em; color: var(--green);
+    border-bottom: 1px solid rgba(67,97,75,0.4); padding-bottom: 5px;
+    transition: border-color .3s ease, letter-spacing .3s ease; }
+  .link-quiet:hover { border-color: var(--green); letter-spacing: 0.18em; }
+
+  .detail { margin-top: 44px; display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; }
+  .detail-item .label { font-size: 11px; color: var(--muted); letter-spacing: 0.26em; }
+  .detail-item .value { font-family: var(--serif); font-size: 22px; font-weight: 600;
+    margin-top: 6px; letter-spacing: 0.06em; }
+
+  .price { margin-top: 40px; font-family: var(--serif);
+    font-size: clamp(34px, 5.4vw, 52px); font-weight: 600; letter-spacing: 0.04em;
+    color: var(--green-deep); }
+  .price small { font-size: 0.38em; font-weight: 500; color: var(--muted); letter-spacing: 0.1em; }
+
+  ul.marks { list-style: none; margin-top: 36px; display: inline-block;
+    text-align: left; font-size: 16px; line-height: 1.9; max-width: 560px; }
+  ul.marks li { position: relative; padding: 15px 0 15px 32px;
+    border-bottom: 1px solid rgba(38,35,29,0.08); }
+  ul.marks li:last-child { border-bottom: none; }
+  ul.marks li::before { content: ''; position: absolute; left: 2px; top: 50%;
+    transform: translateY(-50%); width: 16px; height: 2px; border-radius: 2px;
+    background: var(--gold); opacity: 0.9; }
+  .plain { margin-top: 28px; font-size: 16px; line-height: 2.4; }
+  .note { margin-top: 18px; font-size: 13px; letter-spacing: 0.08em; color: var(--muted); }
+
+  .cta-row { display: flex; gap: 16px; justify-content: center; margin-top: 42px; flex-wrap: wrap; }
+  .btn { position: relative; overflow: hidden; display: inline-block; padding: 16px 38px;
+    border-radius: 100px; font-size: 15px; letter-spacing: 0.08em;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+  .btn::after { content: ''; position: absolute; top: 0; bottom: 0; left: -80%; width: 40%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-18deg); transition: left .6s ease; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(46,70,54,0.22); }
+  .btn:hover::after { left: 130%; }
+  .btn-primary { background: var(--green-deep); color: var(--paper); }
+  .btn-ghost { background: transparent; color: var(--green); border: 1px solid rgba(67,97,75,0.5); }
+
+  .reveal { opacity: 0; transform: translateY(34px); filter: blur(5px);
+    transition: opacity 1.2s var(--ease), transform 1.2s var(--ease), filter 1.2s var(--ease); }
+  .reveal.visible { opacity: 1; transform: none; filter: none; }
+  a:focus-visible, button:focus-visible, select:focus-visible {
+    outline: 2px solid var(--green); outline-offset: 3px; }
+
+  .page-hero { position: relative; min-height: 64svh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: calc(var(--nav-h) + 60px) 6% 120px; overflow: hidden;
+    background:
+      radial-gradient(120% 70% at 50% 100%, rgba(233,220,183,0.5) 0%, rgba(233,220,183,0) 60%),
+      linear-gradient(to bottom, #C7D8E2 0%, #DCE3D8 52%, #EFE9D8 78%, #F3EFE2 100%); }
+  .page-hero .eyebrow { position: relative; z-index: 1;
+    opacity: 0; animation: pIn 1.2s var(--ease) .1s forwards; }
+  .page-hero h1 { position: relative; z-index: 1; font-family: var(--serif);
+    font-size: clamp(46px, 9vw, 92px); font-weight: 700; letter-spacing: 0.12em;
+    line-height: 1.2; padding-left: 0.12em;
+    opacity: 0; transform: translateY(34px); filter: blur(6px);
+    animation: pInUp 1.4s var(--ease) .25s forwards; }
+  .page-hero .lede { position: relative; z-index: 1; font-family: var(--serif);
+    font-size: clamp(15px, 2.2vw, 20px); letter-spacing: 0.2em;
+    color: rgba(38,35,29,0.72); margin-top: 22px;
+    opacity: 0; animation: pIn 1.4s var(--ease) .7s forwards; }
+  @keyframes pIn { to { opacity: 1; } }
+  @keyframes pInUp { to { opacity: 1; transform: none; filter: none; } }
+  .page-horizon { position: absolute; left: 0; right: 0; bottom: -2px; width: 100%;
+    height: 90px; display: block; z-index: 0; }
+
+  section.band { padding: 130px 6%; text-align: center; background: var(--paper); }
+  section.band .inner { max-width: 720px; margin: 0 auto; }
+  section.band:nth-of-type(even) { background: var(--paper-deep); }
+
+  footer { background: var(--night); color: rgba(239,235,221,0.62);
+    padding: 64px 6% 50px; font-size: 12.5px; }
+  .footer-inner { max-width: 1020px; margin: 0 auto; display: flex;
+    flex-direction: column; gap: 22px; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; }
+  .footer-links a { transition: color .25s ease; }
+  .footer-links a:hover { color: #F4F1E6; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap; border-top: 1px solid rgba(239,235,221,0.12);
+    padding-top: 24px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .page-hero h1, .page-hero .eyebrow, .page-hero .lede {
+      opacity: 1 !important; transform: none !important; filter: none !important; }
+  }
+
+/* これまでの軌跡 紙芝居プレイヤー */
+  .kiseki { max-width: 720px; margin: 52px auto 0; border-radius: var(--radius); overflow: hidden;
+    background: #211F1B; border: 1px solid rgba(44,42,37,0.12);
+    box-shadow: 0 24px 60px rgba(44,42,37,0.22); outline: none; }
+  .kiseki:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  .kiseki-stage { position: relative; aspect-ratio: 4 / 3; touch-action: pan-y; }
+  .kiseki-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+    opacity: 0; transition: opacity .6s ease; }
+  .kiseki-slide.is-active { opacity: 1; }
+  .kiseki-cover { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: rgba(33,31,27,0.25); border: none; cursor: pointer; transition: opacity .4s ease; }
+  .kiseki-cover.is-hidden { opacity: 0; pointer-events: none; }
+  .kiseki-cover span { width: 84px; height: 84px; border-radius: 50%; background: var(--green); color: var(--paper);
+    display: flex; align-items: center; justify-content: center; font-size: 30px; padding-left: 6px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35); transition: transform .3s ease; }
+  .kiseki-cover:hover span { transform: scale(1.08); }
+  .kiseki-controls { display: flex; align-items: center; gap: 12px; padding: 12px 18px; background: #2C2A25; }
+  .kiseki-controls button { background: none; border: none; color: #EDE9DD; cursor: pointer;
+    font-size: 17px; padding: 4px 6px; line-height: 1; }
+  .kiseki-controls button:hover { color: #fff; }
+  .kiseki-track { flex: 1; height: 3px; background: rgba(237,233,221,0.25); border-radius: 2px; overflow: hidden; }
+  .kiseki-bar { height: 100%; width: 2.4%; background: #A8BD98; transition: width .4s ease; }
+  .kiseki-count { font-size: 12px; color: rgba(237,233,221,0.8); letter-spacing: 0.1em; font-variant-numeric: tabular-nums; }
+  @media (prefers-reduced-motion: reduce) { .kiseki-slide, .kiseki-bar, .kiseki-cover { transition: none; } }
+
+</style>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
 <link rel="alternate" hreflang="ja" href="https://ryo208.github.io/doluck-site1/migration.html">
 <link rel="alternate" hreflang="en" href="https://ryo208.github.io/doluck-site1/en/migration.html">
 <link rel="alternate" hreflang="ko" href="https://ryo208.github.io/doluck-site1/ko/migration.html">
@@ -22,112 +214,195 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand">
-      <svg class="logo-mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Do Luck logo Hokkaido">
-        <rect x="2" y="2" width="96" height="96" rx="22" fill="#3e2b23"/>
-        <g transform="translate(10,11) scale(0.8)">
-          <path d="M35.6,0 L45.5,11.2 L48.9,17.4 L54,23 L63.4,30 L69.5,32.3 L74.1,32.9 L74.1,34.4 L75.6,36.3 L79.1,37.3 L83.5,36.7 L92,27.5 L92.5,29.2 L87.9,37.8 L87.6,40.8 L89,43.5 L92.3,45 L91.3,45.7 L91.9,44.9 L89.7,44.3 L91.2,49.3 L92.8,51.3 L92.2,51.7 L94.6,52 L97.2,49.3 L100,49.8 L96.6,51.1 L94.9,54.5 L93,53.9 L89,54.9 L88.3,56 L89.1,56.5 L86.1,58.6 L83.7,57.9 L83.8,57.2 L85.3,57.5 L85.3,56.8 L83.1,56.9 L81.9,58.7 L83.4,59.8 L77.6,59.6 L75.4,58.1 L73.8,58.1 L69.2,60.4 L63.8,65.5 L59.2,72.4 L58.6,79.5 L57.5,82.1 L52.6,77.9 L45.5,74.9 L39.7,70.1 L37.5,69.8 L35.3,67.7 L32.8,66.7 L31,66.3 L27.7,67.4 L23.3,70.4 L20.5,73.8 L19.3,73.2 L18.3,70.4 L15.6,67.6 L11.8,67.6 L9,71.3 L8.7,75 L13.5,78.3 L15.9,77.6 L19.7,82.1 L22.3,83.2 L23.5,85 L19.8,87.1 L16.9,85.6 L15.4,86.4 L15.9,85.3 L14.8,84.6 L13.5,86.7 L11.1,88.1 L10.6,91.4 L8.7,91.9 L7.7,93.8 L5.2,93.5 L3.6,89.4 L5.1,84.9 L5.9,84.6 L6,80.8 L4.1,77.9 L2.7,77.7 L1.8,76 L0.4,75.4 L0,73.2 L1.3,70.9 L1,66.8 L2.5,65.1 L4.5,65.1 L6.9,62.2 L8.7,63.3 L10.1,60.2 L12.4,58.3 L9.3,53.1 L9.9,50.4 L12.2,49.7 L16.9,53.4 L20.5,52.7 L20.7,53.8 L23.4,54.9 L27.1,51 L27.5,49 L26.3,46.3 L26.7,44.5 L25.8,41.6 L26.7,39.8 L30.5,37.4 L31.2,34.9 L31,28.5 L32.7,25.2 L33.5,20.9 L32.6,14.8 L29.8,6.6 L31.2,4 L30.9,2.2 L33.4,2.7 L35.6,0 Z" fill="#f6efe4"/>
-          <circle cx="65" cy="62" r="5.5" fill="#c1622f"/>
-        </g>
-      </svg>
-      <span class="brand-text">Do Luck 道楽<small>CAFE &amp; GUESTHOUSE</small></span>
-    </a>
-    <button class="nav-toggle" aria-label="Menu">&#9776;</button>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">STARTSEITE</a></li>
-        <li><a href="cafe.html">Café</a></li>
-        <li><a href="lodge.html">Unterkunft</a></li>
-        <li><a href="access.html">Anfahrt</a></li>
-        <li><a href="migration.html" class="active">Unsere Geschichte</a></li>
-        <li><a href="contact.html">Kontakt</a></li>
-        <li><a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">Blog</a></li>
-        <li><select class="lang-select" onchange="if(this.value) window.location.href=this.value;" aria-label="Language">
-        <option value="../migration.html">日本語</option>
-        <option value="../en/migration.html">English</option>
-        <option value="../ko/migration.html">한국어</option>
-        <option value="../zh-hans/migration.html">简体中文</option>
-        <option value="../zh-hant/migration.html">繁體中文</option>
-        <option value="../es/migration.html">Español</option>
-        <option value="../fr/migration.html">Français</option>
-        <option value="../de/migration.html" selected>Deutsch</option>
-        <option value="../it/migration.html">Italiano</option>
-        <option value="../ru/migration.html">Русский</option>
-      </select></li>
-      </ul>
-    </nav>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Do Luck 道楽</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" data-i18n="nav.home">Startseite</a></li>
+      <li><a href="cafe.html" data-i18n="nav.cafe">Café</a></li>
+      <li><a href="lodge.html" data-i18n="nav.lodge">Herberge</a></li>
+      <li><a href="access.html" data-i18n="nav.access">Anfahrt</a></li>
+      <li><a href="migration.html" aria-current="page" data-i18n="nav.migration">Unsere Geschichte</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Kontakt</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/" data-i18n="nav.blog">Blog</a></li>
+    </ul>
+    <div class="nav-right">
+      <select class="lang-select" id="langSelect" aria-label="Language"><option value="ja">日本語</option><option value="en">English</option><option value="zh-CN">简体中文</option><option value="zh-TW">繁體中文</option><option value="ko">한국어</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="ru">Русский</option><option value="fr">Français</option><option value="es">Español</option></select>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false" onclick="toggleMenu(this)">☰</button>
+    </div>
   </div>
+</nav>
+
+<header class="page-hero">
+  <p class="eyebrow reveal">IJU KEIKAKU</p>
+  <h1 class="reveal" data-i18n="nav.migration">Unsere Geschichte</h1>
+  <p class="lede reveal" data-i18n="mig.lede">Von Osaka nach Ikeda, Hokkaidō.</p>
+  <svg class="page-horizon" viewBox="0 0 1440 110" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path d="M0,45 C240,32 420,42 720,38 C1020,34 1240,42 1440,36 L1440,110 L0,110 Z" fill="#B9C7A8"/>
+    <path d="M0,68 C300,58 560,70 860,64 C1120,60 1300,68 1440,63 L1440,110 L0,110 Z" fill="#9DB08B"/>
+    <path d="M0,90 L1440,86 L1440,110 L0,110 Z" fill="#7E9770"/>
+  </svg>
 </header>
 
-<div class="page-header">
-  <div class="container">
-    <h1>Unsere Geschichte</h1>
-    <p>Von Osaka nach Ikeda, Hokkaido: die Geschichte der Besitzerfamilie</p>
-  </div>
-</div>
-
-<section class="block container">
-  <h2>Über den Besitzer</h2>
-  <p class="lead">Koji Fukushima, ursprünglich aus Osaka, arbeitete fast 30 Jahre bei der Post, bevor er mit seiner Familie nach Hokkaido zog. Er baute ein ehemaliges Apothekengebäude zum Café und Gästehaus Do Luck um. Als Motorradliebhaber schätzt er den Austausch mit Mitreisenden sehr.</p>
-
-  <div class="photo-frame">
-    <img src="../images/migration-map.gif" alt="Folie mit der Karte von Hokkaido, die den Umzug der Familie nach Ikeda zeigt">
-  </div>
-
-  <div style="margin-top:24px;">
-    <h3>2006: Auf der Suche nach einem neuen Zuhause durch Hokkaido</h3>
-    <p>Nachdem er seinen Job gekündigt hatte, verbrachte Herr Fukushima einen Monat damit, Hokkaido auf der Suche nach einem neuen Standort zu durchstreifen. Zu den Kandidaten gehörten Biei, bekannt für seine “Patchwork Road”-Hügel, und das Gebäude des ehemaligen Bahnhofs Takashima, der nach Stilllegung der Ginga-Bahnlinie aufgegeben wurde. Schließlich landete er hier in Ikeda.</p>
-  </div>
-
-  <div class="photo-frame" style="margin: 32px 0;">
-    <img src="../images/migration-search.gif" alt="Folie mit Fotos des Anwesens in Biei und des ehemaligen Bahnhofs Takashima">
-  </div>
-
-  <div class="note-box">Umziehen bedeutet nicht nur, einen Ort zu finden — es bedeutet, Menschen zu finden. Diese Erfahrung ist der Ursprung dafür, warum Do Luck das Gespräch zwischen Reisenden so schätzt.</div>
-
-  <h2>Jun und Hotaru, unsere Hunde</h2>
-  <p class="lead">Die Familie brachte zwei Hunde nach Hokkaido, Jun und Hotaru, benannt nach Figuren aus dem beliebten TV-Drama “Kita no Kuni Kara” (Aus dem Norden). Heute verbringt Jun, ein Bobtail, noch immer seine Tage bei Do Luck.</p>
-
-  <div class="photo-frame" style="max-width: 480px;">
-    <img src="../images/migration-mailbox.jpg" alt="Foto eines Briefkastens mit einer Botschaft darüber, dass Umziehen bedeutet, Menschen zu finden">
-  </div>
-
-  <p style="margin-top: 24px;">Ein ausführlicheres Interview mit Herrn und Frau Fukushima können Sie auf der Website der Toho Network Reisenden-Gästehaus-Vereinigung lesen.</p>
-
-  <div class="btn-row" style="justify-content:flex-start;">
-    <a href="https://www.toho.net/meguri/1436.html" target="_blank" rel="noopener" class="btn btn-secondary">Interview lesen</a>
-    <a href="access.html" class="btn btn-primary">Anfahrt ansehen</a>
+<section class="band">
+  <div class="inner">
+    <p class="eyebrow reveal" data-i18n="mig.eyebrow">Unser Weg</p>
+    <h2 class="headline reveal" data-i18n="mig.h">Der bisherige Weg</h2>
+    <div class="kiseki reveal" id="kiseki" tabindex="0" role="group" aria-label="これまでの軌跡 スライドショー">
+      <div class="kiseki-stage" id="kisekiStage">
+        <img class="kiseki-slide is-active" src="../images/kiseki/01.gif" alt="これまでの軌跡 スライド 1">
+        <img class="kiseki-slide" src="../images/kiseki/02.gif" alt="" aria-hidden="true">
+        <button class="kiseki-cover" id="kisekiCover" aria-label="スライドショーを再生"><span>▶</span></button>
+      </div>
+      <div class="kiseki-controls">
+        <button id="kisekiToggle" aria-label="再生・一時停止">▶</button>
+        <button id="kisekiPrev" aria-label="前のスライド">‹</button>
+        <button id="kisekiNext" aria-label="次のスライド">›</button>
+        <div class="kiseki-track"><div class="kiseki-bar" id="kisekiBar"></div></div>
+        <span class="kiseki-count" id="kisekiCount">1 / 42</span>
+      </div>
+    </div>
+    <p class="note reveal" data-i18n="mig.note">Unser Alltag steht auch im Blog (auf Japanisch)</p>
+    <a class="link-quiet reveal" href="https://doluck2007.hatenadiary.org/" data-i18n="link.blog">Blog lesen</a>
   </div>
 </section>
 
-<footer class="site-footer">
-  <div class="container">
-    <div>
-      <strong>Do Luck 道楽</strong><br>
-      〒083-0034 Toshibetsu-honmachi 2-6, Ikeda, Nakagawa-gun, Hokkaido, Japan<br>
-      TEL: <a href="tel:0155724949">+81-15-572-4949</a>
+<footer>
+  <div class="footer-inner">
+    <ul class="footer-links">
+      <li><a href="cafe.html" data-i18n="nav.cafe">Café</a></li>
+      <li><a href="lodge.html" data-i18n="nav.lodge">Herberge</a></li>
+      <li><a href="access.html" data-i18n="nav.access">Anfahrt</a></li>
+      <li><a href="migration.html" data-i18n="nav.migration">Unsere Geschichte</a></li>
+      <li><a href="contact.html" data-i18n="nav.contact">Kontakt</a></li>
+      <li><a href="https://doluck2007.hatenadiary.org/" data-i18n="nav.blog">Blog</a></li>
+    </ul>
+    <div class="footer-bottom">
+      <p>© 2008– Do Luck 道楽</p>
+      <a href="https://www.toho.net/meguri/1436.html">
+        <img src="../images/toho-badge.gif" alt="とほネットワーク旅人宿の会" width="132" height="47" style="display:block">
+      </a>
     </div>
-    <div>
-      <a href="cafe.html">Café</a><br>
-      <a href="lodge.html">Unterkunft</a><br>
-      <a href="access.html">Anfahrt</a><br>
-      <a href="migration.html">Unsere Geschichte</a><br>
-      <a href="contact.html">Kontakt</a><br>
-      <a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener">Blog</a>
-    </div>
-    <div>
-      <a href="https://www.toho.net/meguri/1436.html" target="_blank" rel="noopener" class="toho-badge"><img src="../images/toho-badge.gif" alt="Toho Network Travelers' Inn Association"></a>
-    </div>
-    <div class="copyright"><span class="last-updated">Last updated: July 2026</span>&copy; 2008– Do Luck 道楽</div>
   </div>
 </footer>
 
-<a href="https://doluck2007.hatenadiary.org/" target="_blank" rel="noopener" class="mascot-button" aria-label="Our dogs / blog">
-  <span class="dog-thumb"><img src="../images/dog-jun.png" alt="dog"></span>
-  <span class="dog-thumb"><img src="../images/jun.avif" alt="dog Jun"></span>
-</a>
-<script src="../js/main.js"></script>
+
+<script>
+  function toggleMenu(btn) {
+    const links = document.getElementById('navLinks');
+    const open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open);
+  }
+
+    const LANG_DIRS = {"ja":"","en":"en","zh-CN":"zh-hans","zh-TW":"zh-hant","ko":"ko","de":"de","it":"it","ru":"ru","fr":"fr","es":"es"};
+  (function () {
+    var sel = document.getElementById('langSelect');
+    sel.value = 'de';
+    sel.addEventListener('change', function (e) {
+      var d = LANG_DIRS[e.target.value];
+      if (d === undefined) return;
+      location.href = (d === '' ? '../' : '../' + d + '/') + 'migration.html';
+    });
+  })();
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // これまでの軌跡 紙芝居プレイヤー
+  (() => {
+    const stage = document.getElementById('kisekiStage');
+    if (!stage) return;
+    const TOTAL = 42, WAIT = 3200;
+    const src = n => '../images/kiseki/' + String(n).padStart(2, '0') + (n <= 10 ? '.gif' : '.jpg');
+    const imgs = stage.querySelectorAll('.kiseki-slide');
+    const cover = document.getElementById('kisekiCover');
+    const toggle = document.getElementById('kisekiToggle');
+    const prev = document.getElementById('kisekiPrev');
+    const next = document.getElementById('kisekiNext');
+    const count = document.getElementById('kisekiCount');
+    const bar = document.getElementById('kisekiBar');
+    let idx = 1, front = 0, timer = null, playing = false;
+    const preload = n => { if (n <= TOTAL) { const im = new Image(); im.src = src(n); } };
+    const setPlaying = v => {
+      playing = v;
+      clearInterval(timer);
+      if (v) timer = setInterval(() => { if (idx < TOTAL) show(idx + 1); else setPlaying(false); }, WAIT);
+      toggle.textContent = v ? '❚❚' : (idx === TOTAL ? '↺' : '▶');
+    };
+    const show = n => {
+      idx = Math.min(TOTAL, Math.max(1, n));
+      const back = 1 - front;
+      const el = imgs[back];
+      const swap = () => {
+        el.classList.add('is-active');
+        imgs[front].classList.remove('is-active');
+        front = back;
+      };
+      el.onload = null;
+      el.src = src(idx);
+      el.alt = 'これまでの軌跡 スライド ' + idx;
+      if (el.complete) swap(); else el.onload = swap;
+      count.textContent = idx + ' / ' + TOTAL;
+      bar.style.width = (idx / TOTAL * 100) + '%';
+      preload(idx + 1); preload(idx + 2);
+      if (idx === TOTAL && playing) setPlaying(false);
+    };
+    const start = () => {
+      cover.classList.add('is-hidden');
+      if (idx === TOTAL) show(1);
+      setPlaying(true);
+    };
+    cover.addEventListener('click', start);
+    toggle.addEventListener('click', () => { if (playing) setPlaying(false); else start(); });
+    prev.addEventListener('click', () => { cover.classList.add('is-hidden'); show(idx - 1); if (playing) setPlaying(true); });
+    next.addEventListener('click', () => { cover.classList.add('is-hidden'); show(idx + 1); if (playing) setPlaying(true); });
+    document.getElementById('kiseki').addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); cover.classList.add('is-hidden'); show(idx - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); cover.classList.add('is-hidden'); show(idx + 1); }
+    });
+    let sx = null;
+    stage.addEventListener('pointerdown', e => { sx = e.clientX; });
+    stage.addEventListener('pointerup', e => {
+      if (sx === null) return;
+      const dx = e.clientX - sx; sx = null;
+      if (Math.abs(dx) > 40) { cover.classList.add('is-hidden'); show(idx + (dx < 0 ? 1 : -1)); if (playing) setPlaying(true); }
+    });
+    preload(2); preload(3);
+  })();
+</script>
+
+<script>
+(function () {
+  var progress = document.createElement('div');
+  progress.id = 'progress';
+  progress.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(progress);
+  var nav = document.querySelector('.nav');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var y = window.scrollY || 0;
+      if (nav) nav.classList.toggle('scrolled', y > 40);
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
 </body>
 </html>
