@@ -291,6 +291,18 @@
   .spot .link-quiet { margin-top: 24px; font-size: 13px; }
   .spots > .note { margin-top: 40px; }
 
+  /* ---- riders ---- */
+  .riders { padding: 130px 6%; text-align: center; background: var(--green-deep); color: #EFEBDD; }
+  .riders .eyebrow { color: var(--gold-soft); }
+  .riders .headline { color: #F4F1E6; }
+  .riders .body { margin: 26px auto 0; max-width: 520px; font-size: 15.5px;
+    color: rgba(239,235,221,0.75); line-height: 2.3; }
+  .riders-grid { max-width: 900px; margin: 56px auto 0; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 34px 26px; }
+  @media (max-width: 700px) { .riders-grid { grid-template-columns: 1fr; } }
+  .rider-item svg { width: 54px; height: 54px; margin: 0 auto 16px; display: block; }
+  .rider-item p { font-size: 15px; letter-spacing: 0.06em; line-height: 2; }
+
   /* ---- voices ---- */
   .voices { padding: 150px 6%; text-align: center; background: var(--paper); }
   .voices .body { margin: 34px auto 0; max-width: 520px; font-size: 15.5px;
@@ -751,6 +763,50 @@
     </div>
   </div>
   <p class="note reveal" data-i18n="spots.note">※时间为驾车参考。也非常适合作为摩托骑行的目的地。</p>
+</section>
+
+<section class="riders">
+  <p class="eyebrow reveal">For Riders</p>
+  <h2 class="headline reveal" data-i18n="rider.h">致骑士们</h2>
+  <p class="body reveal" data-i18n="rider.p">欢迎把道乐作为摩托旅行的据点。</p>
+  <div class="riders-grid">
+    <div class="rider-item reveal">
+      <svg viewBox="0 0 54 54" aria-hidden="true">
+        <g fill="none" stroke="#C9B287" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5,24 L5,18 L27,6 L49,18 L49,24"/>
+          <circle cx="16" cy="42" r="6"/>
+          <circle cx="38" cy="42" r="6"/>
+          <path d="M16,42 L24,32 L32,32 L38,42"/>
+          <path d="M24,32 L21,27 L18,27.5"/>
+          <path d="M32,32 L36,28"/>
+        </g>
+      </svg>
+      <p data-i18n="rider.1">宽敞的带顶停车场</p>
+    </div>
+    <div class="rider-item reveal">
+      <svg viewBox="0 0 54 54" aria-hidden="true">
+        <g fill="none" stroke="#C9B287" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6,40 L48,40"/>
+          <path d="M17,40 A10,10 0 0 1 37,40"/>
+          <path d="M27,22 L27,15"/>
+          <path d="M14,27 L9,22"/>
+          <path d="M40,27 L45,22"/>
+        </g>
+      </svg>
+      <p data-i18n="rider.2">可清晨出发</p>
+    </div>
+    <div class="rider-item reveal">
+      <svg viewBox="0 0 54 54" aria-hidden="true">
+        <g fill="none" stroke="#C9B287" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15,24 L17,38 Q18,42 23,42 L29,42 Q34,42 35,38 L37,24 Z"/>
+          <path d="M37,27 Q43,28 42,33 Q41,37 36,36"/>
+          <path d="M21,18 Q19,14 22,10"/>
+          <path d="M28,18 Q26,14 29,10"/>
+        </g>
+      </svg>
+      <p data-i18n="rider.3">夜晚与旅人畅谈</p>
+    </div>
+  </div>
 </section>
 
 <section class="voices">
