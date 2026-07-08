@@ -422,6 +422,15 @@
     letter-spacing: 0.4em; color: rgba(239,235,221,0.28); white-space: nowrap; }
   @media (max-width: 900px) { .footer-vertical { display: none; } }
 
+  /* ---- mobile ja line breaks ---- */
+  .nb { display: inline; }
+  @media (max-width: 600px) {
+    .nb { display: inline-block; }
+    .headline { font-size: clamp(26px, 7.4vw, 34px); }
+    .statement .headline, .contact-band .headline { font-size: clamp(26px, 7.4vw, 36px); }
+    .news-list li { flex-direction: column; gap: 2px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -640,7 +649,7 @@
     <p class="eyebrow reveal" data-i18n="news.h">最新消息</p>
     <ul class="news-list reveal">
       <li><span class="news-date">2026.07</span><span data-i18n="news.1">网站已全新改版。</span></li>
-      <li><span class="news-date">2026.07</span><span data-i18n="news.2">本季旅舍营业至10月31日。</span></li>
+      <li><span class="news-date">2026.07</span><span data-i18n="news.2">本季旅舍营业至10月31日。</span><span class='nb'>10月31日まで営業しています。</span></span></li>
     </ul>
   </div>
 </section>

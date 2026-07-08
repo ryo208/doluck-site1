@@ -422,6 +422,15 @@
     letter-spacing: 0.4em; color: rgba(239,235,221,0.28); white-space: nowrap; }
   @media (max-width: 900px) { .footer-vertical { display: none; } }
 
+  /* ---- mobile ja line breaks ---- */
+  .nb { display: inline; }
+  @media (max-width: 600px) {
+    .nb { display: inline-block; }
+    .headline { font-size: clamp(26px, 7.4vw, 34px); }
+    .statement .headline, .contact-band .headline { font-size: clamp(26px, 7.4vw, 36px); }
+    .news-list li { flex-direction: column; gap: 2px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -640,7 +649,7 @@
     <p class="eyebrow reveal" data-i18n="news.h">Новости</p>
     <ul class="news-list reveal">
       <li><span class="news-date">2026.07</span><span data-i18n="news.1">Наш сайт полностью обновлён.</span></li>
-      <li><span class="news-date">2026.07</span><span data-i18n="news.2">В этом сезоне гостевой дом открыт до 31 октября.</span></li>
+      <li><span class="news-date">2026.07</span><span data-i18n="news.2">В этом сезоне гостевой дом открыт до 31 октября.</span><span class='nb'>10月31日まで営業しています。</span></span></li>
     </ul>
   </div>
 </section>
