@@ -268,7 +268,7 @@ a {
       rgba(30, 20, 15, 0.55),
       rgba(30, 20, 15, 0.75)
     ),
-    url("../images/lodge-photo.jpg") center/cover no-repeat;
+    url("../images/og-image.jpg") center/cover no-repeat;
   padding: 110px 0 90px;
   text-align: center;
 }
