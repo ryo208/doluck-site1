@@ -359,6 +359,27 @@
   .stroll-b { animation-delay: .57s; }
   @keyframes strollBob { from { transform: translateY(0) rotate(-0.5deg); }
     to { transform: translateY(-2.6px) rotate(0.7deg); } }
+  .fireflies i { position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: #E8D9A0; box-shadow: 0 0 9px 2.5px rgba(232,217,160,0.5);
+    animation: fireflyDrift var(--fd,9s) ease-in-out infinite alternate,
+               fireflyGlow var(--fg,2.4s) ease-in-out infinite; }
+  @keyframes fireflyDrift { from { transform: translate(0,0); }
+    to { transform: translate(var(--fx,26px), var(--fy,-20px)); } }
+  @keyframes fireflyGlow { 0%, 100% { opacity: 0.05; } 50% { opacity: 0.95; } }
+  .journey-rider { display: none; }
+  @supports (offset-path: path("M0 0 L1 1")) {
+    .journey-rider { display: block;
+      offset-path: path("M60,248 C220,150 330,266 450,176 C570,86 660,238 838,84");
+      animation: ride 9s ease-in-out infinite; }
+  }
+  @keyframes ride { 0% { offset-distance: 0%; opacity: 0; } 8% { opacity: 1; }
+    92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+  .stats-grid .stat:nth-child(2), .spots-grid .spot:nth-child(2),
+  .riders-grid .rider-item:nth-child(2), .tiles-grid .tile:nth-child(2) { transition-delay: .14s; }
+  .stats-grid .stat:nth-child(3), .spots-grid .spot:nth-child(3),
+  .riders-grid .rider-item:nth-child(3) { transition-delay: .28s; }
+  .spot svg { transition: transform .5s var(--ease); }
+  .spot:hover svg { transform: translateY(-4px) scale(1.07) rotate(-2deg); }
   .trees { transform-box: fill-box; transform-origin: 50% 100%;
     animation: sway 7s ease-in-out infinite alternate; }
   @keyframes sway { from { transform: rotate(-0.7deg); } to { transform: rotate(0.8deg); } }
@@ -725,6 +746,15 @@
   <div class="stars" aria-hidden="true"></div>
   <span class="moon" aria-hidden="true"></span>
   <span class="shooting" aria-hidden="true"></span>
+  <span class="fireflies" aria-hidden="true">
+    <i style="left:12%;top:72%;--fd:8s;--fg:2.1s;--fx:30px;--fy:-24px"></i>
+    <i style="left:22%;top:80%;--fd:11s;--fg:3.1s;--fx:-24px;--fy:-16px;animation-delay:-3s,-1s"></i>
+    <i style="left:38%;top:68%;--fd:9.5s;--fg:2.6s;--fx:20px;--fy:-30px;animation-delay:-6s,-.4s"></i>
+    <i style="left:58%;top:78%;--fd:12s;--fg:2.9s;--fx:-30px;--fy:-20px;animation-delay:-2s,-1.6s"></i>
+    <i style="left:72%;top:66%;--fd:8.5s;--fg:2.2s;--fx:24px;--fy:-26px;animation-delay:-4.5s,-.8s"></i>
+    <i style="left:84%;top:76%;--fd:10.5s;--fg:3.4s;--fx:-20px;--fy:-30px;animation-delay:-7s,-2s"></i>
+    <i style="left:48%;top:84%;--fd:9s;--fg:2.7s;--fx:16px;--fy:-14px;animation-delay:-1.2s,-.2s"></i>
+  </span>
   <div class="inner">
     <p class="eyebrow reveal" data-i18n="nav.lodge">Albergue</p>
     <h2 class="headline reveal" data-i18n="idx.lodge.h">Noches de charla<br>entre viajeros.</h2>
@@ -745,6 +775,7 @@
       <circle cx="60" cy="248" r="5" fill="var(--gold)"/>
       <circle class="journey-pin" cx="838" cy="84" r="7" fill="none" stroke="var(--gold)" stroke-width="1.5"/>
       <circle cx="838" cy="84" r="5" fill="var(--gold)"/>
+      <circle class="journey-rider" r="3.2" fill="var(--gold)"/>
       <text x="60" y="286" text-anchor="start">OSAKA</text>
       <text x="838" y="56" text-anchor="end">TOKACHI・IKEDA</text>
     </svg>
