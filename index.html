@@ -354,19 +354,28 @@
   .paws-paused .gallop, .paws-paused .leg-f, .paws-paused .leg-b,
   .paws-paused .dog-ear { animation-play-state: paused; }
   .react-a, .react-b { transform-box: fill-box; transform-origin: 50% 100%;
-    transition: transform .7s var(--ease); }
+    transition: transform 1.2s var(--ease); }
   .react-a.lean { transform: rotate(-8deg) translateY(2px); }
   .react-b.lean { transform: rotate(8deg) translateY(2px); }
-  .arm-a, .arm-b { transform-box: fill-box; transition: transform .5s var(--ease); }
+  .arm-a, .arm-b { transform-box: fill-box; transition: transform .9s var(--ease); }
   .arm-a { transform-origin: 100% 0%; }
   .arm-b { transform-origin: 0% 0%; }
-  .arm-a.reach { transform: rotate(55deg); }
-  .arm-b.reach { transform: rotate(-55deg); }
+  .arm-a.reach { transform: rotate(46deg); }
+  .arm-b.reach { transform: rotate(-46deg); }
+  .arm-a.stroking { animation: strokeA 2s ease-in-out infinite; }
+  .arm-b.stroking { animation: strokeB 2s ease-in-out infinite; }
+  @keyframes strokeA { 0%, 100% { transform: rotate(46deg); } 50% { transform: rotate(64deg); } }
+  @keyframes strokeB { 0%, 100% { transform: rotate(-46deg); } 50% { transform: rotate(-64deg); } }
+  .nuzzling-l { animation: nuzzleL 2.1s ease-in-out infinite; }
+  .nuzzling-r { animation: nuzzleR 2.1s ease-in-out infinite; }
+  @keyframes nuzzleL { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(8deg); } }
+  @keyframes nuzzleR { 0%, 100% { transform: scaleX(-1) rotate(3deg); } 50% { transform: scaleX(-1) rotate(8deg); } }
+  .ambling .gallop, .ambling .leg-f, .ambling .leg-b, .ambling .dog-ear { animation-duration: 1.15s; }
   .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
-    animation: strollBob 1.15s ease-in-out infinite alternate; }
-  .stroll-b { animation-delay: .57s; }
-  @keyframes strollBob { from { transform: translateY(0) rotate(-0.5deg); }
-    to { transform: translateY(-2.6px) rotate(0.7deg); } }
+    animation: strollBob 4.2s ease-in-out infinite alternate; }
+  .stroll-b { animation-delay: 2.1s; }
+  @keyframes strollBob { from { transform: translateY(0) rotate(-0.45deg); }
+    to { transform: translateY(-1.6px) rotate(0.55deg); } }
   .fireflies i { position: absolute; width: 3px; height: 3px; border-radius: 50%;
     background: #E8D9A0; box-shadow: 0 0 9px 2.5px rgba(232,217,160,0.5);
     animation: fireflyDrift var(--fd,9s) ease-in-out infinite alternate,
@@ -1185,7 +1194,12 @@
   var b1 = d1.querySelector('.run-dog'), b2 = d2.querySelector('.run-dog');
   var ra = document.querySelector('.react-a'), rb = document.querySelector('.react-b');
   var armA = document.querySelector('.arm-a'), armB = document.querySelector('.arm-b');
-  var p1 = { x: 410, y: 0 }, p2 = { x: 430, y: 0 };
+  /* spots as wrapper offsets — d1 (Hotaru) base x840, d2 (Jun) base x906 */
+  var D1_HUSB = { x: -45, y: 70 },  D1_WIFE = { x: -152, y: 68 };
+  var D2_WIFE = { x: -216, y: 66 }, D2_HUSB = { x: -110, y: 68 };
+  var D1_MEET_L = { x: 5, y: 58 },  D1_MEET_R = { x: 38, y: 48 };
+  var D2_MEET_R = { x: -28, y: 58 }, D2_MEET_L = { x: -61, y: 68 };
+  var p1 = { x: D1_HUSB.x, y: D1_HUSB.y }, p2 = { x: D2_WIFE.x, y: D2_WIFE.y };
   function put(el, p) { el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px)'; }
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   function go(el, p, x, y, ms, ease) {
@@ -1200,80 +1214,91 @@
     return el.animate([{ opacity: into ? 0 : 1 }, { opacity: into ? 1 : 0 }],
       { duration: ms, fill: 'forwards' }).finished.catch(function () {});
   }
-  function legs(el, on) { el.classList.toggle('paws-paused', !on); }
-  function pose(fl, t) { fl.style.transform = t; }
-  async function hop(el, p, n, h) {
-    for (var i = 0; i < n; i++) {
-      await go(el, p, p.x, p.y - h, 150, 'ease-out');
-      await go(el, p, p.x, p.y + h, 170, 'ease-in');
-    }
+  function mode(el, m) {
+    el.classList.toggle('paws-paused', m === 'stop');
+    el.classList.toggle('ambling', m === 'amble');
+  }
+  function setPose(fl, flip, extra) {
+    fl.style.transform = (flip ? 'scaleX(-1) ' : '') + (extra || '');
+  }
+  function nuz(fl, flip, on) {
+    fl.classList.remove('nuzzling-l', 'nuzzling-r');
+    if (on) fl.classList.add(flip ? 'nuzzling-r' : 'nuzzling-l');
+  }
+  async function pet(person, arm, dogEl, dogP, dogFlip, faceRight, dx) {
+    if (person) person.classList.add('lean');
+    if (arm) arm.classList.add('reach');
+    await sleep(1100);
+    if (arm) arm.classList.add('stroking');
+    nuz(dogFlip, faceRight, true);
+    await go(dogEl, dogP, dogP.x + dx, dogP.y - 3, 900);
+    await sleep(4600);
+    nuz(dogFlip, faceRight, false);
+    setPose(dogFlip, faceRight, '');
+    if (arm) arm.classList.remove('stroking');
+    await go(dogEl, dogP, dogP.x - dx, dogP.y + 3, 900);
+    await sleep(400);
+    if (arm) arm.classList.remove('reach');
+    if (person) person.classList.remove('lean');
+    await sleep(800);
   }
   async function story() {
+    put(d1, p1); setPose(f1, false, ''); mode(b1, 'stop');
+    put(d2, p2); setPose(f2, true, ''); mode(b2, 'stop');
+    fade(d1, true, 1200); fade(d2, true, 1200);
+    await sleep(2000);
     for (;;) {
-      put(d1, p1 = { x: 410, y: 0 }); put(d2, p2 = { x: 430, y: 0 });
-      pose(f1, ''); pose(f2, ''); legs(b1, true); legs(b2, true);
-      fade(d2, true, 300);
-      var junIn = go(d2, p2, 90, 0, 3400, 'linear');
-      await sleep(500);
-      fade(d1, true, 300);
-      await go(d1, p1, 220, 0, 2600, 'linear');
-      await junIn;
-      legs(b1, false); legs(b2, false); await sleep(400);
-      pose(f1, 'rotate(-13deg)');
-      await sleep(750);
-      await hop(d2, p2, 2, 8);
-      pose(f1, '');
-      await sleep(250);
-      legs(b1, true); legs(b2, true);
-      var dart1 = go(d2, p2, -60, 6, 1500);
-      await sleep(180);
-      await go(d1, p1, 60, 4, 1500); await dart1;
-      legs(b1, false); legs(b2, false); await sleep(350);
-      pose(f1, 'scaleX(-1)'); pose(f2, 'scaleX(-1)');
-      await sleep(300);
-      legs(b1, true); legs(b2, true);
-      var dart2 = go(d1, p1, 260, 0, 1600);
-      await sleep(180);
-      await go(d2, p2, 140, 0, 1600); await dart2;
-      legs(b1, false); legs(b2, false); await sleep(350);
-      pose(f1, ''); pose(f2, '');
-      await sleep(300);
-      legs(b1, true); legs(b2, true);
-      var toC1 = go(d1, p1, -45, 70, 2100);
-      var toC2 = go(d2, p2, -216, 66, 2400);
-      await toC1; await toC2;
-      legs(b1, false); legs(b2, false);
-      pose(f2, 'scaleX(-1)');
-      await sleep(300);
-      if (ra) ra.classList.add('lean');
-      if (rb) rb.classList.add('lean');
-      if (armA) armA.classList.add('reach');
-      if (armB) armB.classList.add('reach');
+      await pet(ra, armA, d2, p2, f2, true, 5);        /* wife strokes Jun */
+      await sleep(800);
+      await pet(rb, armB, d1, p1, f1, false, -5);      /* husband strokes Hotaru */
+      await sleep(800);
+      /* the dogs wander out to the meadow together */
+      mode(b1, 'amble'); mode(b2, 'amble');
+      setPose(f1, true, ''); setPose(f2, true, '');
+      var m1 = go(d1, p1, D1_MEET_L.x, D1_MEET_L.y, 3200);
+      var m2 = go(d2, p2, D2_MEET_R.x, D2_MEET_R.y, 3800);
+      await m1; await m2;
+      mode(b1, 'stop'); mode(b2, 'stop');
+      setPose(f2, false, '');                          /* Jun turns to face Hotaru */
       await sleep(600);
-      pose(f1, 'rotate(12deg)'); pose(f2, 'scaleX(-1) rotate(12deg)');
-      var up1 = go(d1, p1, p1.x - 7, p1.y - 5, 280, 'ease-out');
-      var up2 = go(d2, p2, p2.x + 7, p2.y - 4, 280, 'ease-out');
-      await up1; await up2;
-      await sleep(1200);
-      pose(f1, ''); pose(f2, 'scaleX(-1)');
-      var dn1 = go(d1, p1, p1.x + 7, p1.y + 5, 260, 'ease-in');
-      var dn2 = go(d2, p2, p2.x - 7, p2.y + 4, 260, 'ease-in');
-      await dn1; await dn2;
-      await sleep(350);
-      await hop(d1, p1, 1, 7); await hop(d2, p2, 1, 7);
-      await sleep(650);
-      if (armA) armA.classList.remove('reach');
-      if (armB) armB.classList.remove('reach');
-      if (ra) ra.classList.remove('lean');
-      if (rb) rb.classList.remove('lean');
-      pose(f2, '');
+      nuz(f1, true, true); nuz(f2, false, true);       /* slow nose-to-nose */
+      await sleep(4200);
+      nuz(f1, true, false); nuz(f2, false, false);
       await sleep(400);
-      legs(b1, true); legs(b2, true);
-      var out1 = go(d1, p1, -780, 0, 3200, 'ease-in');
-      var out2 = go(d2, p2, -860, 0, 3400, 'ease-in');
-      await sleep(2400); fade(d1, false, 500); fade(d2, false, 500);
-      await out1; await out2;
-      await sleep(4000);
+      /* one slow circle around each other */
+      mode(b1, 'amble'); mode(b2, 'amble');
+      var c1 = go(d1, p1, D1_MEET_R.x, D1_MEET_R.y, 2600);
+      var c2 = go(d2, p2, D2_MEET_L.x, D2_MEET_L.y, 2600);
+      await c1; await c2;
+      mode(b1, 'stop'); mode(b2, 'stop');
+      setPose(f1, false, ''); setPose(f2, true, '');
+      await sleep(500);
+      nuz(f1, false, true); nuz(f2, true, true);
+      await sleep(3400);
+      nuz(f1, false, false); nuz(f2, true, false);
+      await sleep(700);
+      /* amble home — this time they swap owners */
+      mode(b1, 'amble'); mode(b2, 'amble');
+      setPose(f1, false, ''); setPose(f2, false, '');
+      var h1 = go(d1, p1, D1_WIFE.x, D1_WIFE.y, 3600);
+      var h2 = go(d2, p2, D2_HUSB.x, D2_HUSB.y, 3200);
+      await h1; await h2;
+      mode(b1, 'stop'); mode(b2, 'stop');
+      setPose(f1, true, ''); setPose(f2, false, '');
+      await sleep(1000);
+      await pet(ra, armA, d1, p1, f1, true, 5);        /* wife strokes Hotaru */
+      await sleep(800);
+      await pet(rb, armB, d2, p2, f2, false, -5);      /* husband strokes Jun */
+      await sleep(800);
+      /* and drift back to their usual sides */
+      mode(b1, 'amble'); mode(b2, 'amble');
+      setPose(f1, true, ''); setPose(f2, false, '');
+      var r1 = go(d1, p1, D1_HUSB.x, D1_HUSB.y, 3600);
+      var r2 = go(d2, p2, D2_WIFE.x, D2_WIFE.y, 4000);
+      await r1; await r2;
+      mode(b1, 'stop'); mode(b2, 'stop');
+      setPose(f1, false, ''); setPose(f2, true, '');
+      await sleep(2200);
     }
   }
   story();
