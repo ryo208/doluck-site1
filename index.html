@@ -349,6 +349,16 @@
   @keyframes earFlap { from { transform: rotate(-6deg); } to { transform: rotate(16deg); } }
   .dog-tail-lab { transform-box: fill-box; transform-origin: 0% 90%;
     animation: wag .9s ease-in-out infinite alternate; }
+  .dog-runner { animation: dogRun 15s linear infinite; animation-delay: -3s; }
+  .dog-runner.r2 { animation-duration: 18.5s; animation-delay: -9s; }
+  @keyframes dogRun { 0% { transform: translateX(80px); opacity: 0; }
+    5% { opacity: 1; } 88% { transform: translateX(-820px); opacity: 1; }
+    94% { opacity: 0; } 100% { transform: translateX(80px); opacity: 0; } }
+  .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
+    animation: strollBob 1.15s ease-in-out infinite alternate; }
+  .stroll-b { animation-delay: .57s; }
+  @keyframes strollBob { from { transform: translateY(0) rotate(-0.5deg); }
+    to { transform: translateY(-2.6px) rotate(0.7deg); } }
   .trees { transform-box: fill-box; transform-origin: 50% 100%;
     animation: sway 7s ease-in-out infinite alternate; }
   @keyframes sway { from { transform: rotate(-0.7deg); } to { transform: rotate(0.8deg); } }
@@ -569,7 +579,7 @@
       <ellipse cx="720" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <ellipse cx="756" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <!-- 奥さん（肩までの黒髪・ブルーのトップス） -->
-      <g>
+      <g class="stroll-a">
         <rect x="715" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
         <rect x="722" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
         <path d="M711,381 Q704,390 706,398" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
@@ -579,7 +589,7 @@
         <path d="M712,359 Q711,372 714,376 Q720,372 726,376 Q729,372 728,359 Z" fill="#3A342C"/>
       </g>
       <!-- ご主人（もじゃっとした髪・デニムベスト） -->
-      <g>
+      <g class="stroll-b">
         <rect x="752" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
         <rect x="760" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
         <path d="M766,381 Q772,390 771,399" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
@@ -592,7 +602,7 @@
     </g>
       <!-- 野原を駆けまわる蛍（黒ラブラドール）と純（オールドイングリッシュシープドッグ） -->
     <g aria-hidden="true">
-      <g class="run-dog dog1" transform="translate(840, 339) scale(0.85)">
+      <g class="dog-runner r1"><g class="run-dog dog1" transform="translate(840, 339) scale(0.85)">
         <ellipse cx="16" cy="29.5" rx="21" ry="2.7" fill="#54704C" opacity="0.22"/>
         <g class="gallop">
           <path class="dog-tail-lab" d="M33,9.5 Q39,6 43,0.5 Q44,-1 42.5,-0.6 Q37,3 31.5,7.5 Z" fill="#23201B"/>
@@ -613,8 +623,8 @@
           <circle cx="3.2" cy="6.6" r="0.9" fill="#C9B287"/>
           <path d="M4,11.5 Q7.5,14 11,13" stroke="#4A7FA5" stroke-width="2.2" fill="none" stroke-linecap="round"/>
         </g>
-      </g>
-      <g class="run-dog dog2" transform="translate(906, 344) scale(0.95)">
+      </g></g>
+      <g class="dog-runner r2"><g class="run-dog dog2" transform="translate(906, 344) scale(0.95)">
         <ellipse cx="15" cy="29.5" rx="23" ry="2.9" fill="#54704C" opacity="0.22"/>
         <g class="gallop">
           <g class="leg-b">
@@ -638,7 +648,7 @@
           <path d="M-5.2,12.2 Q-4.4,16.5 -5.8,18.2 Q-7.4,16.5 -6.5,12.5 Z" fill="#C97F8B"/>
           <path d="M-5.9,13 Q-5.6,15.5 -6.1,17.2" stroke="#B06774" stroke-width="0.8" fill="none" stroke-linecap="round"/>
         </g>
-      </g>
+      </g></g>
     </g>
   </svg>
   </div>
@@ -796,7 +806,8 @@
           <path d="M12,26 Q6.5,34 9,43 Q9.8,48 5.5,50.5"/>
           <path d="M17.5,31 Q13,37 14.5,43 Q14.8,46.5 11.5,49"/>
           <path d="M5.5,50.5 Q8,52.8 11.5,49"/>
-          <path d="M18,34 Q12,40 13.5,46" stroke-width="1.5"/>
+          <path d="M16,33 C10,42 4,42.5 2.5,35.5"/>
+          <path d="M18.5,36 C14.5,42.5 10,43.5 8,39.5" stroke-width="1.5"/>
           <path d="M53,32 Q57,36 55,42" stroke-width="1.3"/>
           <path d="M52,54 Q52,51 54,50 M55,54 Q56,51.5 58,52.5" stroke-width="1.3"/>
         </g>
