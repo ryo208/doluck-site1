@@ -349,55 +349,14 @@
   @keyframes earFlap { from { transform: rotate(-6deg); } to { transform: rotate(16deg); } }
   .dog-tail-lab { transform-box: fill-box; transform-origin: 0% 90%;
     animation: wag .9s ease-in-out infinite alternate; }
-  .dog-runner.r1 { animation: dogPlay1 28s ease-in-out infinite; }
-  .dog-runner.r2 { animation: dogPlay2 28s ease-in-out infinite; }
-  @keyframes dogPlay1 {
-    0% { transform: translate(410px, 0); opacity: 0; }
-    3% { opacity: 1; }
-    12% { transform: translate(160px, 0); }
-    15% { transform: translate(135px, -8px); }
-    18% { transform: translate(185px, 0); }
-    21% { transform: translate(140px, -9px); }
-    24% { transform: translate(170px, 0); }
-    34% { transform: translate(-45px, 70px); }
-    37% { transform: translate(-45px, 58px); }
-    40% { transform: translate(-45px, 70px); }
-    43% { transform: translate(-45px, 57px); }
-    46% { transform: translate(-45px, 70px); }
-    48% { transform: translate(-45px, 70px); }
-    68% { transform: translate(-660px, 0); opacity: 1; }
-    72% { transform: translate(-750px, 0); opacity: 0; }
-    73% { transform: translate(410px, 0); opacity: 0; }
-    100% { transform: translate(410px, 0); opacity: 0; }
-  }
-  @keyframes dogPlay2 {
-    0% { transform: translate(430px, 0); opacity: 0; }
-    6% { transform: translate(430px, 0); opacity: 0; }
-    9% { opacity: 1; }
-    14% { transform: translate(134px, 0); }
-    17% { transform: translate(160px, -10px); }
-    20% { transform: translate(115px, 0); }
-    23% { transform: translate(155px, -8px); }
-    26% { transform: translate(134px, 0); }
-    36% { transform: translate(-216px, 66px); }
-    39% { transform: translate(-216px, 53px); }
-    42% { transform: translate(-216px, 66px); }
-    45% { transform: translate(-216px, 54px); }
-    48% { transform: translate(-216px, 66px); }
-    70% { transform: translate(-766px, 0); opacity: 1; }
-    74% { transform: translate(-820px, 0); opacity: 0; }
-    75% { transform: translate(430px, 0); opacity: 0; }
-    100% { transform: translate(430px, 0); opacity: 0; }
-  }
-  .react-a, .react-b { transform-box: fill-box; transform-origin: 50% 100%; }
-  .react-a { animation: reactA 28s ease-in-out infinite; }
-  .react-b { animation: reactB 28s ease-in-out infinite; }
-  @keyframes reactA { 0%, 33% { transform: rotate(0deg); }
-    37% { transform: rotate(-3deg); } 41% { transform: rotate(-2deg); }
-    45% { transform: rotate(-3deg); } 50%, 100% { transform: rotate(0deg); } }
-  @keyframes reactB { 0%, 34% { transform: rotate(0deg); }
-    38% { transform: rotate(3deg); } 42% { transform: rotate(2deg); }
-    46% { transform: rotate(3deg); } 51%, 100% { transform: rotate(0deg); } }
+  .dog-runner { opacity: 0; }
+  .dog-flip { transform-box: fill-box; transform-origin: 50% 50%; transition: transform .25s ease; }
+  .paws-paused .gallop, .paws-paused .leg-f, .paws-paused .leg-b,
+  .paws-paused .dog-ear { animation-play-state: paused; }
+  .react-a, .react-b { transform-box: fill-box; transform-origin: 50% 100%;
+    transition: transform .7s var(--ease); }
+  .react-a.lean { transform: rotate(-3deg); }
+  .react-b.lean { transform: rotate(3deg); }
   .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
     animation: strollBob 1.15s ease-in-out infinite alternate; }
   .stroll-b { animation-delay: .57s; }
@@ -641,7 +600,7 @@
     </g>
       <!-- 野原を駆けまわる蛍（黒ラブラドール）と純（オールドイングリッシュシープドッグ） -->
     <g aria-hidden="true">
-      <g class="dog-runner r1"><g class="run-dog dog1" transform="translate(840, 296) scale(0.68)">
+      <g class="dog-runner r1" id="dogRun1"><g class="dog-flip"><g class="run-dog dog1" transform="translate(840, 296) scale(0.68)">
         <ellipse cx="16" cy="29.5" rx="21" ry="2.7" fill="#54704C" opacity="0.22"/>
         <g class="gallop">
           <path class="dog-tail-lab" d="M33,9.5 Q39,6 43,0.5 Q44,-1 42.5,-0.6 Q37,3 31.5,7.5 Z" fill="#23201B"/>
@@ -662,8 +621,8 @@
           <circle cx="3.2" cy="6.6" r="0.9" fill="#C9B287"/>
           <path d="M4,11.5 Q7.5,14 11,13" stroke="#4A7FA5" stroke-width="2.2" fill="none" stroke-linecap="round"/>
         </g>
-      </g></g>
-      <g class="dog-runner r2"><g class="run-dog dog2" transform="translate(906, 300) scale(0.76)">
+      </g></g></g>
+      <g class="dog-runner r2" id="dogRun2"><g class="dog-flip"><g class="run-dog dog2" transform="translate(906, 300) scale(0.76)">
         <ellipse cx="15" cy="29.5" rx="23" ry="2.9" fill="#54704C" opacity="0.22"/>
         <g class="gallop">
           <g class="leg-b">
@@ -687,7 +646,7 @@
           <path d="M-5.2,12.2 Q-4.4,16.5 -5.8,18.2 Q-7.4,16.5 -6.5,12.5 Z" fill="#C97F8B"/>
           <path d="M-5.9,13 Q-5.6,15.5 -6.1,17.2" stroke="#B06774" stroke-width="0.8" fill="none" stroke-linecap="round"/>
         </g>
-      </g></g>
+      </g></g></g>
     </g>
     <!-- 道を散歩するご夫婦と看板犬（ほたる・純） -->
     <g aria-hidden="true" transform="translate(220.8, 103.6) scale(0.7)">
@@ -1212,5 +1171,89 @@
 })();
 </script>
 
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var d1 = document.getElementById('dogRun1'), d2 = document.getElementById('dogRun2');
+  if (reduced || !d1 || !d2 || !d1.animate) return;
+  var f1 = d1.querySelector('.dog-flip'), f2 = d2.querySelector('.dog-flip');
+  var b1 = d1.querySelector('.run-dog'), b2 = d2.querySelector('.run-dog');
+  var ra = document.querySelector('.react-a'), rb = document.querySelector('.react-b');
+  var p1 = { x: 410, y: 0 }, p2 = { x: 430, y: 0 };
+  function put(el, p) { el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px)'; }
+  function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  function go(el, p, x, y, ms, ease) {
+    var a = el.animate(
+      [{ transform: 'translate(' + p.x + 'px,' + p.y + 'px)' },
+       { transform: 'translate(' + x + 'px,' + y + 'px)' }],
+      { duration: ms, easing: ease || 'ease-in-out', fill: 'forwards' });
+    p.x = x; p.y = y;
+    return a.finished.catch(function () {});
+  }
+  function fade(el, into, ms) {
+    return el.animate([{ opacity: into ? 0 : 1 }, { opacity: into ? 1 : 0 }],
+      { duration: ms, fill: 'forwards' }).finished.catch(function () {});
+  }
+  function legs(el, on) { el.classList.toggle('paws-paused', !on); }
+  function pose(fl, t) { fl.style.transform = t; }
+  async function hop(el, p, n, h) {
+    for (var i = 0; i < n; i++) {
+      await go(el, p, p.x, p.y - h, 150, 'ease-out');
+      await go(el, p, p.x, p.y + h, 170, 'ease-in');
+    }
+  }
+  async function story() {
+    for (;;) {
+      put(d1, p1 = { x: 410, y: 0 }); put(d2, p2 = { x: 430, y: 0 });
+      pose(f1, ''); pose(f2, ''); legs(b1, true); legs(b2, true);
+      fade(d2, true, 300);
+      var junIn = go(d2, p2, 90, 0, 3400, 'linear');
+      await sleep(500);
+      fade(d1, true, 300);
+      await go(d1, p1, 220, 0, 2600, 'linear');
+      await junIn;
+      legs(b1, false); legs(b2, false); await sleep(400);
+      pose(f1, 'rotate(-13deg)');
+      await sleep(750);
+      await hop(d2, p2, 2, 8);
+      pose(f1, '');
+      await sleep(250);
+      legs(b1, true); legs(b2, true);
+      var dart1 = go(d2, p2, -60, 6, 1500);
+      await sleep(180);
+      await go(d1, p1, 60, 4, 1500); await dart1;
+      legs(b1, false); legs(b2, false); await sleep(350);
+      pose(f1, 'scaleX(-1)'); pose(f2, 'scaleX(-1)');
+      await sleep(300);
+      legs(b1, true); legs(b2, true);
+      var dart2 = go(d1, p1, 260, 0, 1600);
+      await sleep(180);
+      await go(d2, p2, 140, 0, 1600); await dart2;
+      legs(b1, false); legs(b2, false); await sleep(350);
+      pose(f1, ''); pose(f2, '');
+      await sleep(300);
+      legs(b1, true); legs(b2, true);
+      var toC1 = go(d1, p1, -45, 70, 2100);
+      var toC2 = go(d2, p2, -216, 66, 2400);
+      await toC1; await toC2;
+      legs(b1, false); legs(b2, false);
+      if (ra) ra.classList.add('lean');
+      if (rb) rb.classList.add('lean');
+      await sleep(300);
+      await hop(d1, p1, 2, 7); await hop(d2, p2, 2, 7);
+      await sleep(900);
+      if (ra) ra.classList.remove('lean');
+      if (rb) rb.classList.remove('lean');
+      legs(b1, true); legs(b2, true);
+      var out1 = go(d1, p1, -780, 0, 3200, 'ease-in');
+      var out2 = go(d2, p2, -860, 0, 3400, 'ease-in');
+      await sleep(2400); fade(d1, false, 500); fade(d2, false, 500);
+      await out1; await out2;
+      await sleep(4000);
+    }
+  }
+  story();
+})();
+</script>
 </body>
 </html>
