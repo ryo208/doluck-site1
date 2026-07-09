@@ -349,11 +349,55 @@
   @keyframes earFlap { from { transform: rotate(-6deg); } to { transform: rotate(16deg); } }
   .dog-tail-lab { transform-box: fill-box; transform-origin: 0% 90%;
     animation: wag .9s ease-in-out infinite alternate; }
-  .dog-runner { animation: dogRun 15s linear infinite; animation-delay: -3s; }
-  .dog-runner.r2 { animation-duration: 18.5s; animation-delay: -9s; }
-  @keyframes dogRun { 0% { transform: translateX(80px); opacity: 0; }
-    5% { opacity: 1; } 88% { transform: translateX(-820px); opacity: 1; }
-    94% { opacity: 0; } 100% { transform: translateX(80px); opacity: 0; } }
+  .dog-runner.r1 { animation: dogPlay1 28s ease-in-out infinite; }
+  .dog-runner.r2 { animation: dogPlay2 28s ease-in-out infinite; }
+  @keyframes dogPlay1 {
+    0% { transform: translate(410px, 0); opacity: 0; }
+    3% { opacity: 1; }
+    12% { transform: translate(160px, 0); }
+    15% { transform: translate(135px, -8px); }
+    18% { transform: translate(185px, 0); }
+    21% { transform: translate(140px, -9px); }
+    24% { transform: translate(170px, 0); }
+    34% { transform: translate(-45px, 70px); }
+    37% { transform: translate(-45px, 58px); }
+    40% { transform: translate(-45px, 70px); }
+    43% { transform: translate(-45px, 57px); }
+    46% { transform: translate(-45px, 70px); }
+    48% { transform: translate(-45px, 70px); }
+    68% { transform: translate(-660px, 0); opacity: 1; }
+    72% { transform: translate(-750px, 0); opacity: 0; }
+    73% { transform: translate(410px, 0); opacity: 0; }
+    100% { transform: translate(410px, 0); opacity: 0; }
+  }
+  @keyframes dogPlay2 {
+    0% { transform: translate(430px, 0); opacity: 0; }
+    6% { transform: translate(430px, 0); opacity: 0; }
+    9% { opacity: 1; }
+    14% { transform: translate(134px, 0); }
+    17% { transform: translate(160px, -10px); }
+    20% { transform: translate(115px, 0); }
+    23% { transform: translate(155px, -8px); }
+    26% { transform: translate(134px, 0); }
+    36% { transform: translate(-216px, 66px); }
+    39% { transform: translate(-216px, 53px); }
+    42% { transform: translate(-216px, 66px); }
+    45% { transform: translate(-216px, 54px); }
+    48% { transform: translate(-216px, 66px); }
+    70% { transform: translate(-766px, 0); opacity: 1; }
+    74% { transform: translate(-820px, 0); opacity: 0; }
+    75% { transform: translate(430px, 0); opacity: 0; }
+    100% { transform: translate(430px, 0); opacity: 0; }
+  }
+  .react-a, .react-b { transform-box: fill-box; transform-origin: 50% 100%; }
+  .react-a { animation: reactA 28s ease-in-out infinite; }
+  .react-b { animation: reactB 28s ease-in-out infinite; }
+  @keyframes reactA { 0%, 33% { transform: rotate(0deg); }
+    37% { transform: rotate(-3deg); } 41% { transform: rotate(-2deg); }
+    45% { transform: rotate(-3deg); } 50%, 100% { transform: rotate(0deg); } }
+  @keyframes reactB { 0%, 34% { transform: rotate(0deg); }
+    38% { transform: rotate(3deg); } 42% { transform: rotate(2deg); }
+    46% { transform: rotate(3deg); } 51%, 100% { transform: rotate(0deg); } }
   .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
     animation: strollBob 1.15s ease-in-out infinite alternate; }
   .stroll-b { animation-delay: .57s; }
@@ -650,7 +694,7 @@
       <ellipse cx="720" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <ellipse cx="756" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <!-- 奥さん（肩までの黒髪・ブルーのトップス） -->
-      <g class="stroll-a">
+      <g class="react-a"><g class="stroll-a">
         <rect x="715" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
         <rect x="722" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
         <path d="M711,381 Q704,390 706,398" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
@@ -658,9 +702,9 @@
         <path d="M712,377 Q713,371 720,371 Q727,371 728,377 L730,401 Q730,405 726,405 L714,405 Q710,405 710,401 Z" fill="#66908C"/>
         <circle cx="720" cy="361" r="8.2" fill="#3A342C"/>
         <path d="M712,359 Q711,372 714,376 Q720,372 726,376 Q729,372 728,359 Z" fill="#3A342C"/>
-      </g>
+      </g></g>
       <!-- ご主人（もじゃっとした髪・デニムベスト） -->
-      <g class="stroll-b">
+      <g class="react-b"><g class="stroll-b">
         <rect x="752" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
         <rect x="760" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
         <path d="M766,381 Q772,390 771,399" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
@@ -669,7 +713,7 @@
         <path d="M757.5,372 L757.5,406" stroke="#5F7690" stroke-width="1.2"/>
         <circle cx="757.5" cy="360" r="8.8" fill="#332E27"/>
         <path d="M749,358 Q747.5,370 752,373 Q757.5,369 763,373 Q767.5,370 766,358 Z" fill="#332E27"/>
-      </g>
+      </g></g>
     </g>
   </svg>
   </div>
