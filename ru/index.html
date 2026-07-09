@@ -355,8 +355,13 @@
   .paws-paused .dog-ear { animation-play-state: paused; }
   .react-a, .react-b { transform-box: fill-box; transform-origin: 50% 100%;
     transition: transform .7s var(--ease); }
-  .react-a.lean { transform: rotate(-3deg); }
-  .react-b.lean { transform: rotate(3deg); }
+  .react-a.lean { transform: rotate(-8deg) translateY(2px); }
+  .react-b.lean { transform: rotate(8deg) translateY(2px); }
+  .arm-a, .arm-b { transform-box: fill-box; transition: transform .5s var(--ease); }
+  .arm-a { transform-origin: 100% 0%; }
+  .arm-b { transform-origin: 0% 0%; }
+  .arm-a.reach { transform: rotate(55deg); }
+  .arm-b.reach { transform: rotate(-55deg); }
   .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
     animation: strollBob 1.15s ease-in-out infinite alternate; }
   .stroll-b { animation-delay: .57s; }
@@ -656,7 +661,7 @@
       <g class="react-a"><g class="stroll-a">
         <rect x="715" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
         <rect x="722" y="402" width="3.6" height="29" rx="1.8" fill="#33302B"/>
-        <path d="M711,381 Q704,390 706,398" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
+        <path class="arm-a" d="M711,381 Q704,390 706,398" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
         <path d="M730,381 Q734,388 733,394" stroke="#C9A183" stroke-width="3.8" fill="none" stroke-linecap="round"/>
         <path d="M712,377 Q713,371 720,371 Q727,371 728,377 L730,401 Q730,405 726,405 L714,405 Q710,405 710,401 Z" fill="#66908C"/>
         <circle cx="720" cy="361" r="8.2" fill="#3A342C"/>
@@ -666,7 +671,7 @@
       <g class="react-b"><g class="stroll-b">
         <rect x="752" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
         <rect x="760" y="404" width="3.8" height="27" rx="1.9" fill="#41505E"/>
-        <path d="M766,381 Q772,390 771,399" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path class="arm-b" d="M766,381 Q772,390 771,399" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
         <path d="M749,381 Q744,389 746,396" stroke="#C9A183" stroke-width="4" fill="none" stroke-linecap="round"/>
         <path d="M746,378 Q746,372 753,371 L762,371 Q769,372 769,378 L770,403 Q770,407 766,407 L750,407 Q746,407 746,403 Z" fill="#7188A0"/>
         <path d="M757.5,372 L757.5,406" stroke="#5F7690" stroke-width="1.2"/>
@@ -1153,6 +1158,7 @@
   var f1 = d1.querySelector('.dog-flip'), f2 = d2.querySelector('.dog-flip');
   var b1 = d1.querySelector('.run-dog'), b2 = d2.querySelector('.run-dog');
   var ra = document.querySelector('.react-a'), rb = document.querySelector('.react-b');
+  var armA = document.querySelector('.arm-a'), armB = document.querySelector('.arm-b');
   var p1 = { x: 410, y: 0 }, p2 = { x: 430, y: 0 };
   function put(el, p) { el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px)'; }
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -1211,13 +1217,31 @@
       var toC2 = go(d2, p2, -216, 66, 2400);
       await toC1; await toC2;
       legs(b1, false); legs(b2, false);
+      pose(f2, 'scaleX(-1)');
+      await sleep(300);
       if (ra) ra.classList.add('lean');
       if (rb) rb.classList.add('lean');
-      await sleep(300);
-      await hop(d1, p1, 2, 7); await hop(d2, p2, 2, 7);
-      await sleep(900);
+      if (armA) armA.classList.add('reach');
+      if (armB) armB.classList.add('reach');
+      await sleep(600);
+      pose(f1, 'rotate(12deg)'); pose(f2, 'scaleX(-1) rotate(12deg)');
+      var up1 = go(d1, p1, p1.x - 7, p1.y - 5, 280, 'ease-out');
+      var up2 = go(d2, p2, p2.x + 7, p2.y - 4, 280, 'ease-out');
+      await up1; await up2;
+      await sleep(1200);
+      pose(f1, ''); pose(f2, 'scaleX(-1)');
+      var dn1 = go(d1, p1, p1.x + 7, p1.y + 5, 260, 'ease-in');
+      var dn2 = go(d2, p2, p2.x - 7, p2.y + 4, 260, 'ease-in');
+      await dn1; await dn2;
+      await sleep(350);
+      await hop(d1, p1, 1, 7); await hop(d2, p2, 1, 7);
+      await sleep(650);
+      if (armA) armA.classList.remove('reach');
+      if (armB) armB.classList.remove('reach');
       if (ra) ra.classList.remove('lean');
       if (rb) rb.classList.remove('lean');
+      pose(f2, '');
+      await sleep(400);
       legs(b1, true); legs(b2, true);
       var out1 = go(d1, p1, -780, 0, 3200, 'ease-in');
       var out2 = go(d2, p2, -860, 0, 3400, 'ease-in');
