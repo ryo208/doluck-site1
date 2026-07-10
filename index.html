@@ -367,6 +367,7 @@
   .arm-b { transform-origin: 0% 0%; }
   .arm-a.reach { transform: rotate(46deg); }
   .arm-b.reach { transform: rotate(-46deg); }
+  .arm-b.throw { transform: rotate(-100deg); transition-duration: .22s; }
   .arm-a.stroking { animation: strokeA 2s ease-in-out infinite; }
   .arm-b.stroking { animation: strokeB 2s ease-in-out infinite; }
   @keyframes strokeA { 0%, 100% { transform: rotate(46deg); } 50% { transform: rotate(64deg); } }
@@ -376,6 +377,7 @@
   @keyframes nuzzleL { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(8deg); } }
   @keyframes nuzzleR { 0%, 100% { transform: scaleX(-1) rotate(3deg); } 50% { transform: scaleX(-1) rotate(8deg); } }
   .ambling .gallop, .ambling .leg-f, .ambling .leg-b, .ambling .dog-ear { animation-duration: 1.15s; }
+  .cantering .gallop, .cantering .leg-f, .cantering .leg-b, .cantering .dog-ear { animation-duration: .8s; }
   .stroll-a, .stroll-b { transform-box: fill-box; transform-origin: 50% 100%;
     animation: strollBob 4.2s ease-in-out infinite alternate; }
   .stroll-b { animation-delay: 2.1s; }
@@ -691,6 +693,7 @@
         <path d="M749,358 Q747.5,370 752,373 Q757.5,369 763,373 Q767.5,370 766,358 Z" fill="#332E27"/>
       </g></g>
     </g></g>
+    <g id="frisbee" opacity="0" aria-hidden="true"><ellipse rx="7" ry="2.4" fill="#C05B52"/><ellipse rx="4" ry="1.2" cy="-0.6" fill="#D97A6C"/></g>
   </svg>
   </div>
   <p class="hero-scroll"><span class="scroll-line" aria-hidden="true"></span>SCROLL</p>
@@ -1198,41 +1201,26 @@
   var ra = document.querySelector('.react-a'), rb = document.querySelector('.react-b');
   var armA = document.querySelector('.arm-a'), armB = document.querySelector('.arm-b');
   var cw = document.getElementById('coupleWalk');
-  function walkTo(x, y, s, ms) {
-    if (!cw) return Promise.resolve();
-    var from = cw.__t || 'translate(0px,0px) scale(1)';
-    var to = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
-    cw.__t = to;
-    return cw.animate([{ transform: from }, { transform: to }],
-      { duration: ms, easing: 'ease-in-out', fill: 'forwards' }).finished.catch(function () {});
-  }
-  async function coupleStroll() {
-    if (!cw) return;
-    await sleep(1200);
-    cw.classList.add('walking');
-    await walkTo(-5, -32, 0.86, 5600);
-    cw.classList.remove('walking');
-    await sleep(3800);
-    cw.classList.add('walking');
-    await walkTo(0, 0, 1, 5600);
-    cw.classList.remove('walking');
-  }
-  /* spots as wrapper offsets — d1 (Hotaru) base x840, d2 (Jun) base x906 */
+  var SEASON = (document.body.className.match(/season-(\w+)/) || [0, ''])[1];
+  var REST = SEASON === 'summer' ? 1600 : 0;
+  /* the couple walks the road one stretch at a time; the dogs come to them */
+  var HOME = { dx: 0, dy: 0, s: 1 }, UP = { dx: -5, dy: -32, s: 0.86 };
+  var loc = HOME;
   var D1_HUSB = { x: -45, y: 70 },  D1_WIFE = { x: -152, y: 68 };
   var D2_WIFE = { x: -216, y: 66 }, D2_HUSB = { x: -110, y: 68 };
   var D1_MEET_L = { x: 5, y: 58 },  D1_MEET_R = { x: 38, y: 48 };
   var D2_MEET_R = { x: -28, y: 58 }, D2_MEET_L = { x: -61, y: 68 };
-  var p1 = { x: D1_HUSB.x, y: D1_HUSB.y }, p2 = { x: D2_WIFE.x, y: D2_WIFE.y };
-  var SEASON = (document.body.className.match(/season-(\w+)/) || [0, ''])[1];
-  var REST = SEASON === 'summer' ? 1600 : 0;
-  function put(el, p) { el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px)'; }
+  var p1 = { x: D1_HUSB.x, y: D1_HUSB.y, s: 1 }, p2 = { x: D2_WIFE.x, y: D2_WIFE.y, s: 1 };
+  function at(base) { return { x: base.x + loc.dx, y: base.y + loc.dy }; }
+  function put(el, p) { el.style.transform = 'translate(' + p.x + 'px,' + p.y + 'px) scale(' + (p.s || 1) + ')'; }
   function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
-  function go(el, p, x, y, ms, ease) {
+  function go(el, p, x, y, ms, ease, s) {
+    var s0 = p.s || 1; if (s === undefined) s = s0;
     var a = el.animate(
-      [{ transform: 'translate(' + p.x + 'px,' + p.y + 'px)' },
-       { transform: 'translate(' + x + 'px,' + y + 'px)' }],
+      [{ transform: 'translate(' + p.x + 'px,' + p.y + 'px) scale(' + s0 + ')' },
+       { transform: 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')' }],
       { duration: ms, easing: ease || 'ease-in-out', fill: 'forwards' });
-    p.x = x; p.y = y;
+    p.x = x; p.y = y; p.s = s;
     return a.finished.catch(function () {});
   }
   function fade(el, into, ms) {
@@ -1242,6 +1230,7 @@
   function mode(el, m) {
     el.classList.toggle('paws-paused', m === 'stop');
     el.classList.toggle('ambling', m === 'amble');
+    el.classList.toggle('cantering', m === 'canter');
   }
   function setPose(fl, flip, extra) {
     fl.style.transform = (flip ? 'scaleX(-1) ' : '') + (extra || '');
@@ -1249,6 +1238,18 @@
   function nuz(fl, flip, on) {
     fl.classList.remove('nuzzling-l', 'nuzzling-r');
     if (on) fl.classList.add(flip ? 'nuzzling-r' : 'nuzzling-l');
+  }
+  function walkTo(st, ms) {
+    loc = st;
+    if (!cw) return Promise.resolve();
+    var from = cw.__t || 'translate(0px,0px) scale(1)';
+    var to = 'translate(' + st.dx + 'px,' + st.dy + 'px) scale(' + st.s + ')';
+    cw.__t = to;
+    cw.classList.add('walking');
+    return cw.animate([{ transform: from }, { transform: to }],
+      { duration: ms, easing: 'ease-in-out', fill: 'forwards' }).finished
+      .catch(function () {})
+      .then(function () { cw.classList.remove('walking'); });
   }
   async function pet(person, arm, dogEl, dogP, dogFlip, faceRight, dx) {
     if (person) person.classList.add('lean');
@@ -1273,39 +1274,84 @@
     fade(d1, true, 1200); fade(d2, true, 1200);
     await sleep(2000);
     for (;;) {
-      await pet(ra, armA, d2, p2, f2, true, 5);        /* wife strokes Jun */
+      await pet(ra, armA, d2, p2, f2, true, 5);
       await sleep(800);
-      await pet(rb, armB, d1, p1, f1, false, -5);      /* husband strokes Hotaru */
+      await pet(rb, armB, d1, p1, f1, false, -5);
       await sleep(800);
-      /* a joyful free run through the fields (two laps in snow season) —
-         meanwhile the couple takes a slow stroll up the road and back */
-      var strollP = coupleStroll();
+      /* fetch! the husband sails a frisbee over the meadow */
+      var fb = document.getElementById('frisbee');
+      if (fb && fb.animate) {
+        if (armB) armB.classList.add('throw');
+        await sleep(350);
+        fb.style.opacity = 1;
+        var fly = fb.animate([
+          { transform: 'translate(' + (766 + loc.dx) + 'px,' + (380 + loc.dy) + 'px)' },
+          { transform: 'translate(980px, 300px)', offset: 0.55 },
+          { transform: 'translate(1134px, 336px)' }
+        ], { duration: 1600, easing: 'ease-out', fill: 'forwards' });
+        setTimeout(function () { if (armB) armB.classList.remove('throw'); }, 450);
+        mode(b1, 'run'); setPose(f1, true, '');
+        var chase = go(d1, p1, 300, 34, 1750, 'ease-in-out', 1);
+        await fly.finished.catch(function () {});
+        await chase;
+        mode(b1, 'stop');
+        await sleep(250);
+        var junShow = (async function () {
+          await go(d2, p2, p2.x + 40, p2.y - 6, 900, undefined, 1);
+          await go(d2, p2, p2.x, p2.y + 6, 500);
+          mode(b2, 'run');
+          var roll = f2.animate(
+            [{ transform: 'scaleX(-1) rotate(0deg)' }, { transform: 'scaleX(-1) rotate(-360deg)' }],
+            { duration: 1400, easing: 'ease-in-out' });
+          await roll.finished.catch(function () {});
+          mode(b2, 'stop');
+          setPose(f2, true, '');
+        })();
+        mode(b1, 'amble'); setPose(f1, false, '');
+        var backHome = at(D1_HUSB);
+        var carry = fb.animate([
+          { transform: 'translate(' + (840 + p1.x - 6) + 'px,' + (296 + p1.y + 6) + 'px)' },
+          { transform: 'translate(' + (840 + backHome.x - 6) + 'px,' + (296 + backHome.y + 6) + 'px)' }
+        ], { duration: 3400, easing: 'ease-in-out', fill: 'forwards' });
+        await go(d1, p1, backHome.x, backHome.y, 3400, undefined, loc.s);
+        await carry.finished.catch(function () {});
+        fb.style.opacity = 0;
+        mode(b1, 'stop');
+        await junShow;
+        await sleep(700);
+      }
+      /* the dogs lope off for an easy run; the couple strolls on
+         to the next stretch of road (they do not turn back — the
+         dogs will come to wherever they are) */
+      var strollP = (async function () {
+        await sleep(1500);
+        await walkTo(loc === HOME ? UP : HOME, 7000);
+      })();
       var laps = SEASON === 'winter' ? 2 : 1;
       for (var L = 0; L < laps; L++) {
-        mode(b1, 'run'); mode(b2, 'run');
+        mode(b1, 'canter'); mode(b2, 'canter');
         setPose(f1, true, ''); setPose(f2, true, '');
-        var u1 = go(d1, p1, 340, 8, 1500);
-        var u2 = go(d2, p2, 324, 12, 1700);
+        var u1 = go(d1, p1, 340, 8, 2600, undefined, 1);
+        var u2 = go(d2, p2, 324, 12, 2900, undefined, 1);
         await u1; await u2;
         setPose(f1, false, ''); setPose(f2, false, '');
-        await sleep(150);
-        var v1 = go(d1, p1, -340, 2, 2300);
-        var v2 = go(d2, p2, -366, 8, 2500);
+        await sleep(250);
+        var v1 = go(d1, p1, -340, 2, 4200, undefined, 1);
+        var v2 = go(d2, p2, -366, 8, 4500, undefined, 1);
         await v1; await v2;
         setPose(f1, true, ''); setPose(f2, true, '');
-        await sleep(150);
+        await sleep(250);
       }
-      var m1 = go(d1, p1, D1_MEET_L.x, D1_MEET_L.y, 1500);
-      var m2 = go(d2, p2, D2_MEET_R.x, D2_MEET_R.y, 1700);
+      var m1 = go(d1, p1, D1_MEET_L.x, D1_MEET_L.y, 2400, undefined, 1);
+      var m2 = go(d2, p2, D2_MEET_R.x, D2_MEET_R.y, 2700, undefined, 1);
       await m1; await m2;
       mode(b1, 'stop'); mode(b2, 'stop');
-      setPose(f2, false, '');                          /* Jun turns to face Hotaru */
+      setPose(f2, false, '');
       await sleep(600);
-      nuz(f1, true, true); nuz(f2, false, true);       /* slow nose-to-nose */
+      nuz(f1, true, true); nuz(f2, false, true);
       await sleep(4200 + REST);
       nuz(f1, true, false); nuz(f2, false, false);
       await sleep(400);
-      /* one slow circle around each other */
       mode(b1, 'amble'); mode(b2, 'amble');
       var c1 = go(d1, p1, D1_MEET_R.x, D1_MEET_R.y, 2600);
       var c2 = go(d2, p2, D2_MEET_L.x, D2_MEET_L.y, 2600);
@@ -1318,24 +1364,23 @@
       nuz(f1, false, false); nuz(f2, true, false);
       await sleep(700);
       await strollP;
-      /* amble home — this time they swap owners */
+      /* the dogs trot to wherever the couple has strolled — swapping owners */
       mode(b1, 'amble'); mode(b2, 'amble');
       setPose(f1, false, ''); setPose(f2, false, '');
-      var h1 = go(d1, p1, D1_WIFE.x, D1_WIFE.y, 3600);
-      var h2 = go(d2, p2, D2_HUSB.x, D2_HUSB.y, 3200);
+      var h1 = go(d1, p1, at(D1_WIFE).x, at(D1_WIFE).y, 3600, undefined, loc.s);
+      var h2 = go(d2, p2, at(D2_HUSB).x, at(D2_HUSB).y, 3200, undefined, loc.s);
       await h1; await h2;
       mode(b1, 'stop'); mode(b2, 'stop');
       setPose(f1, true, ''); setPose(f2, false, '');
       await sleep(1000);
-      await pet(ra, armA, d1, p1, f1, true, 5);        /* wife strokes Hotaru */
+      await pet(ra, armA, d1, p1, f1, true, 5);
       await sleep(800);
-      await pet(rb, armB, d2, p2, f2, false, -5);      /* husband strokes Jun */
+      await pet(rb, armB, d2, p2, f2, false, -5);
       await sleep(800);
-      /* and drift back to their usual sides */
       mode(b1, 'amble'); mode(b2, 'amble');
       setPose(f1, true, ''); setPose(f2, false, '');
-      var r1 = go(d1, p1, D1_HUSB.x, D1_HUSB.y, 3600);
-      var r2 = go(d2, p2, D2_WIFE.x, D2_WIFE.y, 4000);
+      var r1 = go(d1, p1, at(D1_HUSB).x, at(D1_HUSB).y, 3600, undefined, loc.s);
+      var r2 = go(d2, p2, at(D2_WIFE).x, at(D2_WIFE).y, 4000, undefined, loc.s);
       await r1; await r2;
       mode(b1, 'stop'); mode(b2, 'stop');
       setPose(f1, false, ''); setPose(f2, true, '');
