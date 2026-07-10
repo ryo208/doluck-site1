@@ -360,6 +360,8 @@
   .season-spring .c-wife { fill: #C08E97; } .season-spring .c-husb { fill: #7C9A6D; }
   .season-autumn .c-wife { fill: #B57B4E; } .season-autumn .c-husb { fill: #77704C; }
   .season-winter .c-wife { fill: #A05A54; } .season-winter .c-husb { fill: #4C5B73; }
+  #coupleWalk { transform-box: fill-box; transform-origin: 50% 100%; }
+  #coupleWalk.walking .stroll-a, #coupleWalk.walking .stroll-b { animation-duration: 1.05s; }
   .arm-a, .arm-b { transform-box: fill-box; transition: transform .9s var(--ease); }
   .arm-a { transform-origin: 100% 0%; }
   .arm-b { transform-origin: 0% 0%; }
@@ -664,7 +666,7 @@
       </g></g></g>
     </g>
     <!-- 道を散歩するご夫婦と看板犬（ほたる・純） -->
-    <g aria-hidden="true" transform="translate(220.8, 103.6) scale(0.7)">
+    <g id="coupleWalk"><g aria-hidden="true" transform="translate(220.8, 103.6) scale(0.7)">
       <ellipse cx="720" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <ellipse cx="756" cy="435" rx="13" ry="3.2" fill="#54704C" opacity="0.28"/>
       <!-- 奥さん（肩までの黒髪・ブルーのトップス） -->
@@ -688,7 +690,7 @@
         <circle cx="757.5" cy="360" r="8.8" fill="#332E27"/>
         <path d="M749,358 Q747.5,370 752,373 Q757.5,369 763,373 Q767.5,370 766,358 Z" fill="#332E27"/>
       </g></g>
-    </g>
+    </g></g>
   </svg>
   </div>
   <p class="hero-scroll"><span class="scroll-line" aria-hidden="true"></span>SCROLL</p>
@@ -1169,6 +1171,26 @@
   var b1 = d1.querySelector('.run-dog'), b2 = d2.querySelector('.run-dog');
   var ra = document.querySelector('.react-a'), rb = document.querySelector('.react-b');
   var armA = document.querySelector('.arm-a'), armB = document.querySelector('.arm-b');
+  var cw = document.getElementById('coupleWalk');
+  function walkTo(x, y, s, ms) {
+    if (!cw) return Promise.resolve();
+    var from = cw.__t || 'translate(0px,0px) scale(1)';
+    var to = 'translate(' + x + 'px,' + y + 'px) scale(' + s + ')';
+    cw.__t = to;
+    return cw.animate([{ transform: from }, { transform: to }],
+      { duration: ms, easing: 'ease-in-out', fill: 'forwards' }).finished.catch(function () {});
+  }
+  async function coupleStroll() {
+    if (!cw) return;
+    await sleep(1200);
+    cw.classList.add('walking');
+    await walkTo(-5, -32, 0.86, 5600);
+    cw.classList.remove('walking');
+    await sleep(3800);
+    cw.classList.add('walking');
+    await walkTo(0, 0, 1, 5600);
+    cw.classList.remove('walking');
+  }
   /* spots as wrapper offsets — d1 (Hotaru) base x840, d2 (Jun) base x906 */
   var D1_HUSB = { x: -45, y: 70 },  D1_WIFE = { x: -152, y: 68 };
   var D2_WIFE = { x: -216, y: 66 }, D2_HUSB = { x: -110, y: 68 };
@@ -1229,7 +1251,9 @@
       await sleep(800);
       await pet(rb, armB, d1, p1, f1, false, -5);      /* husband strokes Hotaru */
       await sleep(800);
-      /* a joyful free run through the fields (two laps in snow season) */
+      /* a joyful free run through the fields (two laps in snow season) —
+         meanwhile the couple takes a slow stroll up the road and back */
+      var strollP = coupleStroll();
       var laps = SEASON === 'winter' ? 2 : 1;
       for (var L = 0; L < laps; L++) {
         mode(b1, 'run'); mode(b2, 'run');
@@ -1267,6 +1291,7 @@
       await sleep(3400);
       nuz(f1, false, false); nuz(f2, true, false);
       await sleep(700);
+      await strollP;
       /* amble home — this time they swap owners */
       mode(b1, 'amble'); mode(b2, 'amble');
       setPose(f1, false, ''); setPose(f2, false, '');
