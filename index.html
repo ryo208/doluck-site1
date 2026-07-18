@@ -326,6 +326,11 @@
   @keyframes smokeUp { 0% { transform: translateY(3px); opacity: 0; }
     35% { opacity: 0.9; } 100% { transform: translateY(-4px); opacity: 0; } }
 
+  .cafe-photo { width: 100%; max-width: 480px; height: auto; display: block;
+    margin: 0 auto; border-radius: var(--radius);
+    box-shadow: 0 26px 60px rgba(38,35,29,0.2);
+    transform: rotate(-1.2deg); }
+
   /* ---- voices ---- */
   .voices { padding: 150px 6%; text-align: center; background: var(--paper); }
   .voices .body { margin: 34px auto 0; max-width: 520px; font-size: 15.5px;
@@ -682,15 +687,7 @@
       <a class="link-quiet reveal" href="cafe.html" data-i18n="link.cafe.more">喫茶についてくわしく</a>
     </div>
     <div class="split-art reveal">
-      <svg class="coffee-svg" viewBox="0 0 240 240" aria-hidden="true">
-        <circle cx="120" cy="126" r="88" fill="none" stroke="rgba(169,138,80,0.35)" stroke-width="1"/>
-        <path class="steam s1" d="M102,102 Q96,86 104,74 Q112,64 106,50" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path class="steam s2" d="M121,104 Q115,88 123,76 Q131,66 125,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path class="steam s3" d="M140,102 Q134,86 142,74 Q150,64 144,50" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <path d="M76,122 L83,170 Q85,179 95,179 L145,179 Q155,179 157,170 L164,122 Z" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linejoin="round"/>
-        <path d="M164,130 Q188,131 184,150 Q181,164 159,161" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linecap="round"/>
-        <ellipse cx="120" cy="192" rx="62" ry="7" fill="none" stroke="rgba(38,35,29,0.4)" stroke-width="1.6"/>
-      </svg>
+      <img class="cafe-photo" src="images/cafe-interior.jpg" alt="Do Luck 道楽 喫茶店内 — バイクと薪ストーブのある空間" loading="lazy" width="1600" height="1200">
     </div>
   </div>
 </section>
