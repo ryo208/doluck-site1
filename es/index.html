@@ -254,6 +254,10 @@
   .bike-svg { width: min(440px, 92%); height: auto; display: block; margin: 0 auto; }
   .rider-bike-cap { margin-top: 4px; font-size: 14px; color: #D8CDB4; letter-spacing: 0.08em; }
 
+  /* ---- a small visitor from the north country ---- */
+  #foxCall { opacity: 0; transition: opacity 0.7s ease; font-family: "Klee One", var(--serif); }
+  #foxCall.on { opacity: 1; }
+
   /* ---- seasonal fields (hero) ---- */
   .fld-far { fill: #B6C4A4; } .fld-wheat { fill: #D9B455; } .fld-wheat2 { fill: #CDA84A; }
   .fld-potato { fill: #83A568; } .fld-potato2 { fill: #79A061; }
@@ -822,6 +826,27 @@
       <circle class="tr-dark" cx="-15" cy="2" r="4.5"/>
       <circle class="tr-glass" cx="-15" cy="2" r="1.7"/>
     </g>
+    <g transform="translate(600,172)" fill="#4C6148" stroke="#4C6148" opacity="0.9">
+      <rect x="-6" y="-7" width="13" height="7" stroke="none"/>
+      <path d="M-8,-7 L0.5,-13 L9,-7 Z" stroke="none"/>
+      <path d="M13,0 L13,-20" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M13,-20 L9,-24 M13,-20 L17,-24 M13,-20 L9,-16 M13,-20 L17,-16" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <circle cx="13" cy="-20" r="1.2" stroke="none"/>
+    </g>
+    <g id="foxEgg" transform="translate(852,452)">
+      <path d="M13,-3 Q25,-5 26,-16 Q20,-9 11,-8 Z" fill="#C97A42"/>
+      <circle cx="24.5" cy="-14.5" r="2.6" fill="#F4EFE2"/>
+      <path d="M-1,0 Q-3,-13 5,-19 L9,-19 Q15,-11 13,0 Z" fill="#C97A42"/>
+      <path d="M0,0 Q0,-10 4,-14 L6,-14 Q8,-8 7,0 Z" fill="#EFE3CE" opacity="0.9"/>
+      <circle cx="2.5" cy="-22" r="5.4" fill="#C97A42"/>
+      <path d="M-3.5,-21 L-6.5,-19.5 Q-3,-18.5 -1,-19 Z" fill="#EFE3CE"/>
+      <path d="M-1,-26 L-3,-33 L3,-28.5 Z" fill="#C97A42"/>
+      <path d="M6,-27 L9,-33 L10.5,-26.5 Z" fill="#C97A42"/>
+      <path d="M-1.6,-30.5 L-3,-33 L0.4,-30 Z" fill="#26231D" opacity="0.65"/>
+      <circle cx="0" cy="-22.5" r="0.8" fill="#26231D"/>
+      <path d="M2,0 L2,-8 M5,0 L5,-8" stroke="#8F5A2E" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+    </g>
+    <text id="foxCall" x="848" y="410" font-size="15" fill="#6B665A" text-anchor="middle">ルールルルル…</text>
     <path d="M718,168 L722,168 L810,460 L630,460 Z" fill="#EDE6D2"/>
     <path d="M719.4,180 L720.6,180 L724,460 L716,460 Z" fill="#C8BFA6" opacity="0.7"/>
   </svg>
@@ -1318,6 +1343,18 @@
       }
     })
     .catch(function () {});
+})();
+</script>
+<script>
+(function () {
+  var fx = document.getElementById('foxEgg'), fc = document.getElementById('foxCall');
+  if (!fx || !fc) return;
+  var t;
+  fx.addEventListener('click', function () {
+    fc.classList.add('on');
+    clearTimeout(t);
+    t = setTimeout(function () { fc.classList.remove('on'); }, 2600);
+  });
 })();
 </script>
 </body>
