@@ -629,6 +629,8 @@
     padding: 70px 6% 54px; font-size: 12.5px; overflow: hidden; }
   .footer-inner { max-width: 1020px; margin: 0 auto; display: flex;
     flex-direction: column; gap: 26px; }
+  .footer-since { display: block; margin-top: 5px; font-size: 10.5px;
+    letter-spacing: 0.3em; color: rgba(239,235,221,0.45); }
   .footer-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.16em;
     color: #F4F1E6; }
   .footer-links { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; }
@@ -834,23 +836,6 @@
   <p class="body reveal" data-i18n="stmt.body">“道乐”（Do Luck）意为：乐在旅途，乐在爱好，乐在人生。</p>
 </section>
 
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat reveal">
-      <p class="stat-num"><span data-count="2008">2008</span></p>
-      <p class="stat-label">Since</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num">¥<span data-count="4000" data-comma="1">4,000</span><small data-i18n="price.small">起／仅住宿</small></p>
-      <p class="stat-label" data-i18n="lodge.price.eyebrow">价格</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num stat-season" data-i18n="val.season">4月1日～10月31日</p>
-      <p class="stat-label" data-i18n="lbl.season">营业期间</p>
-    </div>
-  </div>
-</section>
-
 <section class="riders">
   <p class="eyebrow reveal">For Riders</p>
   <h2 class="headline reveal" data-i18n="rider.h">致骑士们</h2>
@@ -1047,6 +1032,7 @@
     <h2 class="headline reveal" data-i18n="idx.lodge.h">旅人相聚，<br>畅谈之夜。</h2>
     <p class="subhead reveal" data-i18n="idx.lodge.p">男女分室的通铺，质朴的小宿。</p>
     <p class="price reveal">¥4,000<small data-i18n="price.small">起／仅住宿</small></p>
+    <p class="note reveal"><span data-i18n="lbl.season">营业期间</span> <span data-i18n="val.season">4月1日～10月31日</span></p>
     <p class="note reveal" data-i18n="note.toho">“Toho Network”旅人宿联盟成员</p>
     <a class="link-quiet reveal" href="lodge.html" data-i18n="link.lodge.more">旅舍详情</a>
   </div>
@@ -1124,7 +1110,7 @@
 <footer>
   <p class="footer-vertical" aria-hidden="true">十勝・池田町</p>
   <div class="footer-inner">
-    <p class="footer-brand">Do Luck 道楽</p>
+    <p class="footer-brand">Do Luck 道楽<span class="footer-since">since 2008</span></p>
     <ul class="footer-links">
       <li><a href="cafe.html" data-i18n="nav.cafe">咖啡馆</a></li>
       <li><a href="lodge.html" data-i18n="nav.lodge">旅舍</a></li>

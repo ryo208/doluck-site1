@@ -629,6 +629,8 @@
     padding: 70px 6% 54px; font-size: 12.5px; overflow: hidden; }
   .footer-inner { max-width: 1020px; margin: 0 auto; display: flex;
     flex-direction: column; gap: 26px; }
+  .footer-since { display: block; margin-top: 5px; font-size: 10.5px;
+    letter-spacing: 0.3em; color: rgba(239,235,221,0.45); }
   .footer-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.16em;
     color: #F4F1E6; }
   .footer-links { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; }
@@ -834,23 +836,6 @@
   <p class="body reveal" data-i18n="stmt.body">'도라쿠(道楽·Do Luck)'란 길을 즐기고, 취미를 즐기고, 인생을 즐기는 마음.</p>
 </section>
 
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat reveal">
-      <p class="stat-num"><span data-count="2008">2008</span></p>
-      <p class="stat-label">Since</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num">¥<span data-count="4000" data-comma="1">4,000</span><small data-i18n="price.small">~ / 숙박만</small></p>
-      <p class="stat-label" data-i18n="lodge.price.eyebrow">요금</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num stat-season" data-i18n="val.season">4월 1일 ~ 10월 31일</p>
-      <p class="stat-label" data-i18n="lbl.season">영업 기간</p>
-    </div>
-  </div>
-</section>
-
 <section class="riders">
   <p class="eyebrow reveal">For Riders</p>
   <h2 class="headline reveal" data-i18n="rider.h">라이더 여러분께</h2>
@@ -1047,6 +1032,7 @@
     <h2 class="headline reveal" data-i18n="idx.lodge.h">여행자들이 모여<br>이야기 나누는 밤.</h2>
     <p class="subhead reveal" data-i18n="idx.lodge.p">남녀 별실 도미토리, 소박한 숙소.</p>
     <p class="price reveal">¥4,000<small data-i18n="price.small">~ / 숙박만</small></p>
+    <p class="note reveal"><span data-i18n="lbl.season">영업 기간</span> <span data-i18n="val.season">4월 1일 ~ 10월 31일</span></p>
     <p class="note reveal" data-i18n="note.toho">'토호 네트워크' 여행자 숙소 모임 가맹</p>
     <a class="link-quiet reveal" href="lodge.html" data-i18n="link.lodge.more">숙소 자세히 보기</a>
   </div>
@@ -1124,7 +1110,7 @@
 <footer>
   <p class="footer-vertical" aria-hidden="true">十勝・池田町</p>
   <div class="footer-inner">
-    <p class="footer-brand">Do Luck 道楽</p>
+    <p class="footer-brand">Do Luck 道楽<span class="footer-since">since 2008</span></p>
     <ul class="footer-links">
       <li><a href="cafe.html" data-i18n="nav.cafe">카페</a></li>
       <li><a href="lodge.html" data-i18n="nav.lodge">여행자 숙소</a></li>

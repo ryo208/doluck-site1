@@ -629,6 +629,8 @@
     padding: 70px 6% 54px; font-size: 12.5px; overflow: hidden; }
   .footer-inner { max-width: 1020px; margin: 0 auto; display: flex;
     flex-direction: column; gap: 26px; }
+  .footer-since { display: block; margin-top: 5px; font-size: 10.5px;
+    letter-spacing: 0.3em; color: rgba(239,235,221,0.45); }
   .footer-brand { font-family: var(--serif); font-size: 20px; letter-spacing: 0.16em;
     color: #F4F1E6; }
   .footer-links { display: flex; gap: 24px; flex-wrap: wrap; list-style: none; }
@@ -834,23 +836,6 @@
   <p class="body reveal" data-i18n="stmt.body">„Do Luck“ (dōraku) bedeutet: Freude an der Straße, an den eigenen Leidenschaften und am Leben.</p>
 </section>
 
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat reveal">
-      <p class="stat-num"><span data-count="2008">2008</span></p>
-      <p class="stat-label">Since</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num">¥<span data-count="4000" data-comma="1">4,000</span><small data-i18n="price.small">ab / nur Übernachtung</small></p>
-      <p class="stat-label" data-i18n="lodge.price.eyebrow">Preise</p>
-    </div>
-    <div class="stat reveal">
-      <p class="stat-num stat-season" data-i18n="val.season">1. April – 31. Oktober</p>
-      <p class="stat-label" data-i18n="lbl.season">Saison</p>
-    </div>
-  </div>
-</section>
-
 <section class="riders">
   <p class="eyebrow reveal">For Riders</p>
   <h2 class="headline reveal" data-i18n="rider.h">Für Motorradfahrer</h2>
@@ -1047,6 +1032,7 @@
     <h2 class="headline reveal" data-i18n="idx.lodge.h">Abende voller Gespräche<br>unter Reisenden.</h2>
     <p class="subhead reveal" data-i18n="idx.lodge.p">Einfache Schlafsäle, nach Geschlechtern getrennt.</p>
     <p class="price reveal">¥4,000<small data-i18n="price.small">ab / nur Übernachtung</small></p>
+    <p class="note reveal"><span data-i18n="lbl.season">Saison</span> <span data-i18n="val.season">1. April – 31. Oktober</span></p>
     <p class="note reveal" data-i18n="note.toho">Mitglied im Toho-Netzwerk der Reiseherbergen</p>
     <a class="link-quiet reveal" href="lodge.html" data-i18n="link.lodge.more">Mehr über die Herberge</a>
   </div>
@@ -1124,7 +1110,7 @@
 <footer>
   <p class="footer-vertical" aria-hidden="true">十勝・池田町</p>
   <div class="footer-inner">
-    <p class="footer-brand">Do Luck 道楽</p>
+    <p class="footer-brand">Do Luck 道楽<span class="footer-since">since 2008</span></p>
     <ul class="footer-links">
       <li><a href="cafe.html" data-i18n="nav.cafe">Café</a></li>
       <li><a href="lodge.html" data-i18n="nav.lodge">Herberge</a></li>
