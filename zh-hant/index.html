@@ -256,6 +256,11 @@
   .rider-bike-cap { margin-top: 4px; font-size: 14px; color: #D8CDB4; letter-spacing: 0.08em; }
 
   /* ---- a small visitor from the north country ---- */
+  #cupCall, #moonCall { opacity: 0; transition: opacity 0.7s ease;
+    font-family: "Klee One", var(--serif); pointer-events: none; }
+  #cupCall.on, #moonCall.on { opacity: 1; }
+  #moonCall { position: absolute; top: calc(12% + 66px); right: 5%; z-index: 1;
+    font-size: 13.5px; letter-spacing: 0.08em; color: rgba(239,235,221,0.9); }
   #foxCall { opacity: 0; transition: opacity 0.7s ease; font-family: "Klee One", var(--serif); }
   #foxCall.on { opacity: 1; }
 
@@ -834,6 +839,13 @@
       <path d="M13,-20 L9,-24 M13,-20 L17,-24 M13,-20 L9,-16 M13,-20 L17,-16" stroke-width="1.2" fill="none" stroke-linecap="round"/>
       <circle cx="13" cy="-20" r="1.2" stroke="none"/>
     </g>
+    <g transform="translate(1188,170)" fill="#4C6148" opacity="0.9">
+      <path d="M-8,0 L-8,-5 Q-8,-9 -3,-9.5 L3,-9.5 Q8,-9 8,-5 L8,0 Z"/>
+      <rect x="2.2" y="-14.5" width="2.8" height="6"/>
+      <circle cx="-3" cy="-4" r="0.7" fill="#F3EFE2" opacity="0.5"/>
+      <circle cx="1" cy="-6" r="0.7" fill="#F3EFE2" opacity="0.5"/>
+      <circle cx="4" cy="-3.5" r="0.7" fill="#F3EFE2" opacity="0.5"/>
+    </g>
     <g id="foxEgg" transform="translate(852,452)">
       <path d="M13,-3 Q25,-5 26,-16 Q20,-9 11,-8 Z" fill="#C97A42"/>
       <circle cx="24.5" cy="-14.5" r="2.6" fill="#F4EFE2"/>
@@ -856,12 +868,10 @@
 </header>
 
 <section class="statement">
-  <p class="eyebrow reveal" data-i18n="sec.kissa_yado">咖啡館與旅人宿</p>
   <p class="body reveal" data-i18n="stmt.body">「道樂」（Do Luck）意為：樂在旅途，樂在愛好，樂在人生。</p>
 </section>
 
 <section class="riders">
-  <p class="eyebrow reveal">For Riders</p>
   <h2 class="headline reveal" data-i18n="rider.h">致騎士們</h2>
   <p class="body reveal" data-i18n="rider.p">一路走走停停，隨心而行。<br>在池田的夜晚，就到道楽。</p>
   <div class="rider-bike reveal">
@@ -1033,6 +1043,7 @@
         <path d="M113,104 Q124,105 122,113 Q120,119 111,117" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linecap="round"/>
         <path class="steam s1" d="M92,94 Q87,82 93,72 Q99,63 94,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path class="steam s2" d="M104,94 Q99,82 105,72 Q111,63 106,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <text id="cupCall" x="126" y="20" text-anchor="middle" font-size="12.5" fill="#6B665A"><tspan x="126" dy="0">子供がまだ</tspan><tspan x="126" dy="17">食ってる途中でしょうが。</tspan></text>
       </svg>
     </div>
   </div>
@@ -1041,6 +1052,7 @@
 <section class="lodge-band">
   <div class="stars" aria-hidden="true"></div>
   <span class="moon" aria-hidden="true"></span>
+  <span id="moonCall" aria-hidden="true">今夜も星がきれいな、わけで。</span>
   <span class="shooting" aria-hidden="true"></span>
   <span class="fireflies" aria-hidden="true">
     <i style="left:12%;top:72%;--fd:8s;--fg:2.1s;--fx:30px;--fy:-24px"></i>
@@ -1063,7 +1075,6 @@
 </section>
 
 <section class="gallery">
-  <p class="eyebrow reveal">Snapshots</p>
   <h2 class="headline reveal" data-i18n="gal.h">用照片，看見道楽。</h2>
   <figure class="g-featured g-item reveal">
     <img src="../images/cafe-interior.jpg" alt="Do Luck 店内 / common room" loading="lazy">
@@ -1080,7 +1091,6 @@
 </section>
 
 <section class="journey">
-  <p class="eyebrow reveal" data-i18n="mig.eyebrow">歷程</p>
   <h2 class="headline reveal" data-i18n="mig.h">一路走來</h2>
   <div class="reveal" id="journeyArt">
     <svg class="journey-svg" viewBox="0 0 900 300" aria-hidden="true">
@@ -1354,6 +1364,19 @@
     clearTimeout(t);
     t = setTimeout(function () { fc.classList.remove('on'); }, 2600);
   });
+})();
+(function () {
+  function egg(el, txt) {
+    if (!el || !txt) return;
+    var t;
+    el.addEventListener('click', function () {
+      txt.classList.add('on');
+      clearTimeout(t);
+      t = setTimeout(function () { txt.classList.remove('on'); }, 2800);
+    });
+  }
+  egg(document.querySelector('.coffee-svg'), document.getElementById('cupCall'));
+  egg(document.querySelector('.lodge-band .moon'), document.getElementById('moonCall'));
 })();
 </script>
 </body>
