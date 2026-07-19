@@ -331,6 +331,23 @@
     box-shadow: 0 26px 60px rgba(38,35,29,0.2);
     transform: rotate(-1.2deg); }
 
+  /* ---- photo gallery ---- */
+  .gallery { padding: 130px 6%; text-align: center; background: var(--paper-deep); }
+  .gallery-grid { max-width: 1080px; margin: 64px auto 0; display: grid;
+    grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 800px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+  .g-item { margin: 0; background: #fff; padding: 10px 10px 14px; border-radius: 6px;
+    box-shadow: 0 14px 34px rgba(38,35,29,0.14); transform: rotate(-1.4deg);
+    transition: transform .45s var(--ease), box-shadow .45s var(--ease),
+      opacity 1.2s var(--ease), filter 1.2s var(--ease); }
+  .g-item:nth-child(even) { transform: rotate(1.3deg); }
+  .g-item:hover { transform: rotate(0deg) translateY(-6px) scale(1.02);
+    box-shadow: 0 26px 54px rgba(38,35,29,0.2); transition-delay: 0s; }
+  .g-item img { width: 100%; height: 200px; object-fit: cover; display: block; border-radius: 3px; }
+  @media (max-width: 800px) { .g-item img { height: 132px; } }
+  .gallery-grid .g-item:nth-child(3n+2) { transition-delay: .1s; }
+  .gallery-grid .g-item:nth-child(3n+3) { transition-delay: .2s; }
+
   /* ---- voices ---- */
   .voices { padding: 150px 6%; text-align: center; background: var(--paper); }
   .voices .body { margin: 34px auto 0; max-width: 520px; font-size: 15.5px;
@@ -712,6 +729,19 @@
     <p class="price reveal">¥4,000<small data-i18n="price.small">ab / nur Übernachtung</small></p>
     <p class="note reveal" data-i18n="note.toho">Mitglied im Toho-Netzwerk der Reiseherbergen</p>
     <a class="link-quiet reveal" href="lodge.html" data-i18n="link.lodge.more">Mehr über die Herberge</a>
+  </div>
+</section>
+
+<section class="gallery">
+  <p class="eyebrow reveal">Snapshots</p>
+  <h2 class="headline reveal" data-i18n="gal.h">Do Luck in Bildern.</h2>
+  <div class="gallery-grid">
+    <figure class="g-item reveal"><img src="../images/photo-exterior.jpg" alt="Do Luck 道楽 外観 / exterior" loading="lazy"></figure>
+    <figure class="g-item reveal"><img src="../images/photo-base.jpg" alt="DoLuck BASE" loading="lazy"></figure>
+    <figure class="g-item reveal"><img src="../images/photo-room1.jpg" alt="客室 / guest room" loading="lazy"></figure>
+    <figure class="g-item reveal"><img src="../images/photo-room2.jpg" alt="客室 / guest room" loading="lazy"></figure>
+    <figure class="g-item reveal"><img src="../images/photo-post.jpg" alt="Fukushima POST" loading="lazy"></figure>
+    <figure class="g-item reveal"><img src="../images/photo-road.jpg" alt="宿の前の道 / the road out front" loading="lazy"></figure>
   </div>
 </section>
 
