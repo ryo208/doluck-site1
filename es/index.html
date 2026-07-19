@@ -249,6 +249,50 @@
   .rider-pass-links a:hover { background: #43614B; color: #FAF8F2;
     border-color: #43614B; }
 
+  /* ---- owners' Kawasaki Z ---- */
+  .rider-bike { max-width: 500px; margin: 46px auto 6px; text-align: center; }
+  .bike-svg { width: min(440px, 92%); height: auto; display: block; margin: 0 auto; }
+  .rider-bike-cap { margin-top: 4px; font-size: 14px; color: #D8CDB4; letter-spacing: 0.08em; }
+
+  /* ---- seasonal fields (hero) ---- */
+  .fld-far { fill: #B6C4A4; } .fld-wheat { fill: #D9B455; } .fld-wheat2 { fill: #CDA84A; }
+  .fld-potato { fill: #83A568; } .fld-potato2 { fill: #79A061; }
+  .fld-hay { fill: #B9C48B; } .fld-pasture { fill: #74905F; }
+  .furrow { stroke: rgba(44,42,37,0.10); stroke-width: 1.5; fill: none; }
+  .furrow.gold { stroke: rgba(120,90,20,0.16); }
+  .bloom { fill: #F7F4E8; } .windbreak { fill: #4C6148; }
+  .bale-body { fill: #C9A85C; stroke: #8F6F33; stroke-width: 1; }
+  .bale-line { stroke: #8F6F33; stroke-width: 1.3; fill: none; }
+  .tr-body { fill: #B5533C; } .tr-dark { fill: #26231D; } .tr-glass { fill: #D8E4EA; }
+  .sv-spring .fld-wheat { fill: #A9BE7E; } .sv-spring .fld-wheat2 { fill: #9DB474; }
+  .sv-spring .fld-potato { fill: #A68B63; } .sv-spring .fld-potato2 { fill: #9C8158; }
+  .sv-spring .fld-hay { fill: #C2CFA0; } .sv-spring .fld-pasture { fill: #7FA06B; }
+  .sv-spring .bloom, .sv-spring .bales { display: none; }
+  .sv-autumn .fld-wheat { fill: #D9C27E; } .sv-autumn .fld-wheat2 { fill: #CBB26A; }
+  .sv-autumn .fld-potato { fill: #C09A5A; } .sv-autumn .fld-potato2 { fill: #B4904F; }
+  .sv-autumn .fld-hay { fill: #C4B981; } .sv-autumn .fld-pasture { fill: #7E8F5C; }
+  .sv-autumn .fld-far { fill: #B5BC96; } .sv-autumn .bloom { display: none; }
+  .sv-winter .fld-far { fill: #DEE5E8; }
+  .sv-winter .fld-wheat, .sv-winter .fld-potato2, .sv-winter .fld-hay { fill: #EFF3F5; }
+  .sv-winter .fld-wheat2, .sv-winter .fld-potato, .sv-winter .fld-pasture { fill: #E5EBEF; }
+  .sv-winter .furrow, .sv-winter .furrow.gold { stroke: rgba(110,125,140,0.14); }
+  .sv-winter .bloom, .sv-winter .bales, .sv-winter .tractor { display: none; }
+  .sv-winter .windbreak { fill: #46503F; }
+
+  /* ---- pass weather chips ---- */
+  .pass-chips { margin-top: 12px; display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; }
+  .pass-chip { display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 11px 6px 9px; border: 1px solid rgba(169,138,80,0.4); border-radius: 12px;
+    transition: transform 0.25s, box-shadow 0.25s; }
+  .pass-chip:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(38,35,29,0.12); }
+  .p-name { font-family: var(--serif); font-size: 14px; color: #2C2A25; }
+  .p-now { min-height: 21px; font-size: 15px; color: #2C2A25; }
+  .rider-pass-links.small { margin-top: 12px; gap: 6px 18px; }
+  .rider-pass-links.small a { border: none; padding: 0; font-size: 12px; color: #6B665A;
+    text-decoration: underline; text-underline-offset: 3px; }
+  .rider-pass-links.small a:hover { background: none; color: #43614B; }
+
   /* ---- lodge (night) ---- */
   .lodge-band { position: relative; overflow: hidden; text-align: center; padding: 190px 6%;
     background: radial-gradient(130% 90% at 50% 110%, #23301F 0%, var(--night-2) 45%, var(--night) 100%);
@@ -705,17 +749,79 @@
   </div>
   <div class="hero-scene" id="heroScene">
   <svg class="hero-horizon" viewBox="0 0 1440 460" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-    <path d="M0,180 C240,150 420,175 720,165 C1020,155 1240,175 1440,160 L1440,460 L0,460 Z" fill="#B9C7A8"/>
-    <path d="M0,235 C300,215 560,240 860,228 C1120,218 1300,235 1440,225 L1440,460 L0,460 Z" fill="#9DB08B"/>
-    <path d="M0,300 C260,285 620,305 940,295 C1180,288 1340,300 1440,294 L1440,460 L0,460 Z" fill="#7E9770"/>
-    <path d="M0,370 L1440,360 L1440,460 L0,460 Z" fill="#6F8A62"/>
+    <path class="fld-far" d="M0,180 C240,150 420,175 720,165 C1020,155 1240,175 1440,160 L1440,460 L0,460 Z"/>
+    <g class="windbreak" opacity="0.85">
+      <path d="M0,181 C240,151 420,176 720,166 C1020,156 1240,176 1440,161 L1440,168 C1240,182 1020,163 720,173 C420,183 240,158 0,188 Z" opacity="0.5"/>
+      <ellipse cx="90" cy="172" rx="5" ry="9"/><ellipse cx="130" cy="168" rx="5" ry="10"/><ellipse cx="170" cy="165" rx="4.5" ry="9"/>
+      <ellipse cx="330" cy="158" rx="5" ry="10"/><ellipse cx="370" cy="157" rx="4.5" ry="9"/><ellipse cx="410" cy="158" rx="5" ry="10"/>
+      <ellipse cx="640" cy="158" rx="4" ry="8"/><ellipse cx="662" cy="157" rx="3.6" ry="7.5"/><ellipse cx="684" cy="157" rx="4" ry="8"/>
+      <ellipse cx="758" cy="157" rx="4" ry="8"/><ellipse cx="780" cy="157" rx="3.6" ry="7.5"/><ellipse cx="802" cy="158" rx="4" ry="8"/>
+      <ellipse cx="1030" cy="153" rx="5" ry="10"/><ellipse cx="1070" cy="154" rx="4.5" ry="9"/><ellipse cx="1110" cy="156" rx="5" ry="10"/>
+      <ellipse cx="1290" cy="164" rx="5" ry="9"/><ellipse cx="1330" cy="162" rx="4.5" ry="10"/><ellipse cx="1370" cy="161" rx="5" ry="9"/>
+    </g>
+    <path class="fld-wheat"  d="M718,169 L630,460 L330,460 Z"/>
+    <path class="fld-potato" d="M718,170 L330,460 L40,460 Z"/>
+    <path class="fld-pasture" d="M718,171 L40,460 L0,460 L0,196 Z"/>
+    <path class="fld-potato2" d="M722,169 L810,460 L1120,460 Z"/>
+    <path class="fld-hay"    d="M722,170 L1120,460 L1400,460 Z"/>
+    <path class="fld-wheat2" d="M722,171 L1400,460 L1440,460 L1440,192 Z"/>
+    <g class="furrow gold">
+      <path d="M718,176 L560,460"/><path d="M718,176 L475,460"/><path d="M718,176 L395,460"/>
+    </g>
+    <g class="furrow">
+      <path d="M718,177 L255,460"/><path d="M718,177 L175,460"/><path d="M718,177 L95,460"/>
+    </g>
+    <g class="furrow">
+      <path d="M722,176 L880,460"/><path d="M722,176 L960,460"/><path d="M722,176 L1045,460"/>
+    </g>
+    <g class="furrow gold">
+      <path d="M722,177 L1190,460"/><path d="M722,177 L1265,460"/><path d="M722,177 L1340,460"/>
+    </g>
+    <g class="bloom">
+      <circle cx="579" cy="257" r="1.1"/><circle cx="510" cy="301" r="1.5"/><circle cx="440" cy="344" r="1.9"/>
+      <circle cx="371" cy="388" r="2.3"/><circle cx="301" cy="431" r="2.6"/>
+      <circle cx="544" cy="263" r="1.2"/><circle cx="447" cy="315" r="1.6"/><circle cx="349" cy="367" r="2"/>
+      <circle cx="256" cy="417" r="2.5"/>
+      <circle cx="500" cy="272" r="1.3"/><circle cx="375" cy="330" r="1.7"/><circle cx="251" cy="388" r="2.2"/>
+      <circle cx="145" cy="437" r="2.6"/>
+    </g>
+    <g class="bloom">
+      <circle cx="774" cy="257" r="1.1"/><circle cx="819" cy="344" r="1.9"/><circle cx="865" cy="431" r="2.6"/>
+      <circle cx="800" cy="263" r="1.2"/><circle cx="868" cy="315" r="1.6"/><circle cx="937" cy="367" r="2.1"/>
+      <circle cx="1002" cy="417" r="2.5"/>
+      <circle cx="823" cy="272" r="1.3"/><circle cx="902" cy="330" r="1.8"/><circle cx="985" cy="388" r="2.2"/>
+      <circle cx="1075" cy="437" r="2.6"/>
+    </g>
+    <g class="bales">
+      <g transform="translate(1020,330) scale(0.8)">
+        <ellipse class="bale-body" cx="0" cy="0" rx="13" ry="10.5"/>
+        <ellipse class="bale-line" cx="-4" cy="0" rx="6.5" ry="9"/>
+      </g>
+      <g transform="translate(1150,400) scale(1.2)">
+        <ellipse class="bale-body" cx="0" cy="0" rx="13" ry="10.5"/>
+        <ellipse class="bale-line" cx="-4" cy="0" rx="6.5" ry="9"/>
+      </g>
+      <g transform="translate(1265,438) scale(1.4)">
+        <ellipse class="bale-body" cx="0" cy="0" rx="13" ry="10.5"/>
+        <ellipse class="bale-line" cx="-4" cy="0" rx="6.5" ry="9"/>
+      </g>
+      <g transform="translate(150,395) scale(1.15)">
+        <ellipse class="bale-body" cx="0" cy="0" rx="13" ry="10.5"/>
+        <ellipse class="bale-line" cx="-4" cy="0" rx="6.5" ry="9"/>
+      </g>
+    </g>
+    <g class="tractor" transform="translate(952,318)">
+      <rect class="tr-body" x="-20" y="-13" width="26" height="10" rx="2"/>
+      <rect class="tr-body" x="-2" y="-22" width="14" height="19" rx="2"/>
+      <rect class="tr-glass" x="1" y="-19" width="8" height="8" rx="1.5"/>
+      <rect class="tr-dark" x="-19" y="-17" width="2.2" height="5"/>
+      <circle class="tr-dark" cx="7" cy="0" r="7.5"/>
+      <circle class="tr-glass" cx="7" cy="0" r="3"/>
+      <circle class="tr-dark" cx="-15" cy="2" r="4.5"/>
+      <circle class="tr-glass" cx="-15" cy="2" r="1.7"/>
+    </g>
     <path d="M718,168 L722,168 L810,460 L630,460 Z" fill="#EDE6D2"/>
     <path d="M719.4,180 L720.6,180 L724,460 L716,460 Z" fill="#C8BFA6" opacity="0.7"/>
-    <g class="trees" fill="#4C6148">
-      <ellipse cx="905" cy="212" rx="7" ry="26"/><rect x="903.6" y="230" width="2.8" height="14"/>
-      <ellipse cx="948" cy="220" rx="6" ry="22"/><rect x="946.8" y="236" width="2.4" height="12"/>
-      <ellipse cx="530" cy="218" rx="6.5" ry="24"/><rect x="528.7" y="235" width="2.6" height="13"/>
-    </g>
   </svg>
   </div>
   <p class="hero-scroll"><span class="scroll-line" aria-hidden="true"></span>SCROLL</p>
@@ -749,6 +855,59 @@
   <p class="eyebrow reveal">For Riders</p>
   <h2 class="headline reveal" data-i18n="rider.h">Para moteros</h2>
   <p class="body reveal" data-i18n="rider.p">Vaga a tu aire.<br>Las noches en Ikeda son de Do Luck.</p>
+  <div class="rider-bike reveal">
+    <svg class="bike-svg" viewBox="0 0 340 210" aria-hidden="true">
+      <defs>
+        <linearGradient id="tkz" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2E7386"/><stop offset="0.55" stop-color="#255E6E"/><stop offset="1" stop-color="#1C4A57"/>
+        </linearGradient>
+      </defs>
+      <g stroke="#EFE9D8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="70" cy="156" r="40"/>
+        <circle cx="70" cy="156" r="30" stroke-width="1.3"/>
+        <circle cx="70" cy="156" r="5" fill="#EFE9D8"/>
+        <g stroke-width="1.1" opacity="0.8">
+          <path d="M70,127 L70,185 M41,156 L99,156 M50,136 L90,176 M50,176 L90,136"/>
+        </g>
+        <circle cx="270" cy="156" r="40"/>
+        <circle cx="270" cy="156" r="30" stroke-width="1.3"/>
+        <circle cx="270" cy="156" r="5" fill="#EFE9D8"/>
+        <g stroke-width="1.1" opacity="0.8">
+          <path d="M270,127 L270,185 M241,156 L299,156 M250,136 L290,176 M250,176 L290,136"/>
+        </g>
+        <path d="M27,144 A45,45 0 0 1 102,124" stroke-width="3"/>
+        <path d="M76,150 L114,84 M83,154 L120,89" stroke-width="2.6"/>
+        <circle cx="101" cy="97" r="13" stroke-width="2.6"/>
+        <circle cx="101" cy="97" r="8.5" stroke-width="1.1" opacity="0.7"/>
+        <path d="M112,92 L117,88 M112,103 L118,100" stroke-width="1.4" opacity="0.8"/>
+        <path d="M117,82 Q114,70 124,66 L134,63" stroke-width="2.4"/>
+        <path d="M134,63 L143,62" stroke-width="4"/>
+        <path d="M126,65 L122,52" stroke-width="1.3"/><ellipse cx="121" cy="49" rx="3.4" ry="2.4" stroke-width="1.3"/>
+        <path d="M120,88 L146,120 M206,112 L238,116 M210,152 L250,154 M120,92 Q150,112 206,112" stroke-width="1.6" opacity="0.75"/>
+        <path d="M154,116 L200,116 L202,140 L152,140 Z" stroke-width="2.2"/>
+        <path d="M154,122 L201,122 M153,128 L201,128 M153,134 L202,134" stroke-width="1.1" opacity="0.8"/>
+        <path d="M146,140 L208,140 Q212,150 206,158 L150,158 Q142,150 146,140 Z" stroke-width="2.2"/>
+        <circle cx="196" cy="149" r="5" stroke-width="1.2" opacity="0.8"/>
+        <circle cx="163" cy="149" r="3.4" stroke-width="1.2" opacity="0.8"/>
+        <path d="M158,140 Q146,160 166,166 L258,166 Q276,165 285,156" stroke-width="3.4"/>
+        <path d="M168,144 Q160,170 186,174 L266,174 Q288,173 297,161" stroke-width="3.4"/>
+        <path d="M242,112 L258,144" stroke-width="2"/>
+        <path d="M240,117 L250,114 M243,123 L253,120 M246,129 L256,126 M249,135 L259,132" stroke-width="1.2" opacity="0.9"/>
+        <path d="M262,112 A45,45 0 0 1 310,138" stroke-width="3"/>
+      </g>
+      <path d="M122,100 Q124,84 150,80 Q184,77 202,86 Q212,92 210,102 Q208,111 194,113 L142,114 Q125,111 122,100 Z"
+            fill="url(#tkz)" stroke="#EFE9D8" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M125,104 Q166,114 207,101" stroke="#E8C24A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+      <path d="M128,109 Q166,118 202,107" stroke="#E8C24A" stroke-width="1.3" fill="none" stroke-linecap="round" opacity="0.9"/>
+      <text x="146" y="98" font-family="sans-serif" font-size="7.5" letter-spacing="0.5" fill="#EFE9D8" font-weight="bold">KAWASAKI</text>
+      <path d="M210,97 L250,94 Q260,93 265,87 Q274,93 268,102 Q260,108 236,109 L214,108 Q209,103 210,97 Z"
+            fill="#1A1916" stroke="#EFE9D8" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M267,94 L272,96" stroke="#C05B52" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="224" cy="122" rx="12" ry="8.5" fill="#1A1916" stroke="#EFE9D8" stroke-width="1.8"/>
+      <ellipse cx="224" cy="122" rx="6.5" ry="3.6" fill="none" stroke="#E8C24A" stroke-width="1.1"/>
+    </svg>
+    <p class="hand rider-bike-cap" data-i18n="rider.bike.cap">La vieja Kawasaki Z de los dueños: vive en la cafetería.</p>
+  </div>
   <div class="riders-grid">
     <div class="rider-item reveal">
       <svg viewBox="0 0 54 54" aria-hidden="true">
@@ -813,7 +972,12 @@
     </div>
     <div class="rider-passes">
       <p class="rider-now-title hand" data-i18n="rider.now.passes">Los puertos ahora</p>
-      <p class="rider-pass-links">
+      <div class="pass-chips">
+        <a class="pass-chip" id="pass1" href="https://northern-road.jp/navi/" target="_blank" rel="noopener"><span class="p-name" data-i18n="rider.pass1">Karikachi</span><span class="p-now"><span class="p-ico"></span> <span class="p-temp"></span></span></a>
+        <a class="pass-chip" id="pass2" href="https://northern-road.jp/navi/" target="_blank" rel="noopener"><span class="p-name" data-i18n="rider.pass2">Nissho</span><span class="p-now"><span class="p-ico"></span> <span class="p-temp"></span></span></a>
+        <a class="pass-chip" id="pass3" href="https://northern-road.jp/navi/" target="_blank" rel="noopener"><span class="p-name" data-i18n="rider.pass3">Mikuni</span><span class="p-now"><span class="p-ico"></span> <span class="p-temp"></span></span></a>
+      </div>
+      <p class="rider-pass-links small">
         <a href="https://northern-road.jp/navi/" target="_blank" rel="noopener" data-i18n="rider.link.roads">Info de carreteras y puertos (Northern Road Navi)</a>
         <a href="https://www.google.com/maps/@42.9266,143.4457,10z/data=!5m1!1e1" target="_blank" rel="noopener" data-i18n="rider.link.traffic">Mapa de tráfico en vivo</a>
       </p>
@@ -1131,24 +1295,41 @@
 
 <script>
 (function () {
+  var scene = document.getElementById('heroScene');
+  if (scene) {
+    var mo = new Date().getMonth() + 1;
+    var cls = (mo >= 4 && mo <= 5) ? 'sv-spring' : (mo >= 9 && mo <= 10) ? 'sv-autumn'
+      : (mo >= 11 || mo <= 3) ? 'sv-winter' : '';
+    if (cls) scene.classList.add(cls);
+  }
   var box = document.getElementById('riderNow');
   if (!box || !window.fetch) return;
-  fetch('https://api.open-meteo.com/v1/forecast?latitude=42.92&longitude=143.45&current=temperature_2m,weather_code,wind_speed_10m&wind_speed_unit=ms&timezone=Asia%2FTokyo')
+  function ico(w) {
+    if (w === 1 || w === 2) return '🌤️';
+    if (w === 3) return '☁️';
+    if (w === 45 || w === 48) return '🌫️';
+    if ((w >= 51 && w <= 67) || (w >= 80 && w <= 82)) return '🌧️';
+    if ((w >= 71 && w <= 77) || w === 85 || w === 86) return '🌨️';
+    if (w >= 95) return '⛈️';
+    return '☀️';
+  }
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=42.92,43.07,42.90,43.26&longitude=143.45,142.66,142.99,143.10&current=temperature_2m,weather_code,wind_speed_10m&wind_speed_unit=ms&timezone=Asia%2FTokyo')
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var c = d.current;
-      if (!c || typeof c.temperature_2m !== 'number') return;
-      var w = c.weather_code, ic = '☀️';
-      if (w === 1 || w === 2) ic = '🌤️';
-      else if (w === 3) ic = '☁️';
-      else if (w === 45 || w === 48) ic = '🌫️';
-      else if ((w >= 51 && w <= 67) || (w >= 80 && w <= 82)) ic = '🌧️';
-      else if ((w >= 71 && w <= 77) || w === 85 || w === 86) ic = '🌨️';
-      else if (w >= 95) ic = '⛈️';
-      document.getElementById('nowIcon').textContent = ic;
-      document.getElementById('nowTemp').textContent = Math.round(c.temperature_2m);
-      document.getElementById('nowWind').textContent = Math.round(c.wind_speed_10m);
-      box.hidden = false;
+      var a = Array.isArray(d) ? d : [d];
+      var c = a[0] && a[0].current;
+      if (c && typeof c.temperature_2m === 'number') {
+        document.getElementById('nowIcon').textContent = ico(c.weather_code);
+        document.getElementById('nowTemp').textContent = Math.round(c.temperature_2m);
+        document.getElementById('nowWind').textContent = Math.round(c.wind_speed_10m);
+        box.hidden = false;
+      }
+      for (var i = 1; i <= 3; i++) {
+        var p = a[i] && a[i].current, el = document.getElementById('pass' + i);
+        if (!p || !el || typeof p.temperature_2m !== 'number') continue;
+        el.querySelector('.p-ico').textContent = ico(p.weather_code);
+        el.querySelector('.p-temp').textContent = Math.round(p.temperature_2m) + '°';
+      }
     })
     .catch(function () {});
 })();
