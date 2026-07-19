@@ -251,14 +251,14 @@
     border-color: #43614B; }
 
   /* ---- owners' Kawasaki Z ---- */
-  .rider-bike { max-width: 500px; margin: 46px auto 6px; text-align: center; }
-  .bike-svg { width: min(440px, 92%); height: auto; display: block; margin: 0 auto; }
-  .rider-bike-cap { margin-top: 4px; font-size: 14px; color: #D8CDB4; letter-spacing: 0.08em; }
+  .rider-bike { max-width: 620px; margin: 46px auto 6px; text-align: center; }
+  .bike-svg { width: min(560px, 96%); height: auto; display: block; margin: 0 auto; }
+  .rider-bike-cap { margin-top: 10px; font-size: 19px; color: #EFE9D8; letter-spacing: 0.08em; }
 
   /* ---- a small visitor from the north country ---- */
-  #cupCall, #moonCall { opacity: 0; transition: opacity 0.7s ease;
+  #moonCall { opacity: 0; transition: opacity 0.7s ease;
     font-family: "Klee One", var(--serif); pointer-events: none; }
-  #cupCall.on, #moonCall.on { opacity: 1; }
+  #moonCall.on { opacity: 1; }
   #moonCall { position: absolute; top: calc(12% + 66px); right: 5%; z-index: 1;
     font-size: 13.5px; letter-spacing: 0.08em; color: rgba(239,235,221,0.9); }
   #foxCall { opacity: 0; transition: opacity 0.7s ease; font-family: "Klee One", var(--serif); }
@@ -378,11 +378,11 @@
   .riders .headline { color: #F4F1E6; }
   .riders .body { margin: 26px auto 0; max-width: 520px; font-size: 15.5px;
     color: rgba(239,235,221,0.75); line-height: 2.3; }
-  .riders-grid { max-width: 900px; margin: 56px auto 0; display: grid;
-    grid-template-columns: repeat(3, 1fr); gap: 34px 26px; }
+  .riders-grid { max-width: 760px; margin: 56px auto 0; display: grid;
+    grid-template-columns: repeat(2, 1fr); gap: 34px 26px; }
   @media (max-width: 700px) { .riders-grid { grid-template-columns: 1fr; } }
-  .rider-item svg { width: 54px; height: 54px; margin: 0 auto 16px; display: block; }
-  .rider-item p { font-size: 15px; letter-spacing: 0.06em; line-height: 2; }
+  .rider-item svg { width: 84px; height: 84px; margin: 0 auto 16px; display: block; }
+  .rider-item p { font-size: 17px; letter-spacing: 0.06em; line-height: 2; }
   .stove-flame { transform-box: fill-box; transform-origin: 50% 100%;
     animation: flicker 1.4s ease-in-out infinite alternate; }
   @keyframes flicker { from { transform: scale(1) ; opacity: 0.6; }
@@ -839,7 +839,7 @@
       <path d="M13,-20 L9,-24 M13,-20 L17,-24 M13,-20 L9,-16 M13,-20 L17,-16" stroke-width="1.2" fill="none" stroke-linecap="round"/>
       <circle cx="13" cy="-20" r="1.2" stroke="none"/>
     </g>
-    <g transform="translate(1188,170)" fill="#4C6148" opacity="0.9">
+    <g transform="translate(872,171) scale(1.2)" fill="#4C6148" opacity="0.9">
       <path d="M-8,0 L-8,-5 Q-8,-9 -3,-9.5 L3,-9.5 Q8,-9 8,-5 L8,0 Z"/>
       <rect x="2.2" y="-14.5" width="2.8" height="6"/>
       <circle cx="-3" cy="-4" r="0.7" fill="#F3EFE2" opacity="0.5"/>
@@ -881,6 +881,10 @@
           <stop offset="0" stop-color="#2E7386"/><stop offset="0.55" stop-color="#255E6E"/><stop offset="1" stop-color="#1C4A57"/>
         </linearGradient>
       </defs>
+      <g stroke="#C9B287" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22,42 L170,8 L318,42"/>
+        <path d="M22,42 L22,58 M318,42 L318,58" stroke-width="2.6"/>
+      </g>
       <g stroke="#EFE9D8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="70" cy="156" r="40"/>
         <circle cx="70" cy="156" r="30" stroke-width="1.3"/>
@@ -925,34 +929,9 @@
       <ellipse cx="224" cy="122" rx="12" ry="8.5" fill="#1A1916" stroke="#EFE9D8" stroke-width="1.8"/>
       <ellipse cx="224" cy="122" rx="6.5" ry="3.6" fill="none" stroke="#E8C24A" stroke-width="1.1"/>
     </svg>
-    <p class="hand rider-bike-cap" data-i18n="rider.bike.cap">La vecchia Kawasaki Z dei proprietari — vive nel caffè.</p>
+    <p class="hand rider-bike-cap" data-i18n="rider.1">Ampio parcheggio coperto</p>
   </div>
   <div class="riders-grid">
-    <div class="rider-item reveal">
-      <svg viewBox="0 0 54 54" aria-hidden="true">
-        <g fill="none" stroke="#C9B287" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2,15 L27,4 L52,15"/>
-          <path d="M5.5,13.5 L5.5,49 M48.5,13.5 L48.5,49" stroke-width="1.5"/>
-          <path d="M2,49 L52,49"/>
-          <path class="rain r1" d="M9,3 L8,8" stroke-width="1.3"/>
-          <path class="rain r2" d="M45,2.5 L44,7.5" stroke-width="1.3"/>
-          <path class="rain r3" d="M17,1 L16,5.5" stroke-width="1.3"/>
-          <circle cx="16" cy="41.5" r="6.5"/>
-          <circle cx="16" cy="41.5" r="1.2" fill="#C9B287"/>
-          <circle cx="38" cy="41.5" r="6.5"/>
-          <circle cx="38" cy="41.5" r="1.2" fill="#C9B287"/>
-          <path d="M16,41.5 L21,30"/>
-          <path d="M21,30 L16.5,26"/>
-          <path d="M21.5,31.5 L30,31.5"/>
-          <path d="M22.5,31.5 Q26.5,27.5 30,31.5"/>
-          <path d="M30,31.5 L34.5,32"/>
-          <path d="M34.5,32 L38,41.5"/>
-          <circle cx="27.5" cy="36.5" r="2.6" stroke-width="1.5"/>
-          <rect x="35.5" y="33.5" width="6" height="6.5" rx="1" stroke-width="1.5"/>
-        </g>
-      </svg>
-      <p data-i18n="rider.1">Ampio parcheggio coperto</p>
-    </div>
     <div class="rider-item reveal">
       <svg viewBox="0 0 54 54" aria-hidden="true">
         <g fill="none" stroke="#C9B287" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1043,7 +1022,6 @@
         <path d="M113,104 Q124,105 122,113 Q120,119 111,117" fill="none" stroke="#26231D" stroke-width="2.2" stroke-linecap="round"/>
         <path class="steam s1" d="M92,94 Q87,82 93,72 Q99,63 94,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
         <path class="steam s2" d="M104,94 Q99,82 105,72 Q111,63 106,52" stroke="rgba(122,116,102,0.75)" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <text id="cupCall" x="126" y="20" text-anchor="middle" font-size="12.5" fill="#6B665A"><tspan x="126" dy="0">子供がまだ</tspan><tspan x="126" dy="17">食ってる途中でしょうが。</tspan></text>
       </svg>
     </div>
   </div>
@@ -1375,7 +1353,6 @@
       t = setTimeout(function () { txt.classList.remove('on'); }, 2800);
     });
   }
-  egg(document.querySelector('.coffee-svg'), document.getElementById('cupCall'));
   egg(document.querySelector('.lodge-band .moon'), document.getElementById('moonCall'));
 })();
 </script>
