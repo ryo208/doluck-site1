@@ -18,7 +18,7 @@
 <title>旅宿 | Do Luck</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #F8F5EE; --paper-deep: #EFEAE0; --ink: #26231D; --muted: #7A7466;
@@ -236,6 +236,55 @@
       <li data-i18n="lodge.d3">和来自大阪的店主畅聊吧</li>
     </ul>
   </div>
+</section>
+<section class="band">
+<style>
+
+  /* ---- honest ---- */
+  .honest { padding: 130px 6%; text-align: center; }
+  .honest .body { margin-top: 30px; color: #7A7466; line-height: 2.3; font-size: 16px; }
+  .honest-grid { max-width: 900px; margin: 56px auto 0; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 22px; text-align: left; }
+  @media (max-width: 760px) { .honest-grid { grid-template-columns: 1fr; } }
+  .honest-card { background: #F8F5EE; border-radius: 22px; padding: 34px 32px;
+    border: 1px solid rgba(38,35,29,0.07); box-shadow: 0 10px 30px rgba(38,35,29,0.05); }
+  .honest-card.fit { border-top: 3px solid #43614B; }
+  .honest-card.nofit { border-top: 3px solid rgba(38,35,29,0.18); }
+  .honest-card h3 { font-family: "Shippori Mincho", serif; font-size: 17px; letter-spacing: 0.06em;
+    margin-bottom: 18px; }
+  .honest-card ul { list-style: none; }
+  .honest-card li { position: relative; padding-left: 26px; margin-bottom: 12px;
+    font-size: 14.5px; line-height: 1.9; color: rgba(38,35,29,0.8); }
+  .honest-card.fit li::before { content: '◎'; position: absolute; left: 0; color: #43614B; }
+  .honest-card.nofit li::before { content: '−'; position: absolute; left: 0; color: rgba(38,35,29,0.4); }
+  .honest-close { margin-top: 44px; font-size: 16.5px; letter-spacing: 0.05em;
+    color: #26231D; line-height: 2.2; }
+  .honest .hand { font-family: "Klee One", "Shippori Mincho", serif; }
+</style>
+<div class="honest" style="padding:0">
+  <p class="eyebrow reveal">HONESTLY</p>
+  <h2 class="headline reveal" data-i18n="honest.h">先说实话。</h2>
+  <p class="body reveal hand" data-i18n="honest.lead">道楽不是精致的酒店，<br>而是一家老式而质朴的旅人宿。</p>
+  <div class="honest-grid">
+    <div class="honest-card fit reveal">
+      <h3 data-i18n="honest.fit.t">适合这样的旅人</h3>
+      <ul>
+        <li data-i18n="honest.f1">正在环游北海道的摩托车手、骑行者</li>
+        <li data-i18n="honest.f2">喜欢与旅伴聊旅途故事的人</li>
+        <li data-i18n="honest.f3">能接受多人间与简单自助服务的人</li>
+        <li data-i18n="honest.f4">想节省住宿费、走更远的人</li>
+      </ul>
+    </div>
+    <div class="honest-card nofit reveal">
+      <h3 data-i18n="honest.nf.t">若您更需要这些，酒店也许更合适</h3>
+      <ul>
+        <li data-i18n="honest.n1">酒店级的设施与用品</li>
+        <li data-i18n="honest.n2">完全私密的独立空间</li>
+      </ul>
+    </div>
+  </div>
+  <p class="honest-close hand reveal" data-i18n="honest.close">作为交换——这里有柴炉的温暖，和聊到深夜的旅行故事。</p>
+</div>
 </section>
 <section class="band">
   <style>
