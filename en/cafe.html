@@ -240,14 +240,20 @@
 </section>
 <section class="band">
   <div class="inner">
-    <p class="eyebrow reveal" data-i18n="cafe.s2.eyebrow">Inside the café</p>
-    <h2 class="headline reveal" data-i18n="cafe.s2.h">Handmade warmth.</h2>
-    <ul class="marks reveal">
-      <li data-i18n="cafe.li1">The owner's beloved motorcycle</li>
-      <li data-i18n="cafe.li2">A wood stove (weso, West Germany)</li>
-      <li data-i18n="cafe.li3">A looong bench, tables and chairs handmade by the owner</li>
-      <li data-i18n="cafe.li4">Coffee cups, plates etc. made by the townspeople</li>
-    </ul>
+    <style>
+      .cafe-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 14px; }
+      @media (max-width: 760px) { .cafe-photos { grid-template-columns: 1fr; } }
+      .cafe-photos figure { margin: 0; background: #fff; padding: 9px 9px 12px; border-radius: 6px;
+        box-shadow: 0 14px 30px rgba(38,35,29,0.13); transform: rotate(-1.2deg); }
+      .cafe-photos figure:nth-child(2) { transform: rotate(1.1deg); }
+      .cafe-photos figure:nth-child(3) { transform: rotate(-0.8deg); }
+      .cafe-photos img { width: 100%; height: 235px; object-fit: cover; display: block; border-radius: 3px; }
+    </style>
+    <div class="cafe-photos">
+      <figure class="reveal"><img src="../images/photo-kawasaki.jpg" alt="店内のカワサキ / the owners' Kawasakis in the café" loading="lazy"></figure>
+      <figure class="reveal"><img src="../images/photo-exterior.jpg" alt="Do Luck 道楽 外観 / exterior" loading="lazy"></figure>
+      <figure class="reveal"><img src="../images/photo-post.jpg" alt="Fukushima POST" loading="lazy"></figure>
+    </div>
     <br>
     <a class="link-quiet reveal" href="access.html" data-i18n="link.access">See access & directions</a>
   </div>
